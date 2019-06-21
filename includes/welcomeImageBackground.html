@@ -1,0 +1,168 @@
+
+<head>
+	<style>
+		.welcomeImage{
+			/*background: green;*/
+			margin: auto;
+			text-align: left;
+			color: white;
+		background: url("includes/fixit.png")  no-repeat;
+		height: 450px;
+		background-size: cover;
+		background-attachment: fixed;
+		width: 100%;
+
+		}
+		.welcomeImage  {
+			display: flex;
+			flex-flow: column;
+
+		}
+		.welcomeImage img {
+			width: 80%;
+			z-index: -10
+		}
+		.welcomeImageText{
+			z-index: 1;
+
+		}
+		.welcomeImage h2, .welcomeImage h3, .welcomeImage p{
+			padding: 20px;
+			border: 1px solid white;
+			width: 400px;
+			margin: 20px 20px;
+		}
+		.welcomeImage h2{
+			font-size: 50px;
+
+		}
+		.wptext {
+			position: absolute;
+			 left: 50%;
+			 top: 5%;
+			 transform: translateX(-50%);
+			 font-size: 13px;
+			 font-family: ubuntu;
+			 font-weight: 100
+		}
+		.wptext p#fixit{
+			font-size: 20px;
+			font-weight: 500;
+			color: gold;
+			font-family: 'Anton', sans-serif;
+		}
+		.cleantext{
+			font-size: 15px !important;
+			margin-top: 10px !important;
+		}
+		.clean{
+			margin-top: 0px !important;
+		}
+		#second{
+			font-size: 16px;
+		}
+		@media (min-width: 450px) {
+			.wptext{
+				top: 10%;
+				font-size: 15px
+			}
+			.wptext p#fixit{
+			font-size: 25px;
+			border: 3px solid gold;
+			padding: 5px;
+			color: white;
+		}
+		#second{
+			font-size: 20px;
+		}
+		.gardening{
+			font-size: 25px !important;
+		}
+		}
+		@media (min-width: 700px) {
+			.wptext{
+				top: 15%;
+				font-size: 20px
+
+			}
+			.wptext p#fixit{
+			font-size: 38px;
+		}
+		.gardening{
+			font-size: 30px !important;
+		}
+		.gardentext{
+			font-size: 20px !important;
+			font-weight: 	bold;
+		}
+		}
+
+		@media (min-width: 950px) {
+			.wptext{
+				top: 18%;
+				font-size: 35px
+			}
+			.wptext p#fixit{
+			font-size: 55px;
+		}
+		.gardening{
+			font-size: 40px !important;
+		}
+		#second{
+			font-size: 30px !important;
+			font-weight: bold;
+		}
+		}
+	</style>
+</head>
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="z-index: 1">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+     <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active" style="position: relative;">
+      <img class="d-block" style="margin: auto; width: 100%;"  src="includes/welcome1.jpg" alt="First slide">
+      <div class="carousel-caption d-md-block wptext" style="">
+    		<p id="fixit">Interior Decorations</p>
+    		<!-- <p>Your trusted maitenance partner</p> -->
+  	 </div>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block" style="margin: auto; width: 100%" src="includes/welcome2.jpg" alt="Second slide">
+  <div class="carousel-caption d-md-block wptext" style="">
+    	<p id="second" style="border: 1px solid gold">Professional Home Management</p>
+  	 </div>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block" style="margin: auto; width: 100%" src="includes/welcome3.jpg" alt="Third slide">
+         <div class="carousel-caption d-md-block wptext" style="">
+    		<p id="fixit" class="gardening clean">Cleaning Services</p>
+    	
+  	 </div>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block" style="margin: auto; width: 100%" src="includes/welcome4.jpg" alt="fourth slide">
+  <div class="carousel-caption d-md-block wptext" style="">
+    	<p id="fixit" class="gardening">Gardening</p>
+    	<!-- <p class="gardentext">Gotten from the comfort of your home</p> -->
+
+    		<!-- <p>Your trusted partner in maintenance</p> -->
+  	 </div>
+    </div>
+  </div>
+  
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script>
+	
+$('.carousel').carousel({
+	interval: 10000
+})
+</script>

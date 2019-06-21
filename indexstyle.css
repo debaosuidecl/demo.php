@@ -1,0 +1,955 @@
+html {
+  scroll-behavior: smooth;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: 0;
+}
+ul {
+  padding-left: 0;
+  margin: 0;
+}
+a {
+  text-decoration: none !important;
+}
+nav {
+  /*background: #111;*/
+  /*background:rgb(255,190,0);*/
+  background: white;
+  /*overflow: hidden;*/
+  box-shadow: 0px 1px 3px #bbb;
+  /* margin-top: 0px; */
+  /*margin-bottom: -10px;*/
+  z-index: 20 !important;
+  height: 60px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  /*position: relative;*/
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: space-between;
+
+  /*transition: .31s;*/
+}
+.cancont {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+#cancel {
+  color: white;
+  font-size: 28px;
+}
+
+/*.Logo{
+	
+	z-index: 2 !important;
+	text-align: center; background: #bbb; width: 100%;
+	position: relative;
+
+}
+*/
+.logo {
+  margin: 0;
+  font-weight: 800;
+  padding-left: 20px;
+}
+
+ul.forDropDown {
+  list-style: none;
+  background: #477fae;
+  margin: 0;
+  /*display: block;*/
+  top: 0;
+  z-index: 20;
+  transform: scale(0);
+  position: fixed;
+  width: 100%;
+  background: rgba(10, 10, 10, 0.98);
+  transition: 0.3s ease-out;
+  opacity: 0;
+  height: 100%;
+}
+
+#cancel {
+  color: white;
+}
+
+a {
+  color: #477fae;
+  text-decoration: none;
+  font-size: 15px;
+  transition: 0.2s all ease;
+
+  font-weight: 100;
+}
+
+ul.forDropDown a {
+  padding: 15px 20px 15px 15px;
+  display: block;
+}
+ul.forDropDown.slideDown {
+  /*background: gold;*/
+  z-index: 111;
+  opacity: 1;
+  transform: scale(1);
+}
+.mycontainer {
+  background: rgb(250, 248, 248);
+  width: 100%;
+  min-height: 700px;
+  padding-top: 100px;
+}
+a:hover,
+a.active {
+}
+.forDesktop li a:hover .activeslider {
+  background: #477fae;
+  transition: 0.7s;
+  width: 100%;
+}
+.activeslider {
+  margin-top: 5px;
+
+  position: absolute;
+  height: 2px;
+  width: 0%;
+  transition: 0.7s;
+  background: #477fae;
+  bottom: -10;
+}
+#toggler {
+  float: right;
+  margin: 10px 20px 0 0;
+  cursor: pointer;
+  transition: 0.2s;
+  transform: rotate(0deg);
+}
+
+#toggler div {
+  height: 2px;
+  width: 25px;
+  margin: 10px;
+  background: #477fae;
+}
+#toggler div:nth-child(1).topDisappear {
+  opacity: 0;
+  transition: 0.1s;
+}
+
+#toggler div:nth-child(2).midTurn {
+  transform: translateY(4px) rotate(43deg);
+}
+
+#toggler div:nth-child(3).endTurn {
+  transform: translateY(-8px) rotate(-43deg);
+}
+
+#toggler.rotateOnToggle {
+  transform: rotate(90deg);
+}
+
+.forDesktop {
+  display: none;
+}
+
+/* CSS LOADER */
+.loader-wrapper {
+  background: white;
+  position: fixed;
+  z-index: 200;
+  width: 100%;
+  height: 100vh;
+  /* opacity: 0.3; */
+}
+.lds-ripple {
+  display: inline-block;
+  position: relative;
+  width: 60px;
+  height: 60px;
+  position: fixed;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.lds-ripple div {
+  position: absolute;
+  border: 3px solid #477fae;
+  transform: scale(2);
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+@keyframes lds-ripple {
+  0% {
+    top: 28px;
+    left: 28px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: -1px;
+    left: -1px;
+    width: 58px;
+    height: 58px;
+    opacity: 0;
+  }
+}
+/* CSS LOADER END */
+.invoiceGeneratorCont {
+  display: flex;
+  flex-flow: column;
+  margin: 20px auto;
+  width: 80%;
+  /* background: green; */
+}
+.invoiceFormBody {
+  flex: 1;
+  background: white;
+  box-shadow: 0px 5px 15px #bbb;
+  min-height: 700px;
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+}
+.invoiceFormBody #topDesignInvoice {
+  width: 100%;
+  height: 25px;
+  background: #477fae;
+}
+
+.headingLogoInvoice {
+  display: flex;
+  flex-flow: row;
+  /* background: green; */
+  margin: 50px 50px;
+  align-items: flex-start;
+
+  /* flex-flow: column; */
+  justify-content: space-around;
+  /* align-items: center; */
+}
+
+.invoiceTitle {
+  flex: 3;
+  /* padding: 0px 50px; */
+}
+.invoiceTitle input {
+  padding: 20px;
+  /* font-size: 20px; */
+  border: none;
+  border-bottom: 1px solid #bbb;
+  border-radius: 3px;
+  outline: none;
+  width: 90%;
+  margin: auto;
+}
+.invoiceTitle input:focus {
+  transition: 1.5s;
+  border-bottom: 1px solid #477fae;
+}
+
+input[name="invoiceTitle"] {
+  font-size: 20px;
+  font-weight: lighter;
+  /* flex: 1; */
+  letter-spacing: 5px;
+}
+.fromInvoiceCont {
+  /* background: yellow; */
+  /* margin-right: 5px; */
+  width: 100%;
+}
+.fromInvoiceCont input {
+  width: 100%;
+  /* min-width: 100px; */
+}
+.personalDets {
+  /* flex: 3; */
+  /* background: green; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  /* background: green; */
+}
+.personalDets label {
+  /* margin-right: 10px; */
+  display: none;
+  flex: 1;
+  margin-left: 10px;
+}
+.personalDets input {
+  font-size: 13px;
+  font-weight: lighter;
+  /* letter-spacing: 5px; */
+  padding: 10px;
+  margin: 5px auto;
+  /* font-size: 20px; */
+  /* width: 100%; */
+  border: none;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  outline: none;
+}
+.personalDets select {
+  font-size: 13px;
+  margin: 5px auto;
+  width: 100%;
+  font-weight: lighter;
+  /* letter-spacing: 5px; */
+  padding: 10px;
+  /* font-size: 20px; */
+  /* width: 100%; */
+  border: none;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  outline: none;
+}
+.invoiceLogo {
+  flex: 1;
+}
+.invoiceLogo img {
+  width: 100px;
+  height: 100px;
+  /* background: gold; */
+  flex: 1;
+  border: 1px dotted #477fae;
+}
+.fromToInvoiceCont {
+  display: flex;
+  /* background: green; */
+  /* margin: 0px 10px;
+   */
+  margin: 0px auto;
+  width: 90%;
+
+  align-items: flex-start;
+
+  flex-flow: column;
+  justify-content: space-around;
+}
+.toInvoiceCont {
+  /* background: green; */
+  width: 100%;
+}
+.toInvoiceCont input {
+  /* min-width: 100px; */
+
+  width: 100%;
+}
+#toInvoice,
+#fromInvoice {
+  color: #477fae;
+  font-weight: lighter;
+}
+.descriptionContainerInvoice {
+  display: flex;
+  flex-flow: column;
+  min-height: 130px;
+
+  /* justify-content: column; */
+}
+.descriptionContainerInvoice #descriptionHeaderInvoice {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  min-height: 43px;
+  align-items: center;
+  background: #477fae;
+  width: 90%;
+  margin: 30px auto 0px;
+}
+.descriptionContainerInvoice #descriptionHeaderInvoice li {
+  color: white;
+  list-style: none;
+  padding: 4px;
+  flex: 1;
+}
+
+#descriptionInvoiceForm {
+  flex: 3 !important;
+  margin-left: 50px;
+}
+#qtyInvoiceForm,
+#taxInvoiceForm {
+  /* flex: 1; */
+  flex: 1;
+  /* background: yellow; */
+}
+#priceInvoiceForm {
+  flex: 2 !important;
+}
+#amountInvoiceForm {
+  flex: 2 !important;
+}
+
+.descriptionContainerInvoice .descriptionRowInvoice {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  min-height: 103px;
+  align-items: center;
+  /* background: #477fae; */
+  width: 90%;
+  margin: auto;
+}
+.descriptionInvoiceInput {
+  flex: 3;
+  /* margin-left: 80px; */
+  /* background: green; */
+}
+.qtyInvoiceInput {
+  flex: 1;
+  /* align-self: flex-end; */
+}
+.priceInvoiceInput {
+  flex: 2 !important;
+}
+.amountInvoiceInput {
+  flex: 2;
+  margin-left: 20px;
+}
+
+#amountInvoiceInput h5 {
+  font-weight: 100;
+}
+
+#taxInvoiceInput {
+  flex: 1;
+}
+#priceInvoiceInput {
+  /* background: green; */
+}
+.qtyInvoiceInput input {
+  padding: 7px;
+  /* margin: 10px; */
+  width: 95%;
+  /* margin-right: 20px; */
+  border: none;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+}
+.priceInvoiceInput input {
+  padding: 7px;
+  /* margin: 10px; */
+  width: 90%;
+  border: none;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+}
+.descriptionInvoiceInput textarea {
+  width: 96%;
+  resize: none;
+  padding: 14px 10px;
+  border-radius: 10px;
+}
+.descriptionInvoiceInput textarea:focus {
+  outline: none;
+  box-shadow: 0px 1px 5px #bbb;
+}
+
+.cancelItemInvoice .fas.fa-window-close {
+  font-size: 30px;
+  color: #477fae;
+  margin-right: 10px;
+  cursor: pointer;
+  /* width: 20px; */
+}
+
+.cancelItemInvoice .fas.fa-window-close:hover {
+  color: #355f81;
+}
+#AddNewProductInvoice {
+  width: 90%;
+  margin: 30px auto;
+  padding: 10px;
+  border-top: 1px solid #477fae;
+  border-bottom: 1px solid #477fae;
+}
+#AddNewProductInvoice i {
+  font-size: 30px;
+  color: #477fae;
+  cursor: pointer;
+  margin-left: -10px;
+}
+#productSummaryInvoice {
+  display: flex;
+  justify-content: flex-end;
+  flex-flow: row;
+  width: 90%;
+  margin: 20px auto;
+}
+#productSummaryInvoice li {
+  list-style: none;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  min-width: 200px;
+  /* font-size: 10px; */
+  margin-bottom: -6px;
+  color: #555;
+}
+#productSummaryInvoice li {
+  list-style: none;
+}
+
+.paymentInstructionsAddNotes {
+  /* margin: 40px auto; */
+  margin: auto;
+  border-top: 1px solid #eee;
+  width: 90%;
+  min-height: 300px;
+  /* background: green; */
+}
+
+.paymentInstructionsAddNotes textarea {
+  resize: none;
+  width: 100%;
+  margin: 20px auto 0px;
+  outline: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 15px;
+}
+
+.paymentInstructionsAddNotes textarea::placeholder {
+  font-size: 14px;
+}
+
+.invoiceFormController {
+  border: 1px dotted #477fae;
+  flex: 1;
+  padding-top: 40px;
+  /* display: flex; */
+  flex-flow: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  /* width: 10%; */
+  min-height: 700px;
+}
+.invoiceFormController .colorControllerInvoice {
+  width: 90%;
+  margin: auto;
+}
+.colorControllerInvoice h3 {
+  font-weight: lighter;
+  border-bottom: 1px solid #bbb;
+  padding-bottom: 4px;
+  margin-bottom: 10px;
+}
+
+.invoiceFormController .colorControllerInvoice input {
+  width: 100%;
+}
+.taxControllerInvoice,
+.discountControllerInvoice {
+  margin: 40px auto 0px;
+  position: relative;
+
+  width: 80%;
+}
+.myClass {
+}
+#taxControlContainer,
+#discountControlContainer {
+  /* display: flex; */
+  flex-flow: column;
+  align-items: center;
+
+  justify-content: space-between;
+  flex-flow: row;
+  width: 100%;
+  /* background: green; */
+}
+.taxControllerInvoice i,
+.discountControllerInvoice i {
+  position: absolute;
+  top: 195px;
+  right: 4%;
+}
+.taxControllerInvoice label {
+  padding-right: 10px;
+  font-size: 14px;
+}
+#customSelectTypeTax,
+#customSelectDiscount {
+  width: 100%;
+}
+#typeTaxOptionInvoice,
+#discountOptionInvoice {
+  background: white;
+  box-shadow: 0px 1px 5px #bbb;
+  display: none;
+  width: 100%;
+  /* float: right; */
+  right: 0;
+  /* position: absolute; */
+}
+#typeTaxOptionInvoice li,
+#discountOptionInvoice li {
+  list-style: none;
+  width: 100%;
+  cursor: pointer;
+  transition: 0.4s;
+  padding: 10px;
+  /* width: 80%; */
+  /* margin-left: 20px; */
+}
+#typeTaxOptionInvoice li:hover {
+  background: #477fae;
+  transition: 0.4s;
+
+  color: white;
+}
+
+/* .taxControllerInvoice input:focus #typeTaxOptionInvoice {
+  display: block;
+} */
+
+.taxControllerInvoice h3 {
+  font-weight: lighter;
+  font-size: 20px;
+  border-bottom: 1px solid #bbb;
+  margin-bottom: 7px;
+  padding-bottom: 3px;
+}
+#discountControlContainer,
+#taxControlContainer {
+  width: 100%;
+}
+.taxControllerInvoice select,
+.taxControllerInvoice input,
+#discountControlContainer input,
+#discountControlContainer select {
+  cursor: pointer;
+  /* width: 100%; */
+  margin: auto;
+  /* flex: 2; */
+  width: 100%;
+  /* text-align: center; */
+  padding: 10px;
+}
+select option {
+  padding: 20px;
+}
+.taxControllerInvoice select:focus {
+  outline: none;
+  box-shadow: 0px 1px 5px #bbb;
+}
+
+#labelTaxContInvoice {
+  margin-top: 10px;
+}
+
+#labelsInvoice > li {
+  /* margin-bottom: 20px; */
+}
+#labelsInvoice li h5:first-child {
+  margin-right: 30px;
+}
+.None {
+  padding: 20px;
+}
+
+.SavePreviewCont {
+  width: 90%;
+  margin: 20px auto;
+  /* background: green; */
+  display: flex;
+  flex-flow: row;
+
+  justify-content: center;
+}
+.SavePreviewCont a {
+  text-decoration: none;
+  color: white !important;
+  padding: 10px;
+  cursor: pointer;
+  margin: 10px auto;
+  text-align: center;
+  box-shadow: 0px 1px 5px #bbb;
+  /* border: 1px solid #477fae; */
+  background: #477fae;
+}
+.SavePreviewCont a:hover {
+  background: #274c6b;
+  transition: 0.5s;
+  color: white;
+}
+@media (min-width: 850px) {
+  .fromInvoiceCont,
+  .toInvoiceCont {
+    flex: 3;
+  }
+  .personalDets input {
+    flex: 2;
+  }
+  .personalDets select {
+    flex: 2;
+  }
+  .personalDets label {
+    display: flex;
+  }
+  .invoiceFormBody {
+    flex: 8;
+  }
+  .invoiceGeneratorCont {
+    flex-flow: row;
+    width: 90%;
+  }
+  .invoiceFormController {
+    flex: 4;
+  }
+  .headingLogoInvoice {
+    flex-flow: row;
+    justify-content: space-around;
+  }
+  .fromToInvoiceCont {
+    flex-flow: row;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+  ul.forDropDown {
+    display: none;
+  }
+
+  ul.forDesktop {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: space-between;
+    /*padding: 20px;*/
+    /*float: right;*/
+    /*height: 25px;*/
+    margin-right: 50px;
+    /*margin-top: 25px;*/
+    border: none;
+    list-style: none;
+
+    /*height:;*/
+    /*height: 40px;*/
+  }
+
+  .forDesktop a {
+    /*display: inline;*/
+    padding: 20px 20px 21px 20px !important;
+    transition: 0.5s all ease;
+  }
+
+  #toggler {
+    display: none;
+  }
+}
+
+/* jobs */
+
+.whatwedoicons {
+  /*top: -400px;*/
+  /* width: 90% !important; */
+  display: flex;
+  /*background: green;*/
+  flex-direction: row;
+  margin-top: 200px;
+  /* padding: 0px 30px; */
+  margin: auto;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.card {
+  text-align: center;
+  margin: 10px 10px;
+  box-shadow: 0px 1px 2px #eee;
+  transition: 0.4s;
+  border-top: 4px solid #477fae;
+}
+.card:hover {
+  box-shadow: 0px 5px 5px #888;
+  transition: 0.4s;
+}
+.card img {
+  width: 50%;
+  margin: auto;
+  padding: 10px 0 10px 0;
+}
+.card a:hover {
+  background: none;
+  border: 1px solid #477fae;
+}
+.TryOurButton {
+  border: 1px solid #477fae;
+  /* margin-top: 90px !important; */
+  padding: 8px;
+  color: #477fae;
+  transition: 0.4s;
+  /* margin-bottom: 40px !important; */
+}
+.card p {
+  margin-bottom: 40px;
+}
+.TryOurButton:hover {
+  background: #477fae;
+  color: white;
+  transition: 0.4s;
+  box-shadow: 0px 2px 2px #eee;
+}
+.TryOurButtonCont {
+  /* margin-bottom: 20px; */
+  margin: 20px auto;
+  width: 90%;
+  text-align: center;
+}
+
+/* For Invoice Generator */
+/* .invoiceIntroCont {
+  width: 80%;
+  min-height: 200px;
+  padding: 20px;
+  text-align: center;
+  background: white;
+  margin-top: 30px;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  margin: auto;
+  border-top: 2px solid #477fae;
+  box-shadow: 0px 1px 2px #eee;
+}
+.invoiceIntroCont h3 {
+  color: #477fae;
+  font-weight: 100;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+.invoiceHeader {
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid #477fae;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  align-self: flex-start;
+}
+.invoiceHeader .InvoiceClientDateCont {
+  display: flex;
+  flex-flow: row;
+  padding: 0;
+  margin: 0;
+  justify-content: space-around;
+}
+.InvoiceClientDateCont li {
+  list-style: none;
+  padding: 10px 10px 10px 0px;
+  font-size: 14px;
+  color: #ccc;
+  flex: 1;
+}
+.invoiceHeader .balanceInvoiceCont {
+  display: flex;
+  flex-flow: row;
+  font-size: 14px;
+  color: #ccc;
+
+  justify-content: flex-end;
+}
+.Invoiceinjector {
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid #477fae;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  align-self: flex-start;
+  box-shadow: 0px 1px 5px #bbb;
+}
+.Invoiceinjector ul {
+  display: flex;
+  flex-flow: row;
+  padding: 0;
+  margin: 0;
+  justify-content: space-around;
+}
+.Invoiceinjector ul li {
+  background: green;
+  padding: 10px 10px 10px 0px;
+  font-size: 14px;
+  flex: 1;
+  list-style: none;
+} */
+/* From w3schools */
+
+#invoiceTable {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  border: 1px solid #477fae;
+  width: 100%;
+}
+.invoicesContainer {
+  width: 85%;
+  margin: auto;
+}
+#invoiceTable td,
+#invoiceTable th {
+  /* border: 1px solid #ddd; */
+  padding: 8px;
+  font-weight: lighter;
+}
+
+#invoiceTable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#invoiceTable tr:hover {
+  background-color: #ddd;
+}
+
+#invoiceTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #477fae;
+  color: white;
+}
+/* end w3schools */
+@media (min-width: 650px) {
+  ul.forDropDown {
+    display: none;
+  }
+
+  ul.forDesktop {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: space-between;
+    margin-right: 50px;
+    border: none;
+    list-style: none;
+  }
+
+  .forDesktop a {
+    padding: 20px 20px 21px 20px;
+    transition: 0.5s all ease;
+  }
+
+  #toggler {
+    display: none;
+  }
+  .whatwedoicons {
+    width: 70%;
+  }
+}
