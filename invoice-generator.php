@@ -138,7 +138,7 @@ $GetInvoiceDetails = mysqli_fetch_all($queryGetInvoiceDetails, MYSQLI_ASSOC);
 
     <div class="mycontainer">
           <div class="TryOurButtonCont">
-             <a href="new-invoices" class="TryOurButton" id="addNewInvoice" >Add New Invoice</a>
+             <a href="new-invoice" class="TryOurButton" id="addNewInvoice" >Add New Invoice</a>
           </div>
           
  <div class="invoicesContainer">
