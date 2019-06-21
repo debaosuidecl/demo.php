@@ -57,7 +57,7 @@ AND table_name = 'invoicedetails'";
 
            }
 
-           $producteachExists = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'mrziad' 
+           $producteachExists = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'rymmy2sz9p65xc6f' 
            AND table_name = 'producteach'";
              $producteachExistQueryResult = mysqli_query($conn, $producteachExists);
               $productEach = mysqli_fetch_all($producteachExistQueryResult, MYSQLI_ASSOC);
