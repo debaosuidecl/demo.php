@@ -140,7 +140,7 @@ $GetInvoiceDetails = mysqli_fetch_all($queryGetInvoiceDetails, MYSQLI_ASSOC);
           <div class="TryOurButtonCont">
              <a href="new-invoices" class="TryOurButton" id="addNewInvoice" >Add New Invoice</a>
           </div>
-          s
+          
  <div class="invoicesContainer">
     <table id="invoiceTable">
       <tr>
@@ -204,7 +204,7 @@ $GetInvoiceDetails = mysqli_fetch_all($queryGetInvoiceDetails, MYSQLI_ASSOC);
                    success: function(data){
                      console.log(data);
                     //  window.history.pushState('obj', 'PageTitle', 'http://localhost/fiverrziad/new-invoice');
-                     window.location.href = "http://localhost/fiverrziad/new-invoice";
+                     window.location.href = "http://demophp32.herokuapp.com/new-invoice";
                     // resultmsg = data;
                    }                    
                  });
@@ -218,7 +218,7 @@ $GetInvoiceDetails = mysqli_fetch_all($queryGetInvoiceDetails, MYSQLI_ASSOC);
                    success: function(data){
                      console.log(data);
                     //  window.history.pushState('obj', 'PageTitle', 'http://localhost/fiverrziad/new-invoice');
-                     window.location.href = `http://localhost/fiverrziad/new-invoice?key=${invId}`;
+                     window.location.href = `http://demophp32.herokuapp.com/new-invoice?key=${invId}`;
                     // resultmsg = data;
                    }                    
                  });
