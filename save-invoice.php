@@ -6,7 +6,7 @@
 function startPointSave($assocArray){
     // print_r($assocArray);
   include_once "setdb.php";
-$tableExists = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'mrziad' 
+$tableExists = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'rymmy2sz9p65xc6f' 
 AND table_name = 'invoicedetails'";
   $tableExistQueryResult = mysqli_query($conn, $tableExists);
     $table = mysqli_fetch_all($tableExistQueryResult, MYSQLI_ASSOC);
