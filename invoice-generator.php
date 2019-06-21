@@ -115,9 +115,9 @@ $GetInvoiceDetails = mysqli_fetch_all($queryGetInvoiceDetails, MYSQLI_ASSOC);
   
       <li style="position: relative;"><a class="active" data-ref="fixit" href="./index">Home<div class="activeslider"></div></a></li>
       <li style="position: relative;"><a id="aboutnav" data-ref="about" href="./invoice-generator">Invoices<div class="activeslider"></div></a></li>
-      <li style="position: relative;"><a id="whatwedonav" data-ref="whatwedo" href="#whatwedo">Quotations<div class="activeslider"></div></a></li>
-      <li style="position: relative;"><a id="partnernav" data-ref="partners" href="#partners">Clients<div class="activeslider"></div></a></li>
-      <li style="position: relative;"><a  id="contactnav"data-ref="contact" href="#contact">Settings<div class="activeslider"></div></a></li>
+      <li style="position: relative;"><a id="whatwedonav" data-ref="whatwedo" href="./index">Quotations<div class="activeslider"></div></a></li>
+      <li style="position: relative;"><a id="partnernav" data-ref="partners" href="./index">Clients<div class="activeslider"></div></a></li>
+      <li style="position: relative;"><a  id="contactnav"data-ref="contact" href="./index">Settings<div class="activeslider"></div></a></li>
     </ul>
     
     
@@ -138,7 +138,7 @@ $GetInvoiceDetails = mysqli_fetch_all($queryGetInvoiceDetails, MYSQLI_ASSOC);
 
     <div class="mycontainer">
           <div class="TryOurButtonCont">
-             <a href="new-invoice" class="TryOurButton" id="addNewInvoice" >Add New Invoice</a>
+             <a href="new-invoices" class="TryOurButton" id="addNewInvoice" >Add New Invoice</a>
           </div>
           s
  <div class="invoicesContainer">
