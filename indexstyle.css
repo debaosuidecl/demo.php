@@ -73,9 +73,10 @@ ul.forDropDown {
   transform: scale(0);
   position: fixed;
   width: 100%;
-  background: rgba(10, 10, 10, 0.98);
+  background: #477fae;
   transition: 0.3s ease-out;
   opacity: 0;
+  font-size: 25px;
   height: 100%;
 }
 
@@ -95,11 +96,18 @@ a {
 ul.forDropDown a {
   padding: 15px 20px 15px 15px;
   display: block;
+  color: white;
 }
+
+ul.forDropDown a:hover {
+  background: white;
+  color: #477fae;
+}
+
 ul.forDropDown.slideDown {
   /*background: gold;*/
   z-index: 111;
-  opacity: 1;
+  opacity: 0.91;
   transform: scale(1);
 }
 .mycontainer {

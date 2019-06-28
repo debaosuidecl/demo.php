@@ -69,7 +69,7 @@ if(isset($_SESSION['first_name'])){
 		<h1 style="align-self: left" data-src="" class="logo">Logo</h1>
 
       </a></div>
-    <div id="toggler">
+    <div id="toggler" onclick="toggleHandler()">
       <div></div>
       <div></div>
       <div></div>
@@ -86,13 +86,12 @@ if(isset($_SESSION['first_name'])){
   </nav>
   <ul class="forDropDown">
       <div class="cancont">
-        <i class="fas fa-window-close" id="cancel"></i>
+        <i class="fas fa-window-close" id="cancel" onclick="toggleHandler()"></i>
       </div>
-      <li><a id="active"  style="font-weight: bolder" href="#">Home</a></li>
-      <li><a style="font-weight: bolder"  href="#about">Clients</a></li>
-      <li><a  style="font-weight: bolder" href="#whatwedo">Login</a></li>
-      <li><a  style="font-weight: bolder" href="#partners">Sign Up</a></li>
-      <li><a  style="font-weight: bolder" href="#contact">Contact Us</a></li>
+       <!-- <li><a id="active" href="#">Home</a></li> -->
+			 <li style="position: relative;"><a class="active" data-ref="fixit" href="../../index">Home<div class="activeslider"></div></a></li>
+      <li style="position: relative;"><a id="aboutnav" data-ref="about" href="../signup">Sign Up<div class="activeslider"></div></a></li>
+      <li style="position: relative;"><a id="whatwedonav" data-ref="whatwedo" href="./signin">Login<div class="activeslider"></div></a></li>
 
     </ul>
 
@@ -147,6 +146,19 @@ if(isset($_SESSION['first_name'])){
 	<script src="vendor/daterangepicker/daterangepicker.js"></script>
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 	<script src="js/main.js"></script>
-
+		<script>
+		
+		
+		const toggleHandler = ()=> {
+    show = !show;
+      if (show){
+        
+        document.querySelector(".forDropDown").classList.add("slideDown")
+      } else{
+        document.querySelector(".forDropDown").classList.remove("slideDown")
+      }
+  }
+		
+		</script>
 </body>
 </html>

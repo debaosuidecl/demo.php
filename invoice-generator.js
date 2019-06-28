@@ -3,6 +3,14 @@ const $$ = parameter => {
 };
 
 //set change listener on discount and tax beginning
+const toggleHandler = () => {
+  show = !show;
+  if (show) {
+    document.querySelector(".forDropDown").classList.add("slideDown");
+  } else {
+    document.querySelector(".forDropDown").classList.remove("slideDown");
+  }
+};
 
 const taxChange = () => {
   console.log($$("#discountInvoice").value);

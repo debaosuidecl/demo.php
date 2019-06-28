@@ -126,7 +126,7 @@ $GetInvoiceDetails = mysqli_fetch_all($queryGetInvoiceDetails, MYSQLI_ASSOC);
     <div><a href="#">
         <h1 style="align-self: left" class="logo">Logo</h1>
       </a></div>
-    <div id="toggler">
+    <div id="toggler" onclick="toggleHandler()">
       <div></div>
       <div></div>
       <div></div>
@@ -152,13 +152,21 @@ $GetInvoiceDetails = mysqli_fetch_all($queryGetInvoiceDetails, MYSQLI_ASSOC);
   </nav>
   <ul class="forDropDown">
       <div class="cancont">
-        <i class="fas fa-window-close" id="cancel"></i>
+        <i class="fas fa-window-close" id="cancel" onclick="toggleHandler()"></i>
       </div>
-      <li><a id="active"  style="font-weight: bolder" href="#">Home</a></li>
-      <li><a style="font-weight: bolder"  href="#about">Clients</a></li>
-      <li><a  style="font-weight: bolder" href="#whatwedo">Login</a></li>
-      <li><a  style="font-weight: bolder" href="#partners">Sign Up</a></li>
-      <li><a  style="font-weight: bolder" href="#contact">Contact Us</a></li>
+      <
+      <li style="position: relative;"><a class="active" data-ref="fixit" href="./index">Home<div class="activeslider"></div></a></li>
+      <li style="position: relative;"><a id="aboutnav" data-ref="about" href="./invoice-generator">Invoices<div class="activeslider"></div></a></li>
+      <li style="position: relative;"><a  id="contactnav"data-ref="quotations" href="./quotation-generator">Quotations<div class="activeslider"></div></a></li>
+      <li style="position: relative;"><a  id="contactnav"data-ref="quotations" href="./settings">Settings<div class="activeslider"></div></a></li>
+      <?php if(isset($_SESSION['first_name'])){?>
+ <li>  <a href="index"> <i class="fas fa-user" style="margin-right: 10px;"></i><?php echo $_SESSION['first_name']?> </a></li>
+ <li>  <a href="#" onclick="logout()">Logout </a></li>
+
+      <?php }  else {?>
+        <li style="position: relative;"><a id="aboutnav" data-ref="about" href="./auth/signup">Signup<div class="activeslider"></div></a></li>
+        <li style="position: relative;"><a id="aboutnav" data-ref="about" href="./auth/signin-auth/signin">Signin<div class="activeslider"></div></a></li>
+      <?php }?>
 
     </ul>
 
@@ -265,6 +273,15 @@ $GetInvoiceDetails = mysqli_fetch_all($queryGetInvoiceDetails, MYSQLI_ASSOC);
                         window.location.href = "index.php?logout=success"
                 }
               });
+  }
+  const toggleHandler = ()=> {
+    show = !show;
+      if (show){
+        
+        document.querySelector(".forDropDown").classList.add("slideDown")
+      } else{
+        document.querySelector(".forDropDown").classList.remove("slideDown")
+      }
   }
  </script>
 </body>
