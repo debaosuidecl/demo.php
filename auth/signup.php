@@ -167,6 +167,7 @@
 
 	<script src="js/main.js"></script>
 <script>
+	let show = false
 const toggleHandler = ()=> {
     show = !show;
       if (show){

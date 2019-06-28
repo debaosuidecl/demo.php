@@ -264,6 +264,7 @@ $tableExists = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schem
                 }
               });
   }
+  let show = false
   const toggleHandler = ()=> {
     show = !show;
       if (show){

@@ -274,6 +274,7 @@ $GetInvoiceDetails = mysqli_fetch_all($queryGetInvoiceDetails, MYSQLI_ASSOC);
                 }
               });
   }
+  let show=false
   const toggleHandler = ()=> {
     show = !show;
       if (show){

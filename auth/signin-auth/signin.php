@@ -148,7 +148,7 @@ if(isset($_SESSION['first_name'])){
 	<script src="js/main.js"></script>
 		<script>
 		
-		
+		let show = false
 		const toggleHandler = ()=> {
     show = !show;
       if (show){

@@ -3,6 +3,7 @@ const $$ = parameter => {
 };
 
 //set change listener on discount and tax beginning
+let show = false;
 const toggleHandler = () => {
   show = !show;
   if (show) {
