@@ -54,7 +54,7 @@ session_start();
     
     
   </nav>
-  <ul class="forDropDown">
+  <ul class="forDropDown slideDown">
       <div class="cancont">
         <i class="fas fa-window-close" id="cancel"></i>
       </div>
