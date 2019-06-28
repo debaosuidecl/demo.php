@@ -9,10 +9,7 @@ const taxChange = () => {
   switch ($$("#typeTaxInvoice").value) {
     case "None":
       $("#taxControlContainer").html(` <div id="customSelectTypeTax">
-                    <div id="labelTaxContInvoice">
-                     <label for="labelTax">Label</label> 
-                     <input name="labelTax" id="labelTax" style="margin-bottom: 20px" placeholder="label" value=""/>
-                    </div> 
+                    
                       <label for="type" style="width: 100%;">Type</label> 
                       <select name="type" id="typeTaxInvoice">
                         <option selected value="None">None</option>
@@ -30,10 +27,7 @@ const taxChange = () => {
       $("#taxControlContainer").html(`
 
               <div id="customSelectTypeTax">
-                    <div id="labelTaxContInvoice">
-                     <label for="labelTax">Label</label> 
-                     <input name="labelTax" id="labelTax" style="margin-bottom: 20px" placeholder="label" value=""/>
-                    </div> 
+                    
                       <label for="type" style="width: 100%;">Type</label> 
                       <select value="On Total"name="type" id="typeTaxInvoice">
                         <option value="None">None</option>
@@ -56,10 +50,7 @@ const taxChange = () => {
       break;
     case "Per Item":
       $("#taxControlContainer").html(` <div id="customSelectTypeTax">
-                    <div id="labelTaxContInvoice">
-                     <label for="labelTax">Label</label> 
-                     <input name="labelTax" id="labelTax" style="margin-bottom: 20px" placeholder="label" value=""/>
-                    </div> 
+                    
                       <label for="type" style="width: 100%;">Type</label> 
                       <select value="Per Item" name="type" id="typeTaxInvoice">
                         <option>None</option>
@@ -78,9 +69,7 @@ const taxChange = () => {
       $("#taxControlContainer").html(`
 
                 <div id="customSelectTypeTax">
-         <div id="labelTaxContInvoice">
-       <label for="labelTax">Label</label> 
-       <input name="labelTax" id="labelTax" style="margin-bottom: 20px" placeholder="label" value=""/>
+      
       </div> 
         <label for="type" style="width: 100%;">Type</label> 
         <select value="Deducted" name="type" id="typeTaxInvoice">
@@ -105,10 +94,7 @@ const taxChange = () => {
 
     default:
       $("#taxControlContainer").html(` <div id="customSelectTypeTax">
-                    <div id="labelTaxContInvoice">
-                     <label for="labelTax">Label</label> 
-                     <input name="labelTax" id="labelTax" style="margin-bottom: 20px" placeholder="label" value=""/>
-                    </div> 
+                    
                       <label for="type" style="width: 100%;">Type</label> 
                       <select name="type" id="typeTaxInvoice">
                         <option value="None">None</option>
@@ -149,7 +135,7 @@ const discountChange = () => {
                         <option selected value="Flat Amount">Flat Amount</option>
                       </select>
                      <div id="labelTaxContInvoice">
-                     <label for="labelTax">Amount</label> 
+                     <label for="amount">Amount</label> 
                      <input type="number" name="amount" onkeyup="onChangeHandler()" id="amountDiscount" placeholder="Amount" step="1.00" value="0.00"/>
                     </div> 
               </div>   
@@ -254,6 +240,9 @@ const currencyUpdate = currencySymbol => {
                                 <li><h5>Balance Due</h5> <h5 id="balanceDueValueInvoice">${currencySymbol} 0.00</h5></li>`;
   $$("#amountInvoiceInput h6").innerText = currencySymbol + " " + "0.00";
   console.log(currencySymbol);
+  if ($$("#bamount").getAttribute("data-src") !== "okay") {
+    $$("th#bamount").innerText = currencySymbol + " " + "0.00";
+  }
 };
 
 $.ajax({
@@ -344,12 +333,7 @@ const colorPickerHandler = event => {
   $$("#descriptionHeaderInvoice").style.background = event.target.value;
   $$(".closeProductDescInvoice").style.color = event.target.value;
   $$("#addDescInvoice").style.color = event.target.value;
-  $$("#AddNewProductInvoice").style.borderTop = `1px solid ${
-    event.target.value
-  }`;
-  $$("#AddNewProductInvoice").style.borderBottom = `1px solid ${
-    event.target.value
-  }`;
+
   document.querySelectorAll(".closeProductDescInvoice").forEach(c => {
     c.style.color = event.target.value;
   });
@@ -397,7 +381,7 @@ const onChangeHandler = id => {
 
   let priceInvoices = document.querySelectorAll(".priceInvoice");
   let qtyInvoices = document.querySelectorAll(".qtyInvoice");
-  let checkBoxInvoice = document.querySelectorAll(".taxCheckBox");
+  // let checkBoxInvoice = document.querySelectorAll(".taxCheckBox");
   subTotal = 0.0;
   totalPerItemArray = [];
   priceInvoices.forEach((p, i) => {
@@ -413,18 +397,7 @@ const onChangeHandler = id => {
     subTotal = ultFloatParser(subTotal).toFixed(2);
   });
   taxValue = 0.0;
-  checkBoxInvoice.forEach((t, i) => {
-    // if (t.checked && $$("#myPercent")) {
-    //   perTax = (
-    //     (ultFloatParser($$("#myPercent").value) / 100) *
-    //     ultFloatParser(priceInvoices[i].value)
-    //   ).toFixed(2);
-    //   $$("#taxPercentTag").innerText = $$("#myPercent").value + " %";
-    // } else {
-    //   perTax = 0.0;
-    // }
-    // taxValue = ultFloatParser(taxValue) + ultFloatParser(perTax);
-  });
+
   if ($$("#myPercent")) {
     taxValue = (
       (ultFloatParser($$("#myPercent").value) / 100) *
@@ -454,6 +427,18 @@ const onChangeHandler = id => {
         ultFloatParser(subTotal)
       ).toFixed(2);
   }
+  $$("#bamount").innerText =
+    currencySymbol +
+    " " +
+    (
+      ultFloatParser(subTotal) +
+      ultFloatParser(taxValue) +
+      ultFloatParser(discountValue)
+    )
+      .toFixed(2)
+      .toString()
+      .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+
   $$("#subtotalValueInvoice").innerText =
     currencySymbol +
     " " +
@@ -490,12 +475,10 @@ console.log(balance);
 //BEGINNING OF PRODUCT ADDITION ALGORITHM
 let inc = 1;
 const addNewProductHandler = () => {
-  console.log("click add");
+  // console.log("click add");
   $(".descriptionContainerInvoice")
     .append(`<div class="descriptionRowInvoice" id="${uuidv4()}">
-                        <div class="cancelItemInvoice">
-                           <i class="fas fa-window-close closeProductDescInvoice"  id="closeProductDescInvoice"></i>
-                        </div>
+                        
                         <div id="descriptionInvoiceInput" class="descriptionInvoiceInput">
                           <textarea name="description" id="description${inc}" class="description" placeholder="Describe Item"></textarea>
                         </div>
@@ -508,9 +491,11 @@ const addNewProductHandler = () => {
                         <div class="amountInvoiceInput" id="amountInvoiceInput${inc}">
                           <h6>${currencySymbol} 0.00</h6>
                         </div>
-                        <div id="taxInvoiceInput">
-                          <input type="checkbox" class="taxCheckBox">
+                        <div class="cancelItemInvoice">
+                        <i class="fas fa-trash closeProductDescInvoice"></i>
+                        <span class="deleteTrashInvoice" style="padding: 2px 8px; font-size: 17px; color: ${pickedColor};">Delete Item</span>
                         </div>
+                      
                </div>`);
 
   deleteEventCall();
@@ -519,7 +504,6 @@ const addNewProductHandler = () => {
       value: pickedColor
     }
   });
-  checkBoxEventCall();
 };
 
 //END OF PRODUCT ADDITION ALGORITHM
@@ -528,7 +512,11 @@ const addNewProductHandler = () => {
 
 // console.log(uuidv4())
 
-const deleteHandler = e => {
+const deleteHandler = (e, rowid) => {
+  if (document.querySelectorAll(".closeProductDescInvoice").length < 2) {
+    return;
+  }
+  console.log(rowid);
   const elemId = e.target.parentNode.parentNode;
 
   const filterArr = [
@@ -538,42 +526,125 @@ const deleteHandler = e => {
   console.log(filterArr, "filterArr");
   e.target.parentNode.parentNode.parentNode.removeChild(elemId);
   onChangeHandler();
+  onDeleteAsync(rowid);
+};
+const onDeleteAsync = rowid => {
+  $.ajax({
+    url: `save-invoice.php?rowid=${rowid}`,
+    type: "GET",
+    success: function(data) {
+      console.log(data);
+    }
+  });
 };
 const deleteEventCall = () => {
+  console.log(
+    document.querySelectorAll(".closeProductDescInvoice").length,
+    "Na d length be dis"
+  );
+  if (document.querySelectorAll(".closeProductDescInvoice").length < 2) {
+    return;
+  }
+
   document.querySelectorAll(".closeProductDescInvoice").forEach(x => {
     // console.log(x)
-    x.addEventListener("click", deleteHandler);
+    x.addEventListener("click", e => {
+      deleteHandler(e, x.parentNode.parentNode.id);
+    });
   });
-};
-
-const checkedHandler = e => {
-  onChangeHandler(e.target);
-};
-
-const checkBoxEventCall = () => {
-  document.querySelectorAll(".taxCheckBox").forEach(x => {
+  document.querySelectorAll(".deleteTrashInvoice").forEach(x => {
     // console.log(x)
-    x.addEventListener("click", checkedHandler);
+    x.addEventListener("click", e => {
+      deleteHandler(e, x.parentNode.parentNode.id);
+    });
   });
 };
-checkBoxEventCall();
+
 deleteEventCall();
 onCurrencyChangeHandler();
 //END OF PRODUCT DELETION ALGORITHM
 
 //BEGINNING OF SHOW PREVIEW HANDLER
 
-const showPreviewHandler = key => {
-  // $$(".invoiceGeneratorCont").style.transform = "scale(0.2) translateX(-50%)";
-  // $$(".invoiceGeneratorCont").style.position = "absolute";
-  // $$(".invoiceGeneratorCont").style.top = "0px";
-  // $$(".invoiceGeneratorCont").style.left = "50%";
-  // $$(".invoiceGeneratorCont").style.transition = ".9s";
-  // $.ajax({
-  //   url:"new-invoice-preview?key=key"
-  // })
-};
-
 const previewInvoice = id => {
   window.location.href = `new-invoice-preview?key=${id}`;
+};
+const previewQuotation = id => {
+  window.location.href = `quotation-preview?key=${id}`;
+};
+
+$("input:text").focus(function() {
+  $(this).select();
+});
+$("input:text").mouseup(function(e) {
+  return false;
+});
+
+document.querySelectorAll(".personalDets").forEach(i => {
+  i.querySelector("input").addEventListener("focus", () => {
+    i.querySelector("label").style.color = pickedColor;
+    i.querySelector("label").style.transition = ".5s";
+  });
+});
+document.querySelectorAll(".personalDets").forEach(i => {
+  i.querySelector("input").addEventListener("blur", () => {
+    i.querySelector("label").style.color = "#bbb";
+    i.querySelector("label").style.transition = ".5s";
+  });
+});
+
+const fileHandler = e => {
+  console.log(e);
+  var file = e.target.files[0];
+  // uploadFile(file);
+  console.log(file);
+  let formData = new FormData();
+
+  formData.append("image", file);
+  $.ajax({
+    type: "POST",
+    url: "uploads/uploads.php",
+    data: formData,
+    contentType: false,
+    // cache: false,
+    processData: false,
+    beforeSend: function() {
+      $$(".invoiceLogo label").innerHTML = "Uploading Image...";
+    },
+    success: function(msg) {
+      // console.log(msg);
+      const newMsg = JSON.parse(msg);
+      console.log(newMsg);
+      if (newMsg.success !== undefined) {
+        $$(".invoiceLogo label").innerHTML = `<img  src="./uploads/${
+          newMsg.success
+        }" alt=""/>
+        <form id="formInvoice" enctype="multipart/form-data" name="submit" style="position: absolute"  >
+                  
+                    <input style="position: absolute" type="file" name="image" id="logoInvoice">
+                  </form>
+        
+        `;
+      }
+      // $$(".invoiceLogo label").innerHTML = "Image Uploaded";
+      $$("#logoInvoice").addEventListener("change", fileHandler);
+    }
+  });
+};
+
+if ($$("#logoInvoice")) {
+  $$("#logoInvoice").addEventListener("change", fileHandler);
+}
+
+const logout = () => {
+  $.ajax({
+    url: "backend/logout.backend.php",
+    datatype: "json",
+    type: "post",
+    data: { submit: true },
+    // timeout: 5000,
+    success: function(data) {
+      window.location.href = "index.php?logout=success";
+    }
+  });
 };

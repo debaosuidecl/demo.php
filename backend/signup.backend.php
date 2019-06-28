@@ -1,52 +1,85 @@
 <?php
+session_start();
 if (isset($_POST['submit'])) {
 
-include_once 'dbh.inc.php';
+include_once '../setdb.php';
 
-$first = mysqli_real_escape_string($conn, $_POST['first']);
-$last = mysqli_real_escape_string($conn, $_POST['last']);
-$nationality = mysqli_real_escape_string($conn, $_POST['nationality']);
-$state = mysqli_real_escape_string($conn, $_POST['state']);
-$religion = mysqli_real_escape_string($conn, $_POST['religion']);
-$occupation = mysqli_real_escape_string($conn, $_POST['occupation']);
+$first = mysqli_real_escape_string($conn, $_POST['first_name']);
+$last = mysqli_real_escape_string($conn, $_POST['last_name']);
 $email = mysqli_real_escape_string($conn, $_POST['email']);
 $pwd = mysqli_real_escape_string($conn, $_POST['pwd']);
 
 // error handlers
-
+echo  $name; 
+echo $email;
+echo $pwd;
+echo "Pleas Now";
 
 //Check for empty fields
 
-if(empty($first) || empty($last) || empty($nationality) || empty($state) || empty($religion) || empty($occupation) || empty($email) || empty($pwd) ){
-		header("Location: ../registration.php?signup=empty");
+if(empty($first) || empty($last) || empty($email) || empty($pwd) ){
+    header("Location: ../auth/signup.php?signup=empty");
+    
 		exit();
 } else{
 	//check if input characters are valid
 
-	if(!preg_match("/^[a-zA-Z]*$/", $first) || !preg_match("/^[a-zA-Z]*$/", $last) || !preg_match("/^[a-zA-Z]*$/", $nationality) || !preg_match("/^[a-zA-Z]*$/", $state) || !preg_match("/^[a-zA-Z]*$/", $religion) || !preg_match("/^[a-zA-Z]*$/", $occupation) || !preg_match("/^[a-zA-Z]*$/", $pwd)){
-		header("Location: ../registration.php?signup=invalid");
+	if(!preg_match("/^[a-zA-Z]*$/", $first) || !preg_match("/^[a-zA-Z]*$/", $last)  || !preg_match("/^[a-zA-Z]*$/", $pwd)){
+		header("Location: ../auth/signup.php?signup=invalid");
 		exit();
 	} else{
 		//Check if email is valid
 
 		if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-		header("Location: ../registration.php?signup=email");
+		header("Location: ../auth/signup.php?signup=email");
 		exit();
 		} else{
 		 	$sql = "SELECT * FROM users WHERE user_email='$email'";
 		 	$result = mysqli_query($conn, $sql);
-		 	$resultCheck = mysqli_num_rows($result);
+       $resultCheck = mysqli_num_rows($result);
+      //  mysqli_query($conn, $sql);
+              
 		 	if($resultCheck > 0 ){
-		 		header("Location: ../registration.php?signup=usertaken");
+		 		header("Location: ../auth/signup.php?signup=usertaken");
 				exit();
 		 	} else{
 		 		// hashing the password;
-		 		$hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+		 		$hashedPwd = trim(password_hash($pwd, PASSWORD_DEFAULT));
 
 		 		//Insert the user into the database
-		 		$sql = "INSERT INTO users (user_first, user_last, user_email, user_pwd, user_nationality, user_state, user_religion, user_occupation) VALUES ('$first', '$last', '$email', '$hashedPwd', '$nationality', '$state', '$religion', '$occupation')";
-		 		mysqli_query($conn, $sql);
-		 		header("Location: ../registration.php?signup=success");
+		 		$sql = "INSERT INTO users (first_name, last_name,  user_email, user_pwd) VALUES ('$first', '$last', '$email', '$hashedPwd')";
+				 
+				 if (mysqli_query($conn, $sql)) {
+
+					
+					$sql = "SELECT * FROM users WHERE user_email ='$email'";
+		$result = mysqli_query($conn, $sql);
+		$resultCheck = mysqli_num_rows($result);
+		if ($resultCheck < 1){
+			header("Location: ../auth/signin-auth/signin.php?login=error");
+			exit();
+		} else{
+			if($row = mysqli_fetch_assoc($result)){
+					$_SESSION['first_name'] = $row['first_name'];
+					$_SESSION['last_name'] = $row['last_name'];
+					$_SESSION['user_identification'] = $row['user_identification'];
+					$_SESSION['user_email'] = $row['user_email'];
+					header("Location: ../auth/signup.php?signup=success");
+				
+				}
+
+			}
+
+
+
+
+
+
+				 } else {
+						echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+						exit;
+					}
+				 
 				exit();
 		 	}
 		}
@@ -54,9 +87,7 @@ if(empty($first) || empty($last) || empty($nationality) || empty($state) || empt
 
 }
 
-
-
 } else{
-	header("Location: ../registration.php");
+	header("Location: ../auth/signup.php");
 	exit();
 }

@@ -1,3 +1,21 @@
+<?php
+	session_start();
+	if(isset($_SESSION['first_name'])){
+		header("Location: ../index");
+	}
+  $error="";
+  if(isset($_GET['signup'])){
+    if($_GET['signup'] == "usertaken"){
+      $error="<h3 style='color: red; text-align: center; font-weight: 100; '>User Taken</h3>";
+    } else if($_GET['signup'] == "empty"){
+      $error="<h3 style='color: red; text-align: center; font-weight: 100;  '>Login failed: empty fields</h3>";
+    } else {
+
+		}
+
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,6 +55,9 @@
 		.limiter{
 			margin-top: 40px;
 		}
+		span.label-input100{
+			font-weight: lighter;
+		}
 		
 		a.login100-form-btn:hover{
 			/* background: #477fae !important; */
@@ -46,6 +67,9 @@
 		}
 		input:focus{
 			border-bottom: 1px solid #477fae
+		}
+		input::placeholder{
+			font-weight: lighter;
 		}
 	</style>
 </head>
@@ -63,11 +87,9 @@
 
     <ul class="forDesktop">
       <!-- <li><a id="active" href="#">Home</a></li> -->
-      <li style="position: relative;"><a class="active" data-ref="fixit" href="./index">Home<div class="activeslider"></div></a></li>
-      <li style="position: relative;"><a id="aboutnav" data-ref="about" href="./invoice-generator">Invoices<div class="activeslider"></div></a></li>
-      <li style="position: relative;"><a id="whatwedonav" data-ref="whatwedo" href="#whatwedo">Quotations<div class="activeslider"></div></a></li>
-      <li style="position: relative;"><a id="partnernav" data-ref="partners" href="#partners">Clients<div class="activeslider"></div></a></li>
-      <li style="position: relative;"><a  id="contactnav"data-ref="contact" href="#contact">Settings<div class="activeslider"></div></a></li>
+      <li style="position: relative;"><a class="active" data-ref="fixit" href="../index">Home<div class="activeslider"></div></a></li>
+      <li style="position: relative;"><a id="aboutnav" data-ref="about" href="./signup">Sign Up<div class="activeslider"></div></a></li>
+      <li style="position: relative;"><a id="whatwedonav" data-ref="whatwedo" href="./signin-auth/signin">Login<div class="activeslider"></div></a></li>
     </ul>
     
     
@@ -87,23 +109,27 @@
 
 
 
-	<div class="limiter">
+	<div class="limiter" >
 		<div class="container-login100">
-			<div class="wrap-login100">
-				<div class="login100-form-title" style="background-image: url(images/bg-01.jpg);">
+			<div style=" margin-top: 30px;" class="wrap-login100">
+				<div class="login100-form-title" style="background-image: url(images/bg-03.jpg); background: #477fae">
 					<span class="login100-form-title-1">
 						Sign Up
 					</span>
 				</div>
 
-				<form class="login100-form validate-form" method="P">
-					<div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
-						<span class="label-input100">Username</span>
-						<input class="input100" type="text" name="username" placeholder="Enter username">
+				<form  class="login100-form validate-form" action="../backend/signup.backend.php" method="post">
+						<?php echo $error ?>
+					<div class="wrap-input100 validate-input m-b-26" data-validate="First name is required">
+						<span class="label-input100">First Name</span>
+						<input class="input100" type="text" name="first_name" placeholder="Enter first name">
 						<span class="focus-input100"></span>
 					</div>
-
-				
+					<div class="wrap-input100 validate-input m-b-26" data-validate="Last name is required">
+						<span class="label-input100">Last Name</span>
+						<input class="input100" type="text" name="last_name" placeholder="Enter last name">
+						<span class="focus-input100"></span>
+					</div>
 					<div class="wrap-input100 validate-input m-b-26" data-validate="Email is required">
 						<span class="label-input100">Email</span>
 						<input class="input100" type="email" name="email" placeholder="Enter Email">
@@ -111,31 +137,17 @@
 					</div>
 					<div class="wrap-input100 validate-input m-b-18" data-validate = "Password is required">
 						<span class="label-input100">Password</span>
-						<input class="input100" type="password" name="pass" placeholder="Enter password">
+						<input class="input100" type="password" name="pwd" placeholder="Enter password">
 						<span class="focus-input100"></span>
 					</div>
 
-							<!-- <div class="flex-sb-m w-full p-b-30">
-						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-							<label class="label-checkbox100" for="ckb1">
-								Remember me
-							</label>
-						</div>
-
-				<div>
-							<a href="#" class="txt1">
-								Forgot Password?
-							</a>
-						</div>
-					</div> -->
-
 					<div class="container-login100-form-btn">
-						<a style="border: 1px solid #477fae; background: none; color: #477fae !important; cursor: pointer; text-align: center; margin: auto;" class="login100-form-btn">
-							Sign Up
-						</a>
+				
+						<input type="submit" name="submit" style="border: 1px solid #477fae; background: none; color: #477fae !important; cursor: pointer; text-align: center; margin: auto;"  class="login100-form-btn" value="Sign Up">
 					</div>
+				
 				</form>
+				<p style="text-align: center; margin: 2px auto 10px;">Already have and account? <a href="#">Sign In</a></p>
 			</div>
 		</div>
 	</div>

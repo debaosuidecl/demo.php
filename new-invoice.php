@@ -1,11 +1,20 @@
 <?php 
+session_start();
+include_once "setdb.php";
+$user_email = $_SESSION['user_email'];
       $determinant = false;
+      $user_identification = (float)$_SESSION['user_identification'];
+      
+      if(!isset($_SESSION['first_name'])){
+        header("Location: ./index");
+      }
+        
   	if(isset($_GET['key'])){
       global $determinant;
       $key = htmlspecialchars($_GET['key']);
+      
       // echo $key;
-      include_once "setdb.php";
-      $sqlGetInvoiceToEdit = "SELECT invoicedetails.invoiceTitle, invoicedetails.fromNameInvoice, invoicedetails.fromEmailInvoice, invoicedetails.address1FromInvoice, invoicedetails.address2FromInvoice, invoicedetails.zipcodeFromInvoice, invoicedetails.phoneFromInvoice, invoicedetails.businessNumberFromInvoice, invoicedetails.refNumberFromInvoice, invoicedetails.dateFromInvoice, invoicedetails.termsFromInvoice, invoicedetails.clientNameFromInvoice, invoicedetails.clientEmailFromInvoice, invoicedetails.clientAddressFromInvoice, invoicedetails.paymentInstructionsAddNotes, invoicedetails.labelTax, invoicedetails.typeTaxInvoice, invoicedetails.myPercent, invoicedetails.amountDiscount, invoicedetails.myPercentDiscount, invoicedetails.currencyContInvoice, invoicedetails.subTotal, invoicedetails.taxValue, invoicedetails.discount, invoicedetails.discountInvoice, invoicedetails.pickedColor, invoicedetails.balance FROM invoicedetails WHERE invoicedetails.invoiceIdentifier='$key' ";
+      $sqlGetInvoiceToEdit = "SELECT invoicedetails.invoiceTitle, invoicedetails.fromNameInvoice, invoicedetails.fromEmailInvoice, invoicedetails.address1FromInvoice,   invoicedetails.phoneFromInvoice, invoicedetails.refNumberFromInvoice, invoicedetails.dateFromInvoice, invoicedetails.clientNameFromInvoice, invoicedetails.clientEmailFromInvoice, invoicedetails.clientAddressFromInvoice, invoicedetails.user_identification, invoicedetails.paymentInstructionsAddNotes, invoicedetails.typeTaxInvoice, invoicedetails.myPercent, invoicedetails.amountDiscount, invoicedetails.myPercentDiscount, invoicedetails.currencyContInvoice, invoicedetails.subTotal, invoicedetails.taxValue, invoicedetails.discount, invoicedetails.discountInvoice, invoicedetails.pickedColor, invoicedetails.balance FROM invoicedetails WHERE invoicedetails.invoiceIdentifier='$key' AND invoicedetails.user_identification=$user_identification";
       
       $resultGetInvoiceToEdit = mysqli_query($conn, $sqlGetInvoiceToEdit);
       $GetInvoiceToEdit = mysqli_fetch_all($resultGetInvoiceToEdit, MYSQLI_ASSOC);
@@ -31,7 +40,7 @@
       // print_r($InvoiceValues);
      
       // exit;
-      $sqlGetInvoiceToEdit = "SELECT producteach.description, producteach.priceInvoice, producteach.qtyInvoice, producteach.amountPerItem, producteach.taxCheckBox, producteach.descriptionRowInvoiceId  FROM invoicedetails  INNER JOIN producteach ON invoicedetails.invoiceIdentifier = producteach.invoiceIdentifier WHERE invoicedetails.invoiceIdentifier='$key' ";
+      $sqlGetInvoiceToEdit = "SELECT producteach.description, producteach.priceInvoice, producteach.qtyInvoice, producteach.amountPerItem, producteach.descriptionRowInvoiceId  FROM invoicedetails  INNER JOIN producteach ON invoicedetails.invoiceIdentifier = producteach.invoiceIdentifier WHERE invoicedetails.invoiceIdentifier='$key' AND producteach.user_identification=$user_identification";
 
       $resultGetInvoiceToEdit = mysqli_query($conn, $sqlGetInvoiceToEdit);
       $GetInvoiceToEdit = mysqli_fetch_all($resultGetInvoiceToEdit, MYSQLI_ASSOC);
@@ -43,9 +52,24 @@
         }
         // exit;
         $ProductValues = $GetInvoiceToEdit;
+        
         // print_r($ProductValues);
 
+
+       
+
+
     }
+    
+    $sqlLogoUrl = "SELECT logo_url FROM user_profiles WHERE user_email='$user_email' ";
+    
+    $resultLogoUrl = mysqli_query($conn, $sqlLogoUrl);
+    $logoUrl = mysqli_fetch_all($resultLogoUrl, MYSQLI_ASSOC);
+    $showLogo = false;
+  if((count($logoUrl)) ==0){
+    $showLogo = true;
+  }
+
 
 ?>
 <!DOCTYPE html>
@@ -53,12 +77,12 @@
 <head>
   <meta charset="UTF-8">
   <link href="./fontawesome-free-5.9.0-web/css/fontawesome.css" rel="stylesheet">
-  <link href="chosen.css" rel="stylesheet">
-
   <link href="./fontawesome-free-5.9.0-web/css/brands.css" rel="stylesheet">
   <link href="./fontawesome-free-5.9.0-web/css/solid.css" rel="stylesheet">
+  <link href="./fontawesome-free-5.9.0-web/css/all.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <link rel="stylesheet" href="indexstyle.css">
@@ -84,12 +108,22 @@
     </div>
 
     <ul class="forDesktop">
-      <!-- <li><a id="active" href="#">Home</a></li> -->
+  
       <li style="position: relative;"><a class="active" data-ref="fixit" href="./index">Home<div class="activeslider"></div></a></li>
       <li style="position: relative;"><a id="aboutnav" data-ref="about" href="./invoice-generator">Invoices<div class="activeslider"></div></a></li>
-      <li style="position: relative;"><a id="whatwedonav" data-ref="whatwedo" href="#whatwedo">Quotations<div class="activeslider"></div></a></li>
+      <!-- <li style="position: relative;"><a id="whatwedonav" data-ref="whatwedo" href="#whatwedo">Partners<div class="activeslider"></div></a></li>
       <li style="position: relative;"><a id="partnernav" data-ref="partners" href="#partners">Clients<div class="activeslider"></div></a></li>
-      <li style="position: relative;"><a  id="contactnav"data-ref="contact" href="#contact">Settings<div class="activeslider"></div></a></li>
+   -->
+      <li style="position: relative;"><a  id="contactnav"data-ref="quotations" href="./quotation-generator">Quotations<div class="activeslider"></div></a></li>
+      <li style="position: relative;"><a  id="contactnav"data-ref="quotations" href="./settings">Settings<div class="activeslider"></div></a></li>
+      <?php if(isset($_SESSION['first_name'])){?>
+ <li>  <a href="index"> <i class="fas fa-user" style="margin-right: 10px;"></i><?php echo $_SESSION['first_name']?> </a></li>
+ <li>  <a href="#" onclick="logout()">Logout </a></li>
+
+      <?php }  else {?>
+        <li style="position: relative;"><a id="aboutnav" data-ref="about" href="./auth/signup">Signup<div class="activeslider"></div></a></li>
+        <li style="position: relative;"><a id="aboutnav" data-ref="about" href="./auth/signin-auth/signin">Signin<div class="activeslider"></div></a></li>
+      <?php }?>
     </ul>
     
     
@@ -110,8 +144,16 @@
 
 
 
-    <div class="mycontainer">
+
+
+
+
+
+    <div data-page="invoice" class="ycontainer" data-src="<?php echo $user_identification ?>">
+    <!-- <input id="hidden" type="hidden" value="<?php echo $user_identification ?>"> -->
               <!-- SAVE TO DATABASE -->
+
+              <div class="heading" style="text-align: center; font-size: 50px; color: #477fae; font-family: 'Lobster' "><h1>Design an Invoice</h1></div>
               <div class="SavePreviewCont">
       <a class="prev" href="#" onclick="previewInvoice(this.id)">Preview</a>
     </div>
@@ -137,8 +179,23 @@
 
               </div>
               <div class="invoiceLogo">
-                <!-- <input type="file" name="" id=""> -->
-               <img src="./includes/behance.png" alt=""> 
+                <label for="logoInvoice" style="position: relative" >
+                <?php if($showLogo == true){?>
+                    <p style="padding: 20px; border: none; position: abosolute; top: 50%; left: 50%;  border: 1px solid #999; cursor: pointer;  outline: none; ">Upload Your Logo</p>
+                    <form id="formInvoice" enctype="multipart/form-data" name="submit" style="position: absolute"  >
+                  
+                    <input style="position: absolute" type="file" name="image" id="logoInvoice">
+                  </form>
+                <?php } else {?>
+                  <form id="formInvoice" enctype="multipart/form-data" name="submit" style="position: absolute"  >
+                  
+                    <input style="position: absolute" type="file" name="image" id="logoInvoice">
+                  </form>
+                        <img  src="<?php echo "./uploads/" . $logoUrl[0]['logo_url']?>" alt="">
+                <?php }?>
+                </label>
+               <!-- <img src="./includes/behance.png" alt="">  -->
+
               </div>
             </div>
             <!-- end of Heading an Logo div -->
@@ -149,166 +206,180 @@
               <div class="fromInvoiceCont">
                 <h2 id="fromInvoice">From :</h2>
               <div class="personalDets">
-                    <label for="fromNameInvoice">Name </label> 
                       <?php if($determinant){?>
-                        <input type="text" id="fromNameInvoice" onchange="onChangeHandler()" placeholder="Name" value="<?php echo $InvoiceValues[0]['fromNameInvoice'] ?>" name="name">
+
+                        <label for="fromNameInvoice">
+
+                                        <i class="fas fa-pen"></i>
+                        </label>
+                        <input type="text" id="fromNameInvoice" onchange="onChangeHandler()" placeholder="Enter Your Name" value="<?php echo $InvoiceValues[0]['fromNameInvoice'] ?>" name="name">
                       <?php } else {?>
-                        <input type="text" id="fromNameInvoice" onchange="onChangeHandler()" placeholder="Name" value="" name="name">
+                        <label for="fromNameInvoice">
+
+                        <i class="fas fa-pen"></i>
+
+                        </label>
+                        <input type="text" id="fromNameInvoice" onchange="onChangeHandler()" placeholder="Enter Your Name" value="<?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?>" name="name">
                       <?php }?>
               </div> 
               <div class="personalDets">
-              <label for="fromEmailInvoice">Email </label>
+       
               <?php if($determinant){?>
-                <input type="email" placeholder="Email" onchange="onChangeHandler()" id="fromEmailInvoice" value="<?php echo $InvoiceValues[0]['fromEmailInvoice'] ?>" name="email">
+                
+                <label for="fromEmailInvoice">
+
+<i class="fas fa-pen"></i>
+</label>
+                <input type="email" placeholder="Enter Email Address" onchange="onChangeHandler()" id="fromEmailInvoice" value="<?php echo $InvoiceValues[0]['fromEmailInvoice'] ?>" name="email">
                 <?php } else {?>
-                  <input type="email" placeholder="Email" onchange="onChangeHandler()" id="fromEmailInvoice" value="" name="email">
+                                
+                <label for="fromEmailInvoice">
+
+<i class="fas fa-pen"></i>
+</label>
+                  <input type="email" placeholder="Enter  Email Address" onchange="onChangeHandler()" id="fromEmailInvoice" value="<?php echo $_SESSION['user_email'] ?>" name="email">
                   <?php }?>
 
                      
               </div> 
               <div class="personalDets">
-              <label for="address1FromInvoice">Address 1 </label>
               <?php if($determinant){?>
-                <input type="text" value="<?php echo $InvoiceValues[0]['address1FromInvoice'] ?>" id="address1FromInvoice" onchange="onChangeHandler()" placeholder="Address 1" name="address1">
+                              
+                <label for="address1FromInvoice">
+
+<i class="fas fa-pen"></i>
+</label>
+                <input type="text" value="<?php echo $InvoiceValues[0]['address1FromInvoice'] ?>" id="address1FromInvoice" onchange="onChangeHandler()" placeholder="Enter  residential address" name="address1">
                 <?php } else {?>
-                  <input type="text" value="" id="address1FromInvoice" onchange="onChangeHandler()" placeholder="Address 1" name="address1">
+                                
+                <label for="address1FromInvoice">
+
+        <i class="fas fa-pen"></i>
+      </label>
+                  <input type="text" value="" id="address1FromInvoice" onchange="onChangeHandler()" placeholder="Enter  Office Address" name="address1">
                   <?php }?>
 
                     
               </div> 
-              <div class="personalDets">
-              <label for="address2FromInvoice">Address 2 </label>
-              <?php if($determinant){?>
-                <input type="text" value="<?php echo $InvoiceValues[0]['address2FromInvoice'] ?>" id="address2FromInvoice" onchange="onChangeHandler()" placeholder="Address 2" name="address2">
-                <?php } else {?>
-                  <input type="text" value="" id="address2FromInvoice" onchange="onChangeHandler()" placeholder="Address 2" name="address2">
-                  <?php }?>
-
-                     
-              </div>
-              <div class="personalDets">
-              <label for="zipcodeFromInvoice">Zip Code </label>
-              <?php if($determinant){?>
-                <input type="text" value="<?php echo $InvoiceValues[0]['zipcodeFromInvoice'] ?>" id="zipcodeFromInvoice" onchange="onChangeHandler()" placeholder="Zip Code" name="zipcode">
-                <?php } else {?>
-                  <input type="text" value="" id="zipcodeFromInvoice" onchange="onChangeHandler()" placeholder="Zip Code" name="zipcode">
-                  <?php }?>
-
              
-              </div>
+           
               <div class="personalDets">
-              <label for="phoneFromInvoice">Phone </label>
+              
               <?php if($determinant){?>
+                <label for="phoneFromInvoice">
+
+<i class="fas fa-pen"></i>
+</label>
                 <input type="text" value="<?php echo $InvoiceValues[0]['phoneFromInvoice'] ?>" onchange="onChangeHandler()" id="phoneFromInvoice" placeholder="Phone" name="phone">
                 <?php } else {?>
+                  <label for="phoneFromInvoice">
+
+<i class="fas fa-pen"></i>
+</label>
                   <input type="text" value="" onchange="onChangeHandler()" id="phoneFromInvoice" placeholder="Phone" name="phone">
                   <?php }?>
 
                     
               </div>
-              <div class="personalDets">
-              <label for="businessNumberFromInvoice">Business Number </label>
-              <?php if($determinant){?>
-                <input type="text" value="<?php echo $InvoiceValues[0]['businessNumberFromInvoice'] ?>" onchange="onChangeHandler()"  id="businessNumberFromInvoice" placeholder="Business Number" name="businessnumber">
-                <?php } else {?>
-                  <input type="text" value="" onchange="onChangeHandler()"  id="businessNumberFromInvoice" placeholder="Business Number" name="businessnumber">
-                  <?php }?>
-
-                      
+             
+              
               </div>
-              <div class="personalDets">
-              <label for="refNumberFromInvoice">Reference Number </label>
-
-              <?php if($determinant){?>
-                <input type="text" id="refNumberFromInvoice" onchange="onChangeHandler()" value="<?php echo $InvoiceValues[0]['refNumberFromInvoice']?>" placeholder="Reference Number" name="refnumber">
-                <?php } else {?>
-                  <input type="text" id="refNumberFromInvoice" onchange="onChangeHandler()" value="#INV0001" placeholder="Reference Number" name="refnumber">
-                  <?php }?>
-
-              </div>
-              <div class="personalDets">
-              <label for="dateFromInvoice">Date </label>
-              <?php if($determinant){?>
-                <input id="dateFromInvoice" onchange="onChangeHandler()" type="date" value="<?php echo $InvoiceValues[0]['dateFromInvoice']?>" placeholder="Date" name="date">
-                <?php } else {?>
-                  <input id="dateFromInvoice" onchange="onChangeHandler()" type="date" value="" placeholder="Date" name="date">
-                  <?php }?>
-              </div>
-              <div class="personalDets">
-              <label for="termsFromInvoice">Terms </label>
-              <?php if($determinant){?>
-                <select onchange="onChangeHandler()" value="<?php echo $InvoiceValues[0]['termsFromInvoice']?>" id="termsFromInvoice" name="terms" id="terms">
-                  <option value="none">None</option>
-                  <option value="custom">Custom</option>
-                  <option value="dueonreceipt">Due on Receipt</option>
-                  <option value="nextday">Next day</option>
-                  <option value="2days">2 days</option>
-                  <option value="3days">3 days</option>
-                  <option value="4days">4 days</option>
-                  <option value="5days">5 days</option>
-                  <option value="6days">6 days</option>
-                  <option value="7days">7 days</option>
-                  <option value="10days">10 days</option>
-                  <option value="14days">14 days</option>
-                  <option value="21days">21 days</option>
-                  <option value="36days">36 days</option>
-                  <option value="45days">45 days</option>
-                  <option value="180days">180 days</option>
-                  <option value="365days">365 days</option>
-                </select>
-                <?php } else {?>
-                  <select onchange="onChangeHandler()" value="" id="termsFromInvoice" name="terms" id="terms">
-                    <option value="none">None</option>
-                    <option value="custom">Custom</option>
-                    <option value="dueonreceipt">Due on Receipt</option>
-                    <option value="nextday">Next day</option>
-                    <option value="2days">2 days</option>
-                    <option value="3days">3 days</option>
-                    <option value="4days">4 days</option>
-                    <option value="5days">5 days</option>
-                    <option value="6days">6 days</option>
-                    <option value="7days">7 days</option>
-                    <option value="10days">10 days</option>
-                    <option value="14days">14 days</option>
-                    <option value="21days">21 days</option>
-                    <option value="36days">36 days</option>
-                    <option value="45days">45 days</option>
-                    <option value="180days">180 days</option>
-                    <option value="365days">365 days</option>
-                  </select>
-                  <?php }?>
-              </div>
-              </div>
+              
               <div class="toInvoiceCont">
                 <h2 id="toInvoice">To :</h2>
               <div class="personalDets">
-                <label for="clientNameFromInvoice">Name </label>
+              <!-- <i class="fa fa-pencil" aria-hidden="true"> -->
                 <?php if($determinant){?>
+                  <label for="clientNameFromInvoice">
+
+          <i class="fas fa-pen"></i>
+              </label>
                   <input onchange="onChangeHandler()" type="text" id="clientNameFromInvoice" placeholder="Client Name" value="<?php echo $InvoiceValues[0]['clientNameFromInvoice'] ?>" name="clientname">
                 <?php } else {?>
+                  <label for="clientNameFromInvoice">
+
+<i class="fas fa-pen"></i>
+</label>
                   <input onchange="onChangeHandler()" type="text" id="clientNameFromInvoice" placeholder="Client Name" value="" name="clientname">
                   <?php }?>
               </div> 
               <div class="personalDets">
-                <label for="clientEmailFromInvoice">Email </label>
-                <?php if($determinant){?>
+
+               <?php if($determinant){?>
+                <label for="clientAddressFromInvoice">
+
+<i class="fas fa-pen"></i>
+</label>
                   <input onchange="onChangeHandler()" type="email" value="<?php echo $InvoiceValues[0]['clientEmailFromInvoice'] ?>" id="clientEmailFromInvoice" placeholder="Client Email" name="clientemail">
                 <?php } else {?>
+                  <label for="clientEmailFromInvoice">
+
+<i class="fas fa-pen"></i>
+</label>
                   <input onchange="onChangeHandler()" type="email" value="" id="clientEmailFromInvoice" placeholder="Client Email" name="clientemail">
                   <?php }?>
               </div> 
               <div class="personalDets">
-                <label for="clientAddressFromInvoice">Address </label>
                 <?php if($determinant){?>
+                  <label for="clientAddressFromInvoice">
+
+<i class="fas fa-pen"></i>
+</label>
                   <input onchange="onChangeHandler()" type="text" value="<?php echo $InvoiceValues[0]['clientAddressFromInvoice']?>" id="clientAddressFromInvoice" placeholder="Client Address" name="clientaddress">
                 <?php } else {?>
+                  <label for="clientAddressFromInvoice">
+
+<i class="fas fa-pen"></i>
+</label>
                   <input onchange="onChangeHandler()" type="text" value="" id="clientAddressFromInvoice" placeholder="Client Address" name="clientaddress">
                   <?php }?>
               </div>
               </div>
             </div>
+                      <div id="invoiceDueDateTableCont"> 
+
+                          <table id="invoiceDueDateTable" cellpadding="10px">
+                              <tr>
+                              <?php if($determinant){?>
+                                <th data-src="okay" id="bamount"  colspan="2"><?php echo $InvoiceValues[0]['currencyContInvoice'] .  " " . number_format($InvoiceValues[0]['balance'], 2, '.', '')?></th>
+                                      <?php } else {?>
+                                        <th data-src="" id="bamount"colspan="2">$ 0.00</th>
+                                          <?php }?>
+
+                              
+                              </tr>
+                              <tr>
+                                <td><div class="">
+                                <?php if($determinant){?>
+                              <input type="text" id="refNumberFromInvoice" onchange="onChangeHandler()" value="<?php echo $InvoiceValues[0]['refNumberFromInvoice']?>" placeholder="Reference Number" name="refnumber">
+                              <?php } else {?>
+                                <input type="text" id="refNumberFromInvoice" onchange="onChangeHandler()" value="#INV0001" placeholder="Reference Number" name="refnumber">
+                                <?php }?>
+              
+                                </div></td>
+                                <td>
+                                  <div class="">
+                                  <div class="">
+                            
+                            <?php if($determinant){?>
+                              <input id="dateFromInvoice" onchange="onChangeHandler()" type="date" value="<?php echo $InvoiceValues[0]['dateFromInvoice']?>" placeholder="Date" name="date">
+                              <!-- <div  style="text-align: center; font-size: 14px; width: 100%"><span>mm/dd/yyyy<span></div> -->
+                              <?php } else {?>
+                                <input id="dateFromInvoice" onchange="onChangeHandler()" type="date" value="" placeholder="Date" name="date">
+                              
+              
+                                <?php }?>
+                            </div>
+                                  </div>
+                                </td>
+                              </tr>
+                            </table>
+                      </div>
             <!-- End of From and To div -->
              <!-- BEGINNING OF PRODUCT DESCRIPTION ALGORITHM -->
+             <div class="descriptionHeaderForMobile">
+               <h2 style="color: <?php echo $InvoiceValues[0]['pickedColor']?> ">Enter Your Product Details</h2>
+             </div>
              <div class="descriptionContainerInvoice">
              <?php if($determinant){?>
               <div id="descriptionHeaderInvoice" style="background: <?php echo $InvoiceValues[0]['pickedColor']?>">
@@ -320,59 +391,44 @@
                     <li id="priceInvoiceForm" >Price</li>
                     <li id="qtyInvoiceForm">Qty</li>
                     <li id="amountInvoiceForm">Amount</li>
-                    <li id="taxInvoiceForm">Tax</li>
               </div>
               <?php if($determinant){?>
                       <?php foreach($ProductValues as $p) {?>
 
                         <div class="descriptionRowInvoice" data-src="" id="<?php echo $p['descriptionRowInvoiceId'] ?>">
                           
-                                  <div class="cancelItemInvoice">
-                                  <?php if($determinant){?>
-                                    <i class="fas fa-window-close closeProductDescInvoice" style="color:  <?php echo $InvoiceValues[0]['pickedColor']?>"></i>
-                                      <?php } else {?>
-                                        <i class="fas fa-window-close closeProductDescInvoice"></i>
-                                      <?php }?>
-                                  </div>
+                                  
                                   <div class="descriptionInvoiceInput">
                                     <textarea onchange="onChangeHandler()" name="description" class="description" id="description"
                                     
-                                    placeholder="Describe Item"><?php echo $p['description']?></textarea>
+                                    placeholder="Describe your Invoice Item"><?php echo $p['description']?></textarea>
                                   </div>
                                   <div class="priceInvoiceInput" id="priceInvoiceInput">
-                                    <input type="text" name="price" class="priceInvoice" id="priceInvoice"  onkeyup="onChangeHandler()" step=".01"placeholder="0.00" value="<?php echo number_format((float)$p['priceInvoice'], 2, '.', '')?>">
+                                     <input type="text" name="price" class="priceInvoice" id="priceInvoice"  onkeyup="onChangeHandler()" step=".01"placeholder="0.00" value="<?php echo number_format((float)$p['priceInvoice'], 2, '.', '')?>">
                                   </div>
                                   <div id="qtyInvoiceInput" class="qtyInvoiceInput">
-                                    <input type="text" name="qtyInvoice" class="qtyInvoice" id="qtyInvoice" value="<?php echo $p['qtyInvoice']?>" onkeyup="onChangeHandler()" >
+                                  <span>X</span> <input type="text" name="qtyInvoice" class="qtyInvoice" id="qtyInvoice" value="<?php echo $p['qtyInvoice']?>" onkeyup="onChangeHandler()" >
                                   </div>
                                   <div id="amountInvoiceInput" class="amountInvoiceInput">
                                     <h6><?php echo $InvoiceValues[0]['currencyContInvoice'] . " " . number_format((float)$p['amountPerItem'], 2, '.', '');  ?></h6>
                                   </div>
-                                  <div id="taxInvoiceInput">
+                                  <div class="cancelItemInvoice">
                                   <?php if($determinant){?>
-                                    <?php if ($p['taxCheckBox'] == '1'){ ?>
-                                      <input checked onchange="onChangeHandler()" type="checkbox"  class="taxCheckBox">         
-                                    <?php }  else {?>
-
-                                      <input onchange="onChangeHandler()" type="checkbox"  class="taxCheckBox">
-                                    <?php }?>
-                                         <?php } else {?>
-                                          <input onchange="onChangeHandler()" type="checkbox"  class="taxCheckBox">
-
+                                    <i class="fas fa-trash closeProductDescInvoice" style="color:  <?php echo $InvoiceValues[0]['pickedColor']?>"></i> <span class="deleteTrashInvoice" style="padding: 2px 8px; font-size: 17px; color: <?php echo $InvoiceValues[0]['pickedColor'] ?>;">Delete Item</span> 
+                                      <?php } else {?>
+                                        <i class="fas fa-trash closeProductDescInvoice"></i>
+                                        <span class="deleteTrashInvoice" style="padding: 2px 8px; font-size: 17px; color: #477fae;">Delete Item</span>   
                                       <?php }?>
                                   </div>
+                                  
                          </div>
                       <?php }?>
                 <?php } else {?>
                   <div class="descriptionRowInvoice" data-src="go">
                     
-                            <div class="cancelItemInvoice">
-                               <i class="fas fa-window-close closeProductDescInvoice" 
-                               
-                               id="closeProductDescInvoice"></i>
-                            </div>
+                           
                             <div class="descriptionInvoiceInput" id="descriptionInvoiceInput">
-                              <textarea onchange="onChangeHandler()" name="description" class="description" id="description" placeholder="Describe Item"></textarea>
+                              <textarea onchange="onChangeHandler()" name="description" class="description" id="description" placeholder="Describe your Invoice Item"></textarea>
                             </div>
                             <div class="priceInvoiceInput" id="priceInvoiceInput">
                               <input type="text" name="price" class="priceInvoice" id="priceInvoice"  onkeyup="onChangeHandler()" step=".01"placeholder="0.00" value="0.00">
@@ -383,9 +439,11 @@
                             <div id="amountInvoiceInput" class="amountInvoiceInput">
                               <h6>0.00</h6>
                             </div>
-                            <div id="taxInvoiceInput">
-                              <input onchange="onChangeHandler()" type="checkbox"  class="taxCheckBox">
+                            <div class="cancelItemInvoice">
+                            <i class="fas fa-trash closeProductDescInvoice"></i>
+                                        <span class="deleteTrashInvoice" style="padding: 2px 8px; font-size: 17px; color: #477fae;">Delete Item</span>   
                             </div>
+                           
                    </div>
                   <?php }?>
                
@@ -470,14 +528,6 @@
                  
                  <div id="taxControlContainer">
                     <div id="customSelectTypeTax">
-                    <div id="labelTaxContInvoice">
-                     <label for="labelTax">Label</label> 
-                     <?php if($determinant){?>
-                      <input onchange="onChangeHandler()"  name="labelTax" id="labelTax" style="margin-bottom: 20px" placeholder="label" value="<?php echo $InvoiceValues[0]['labelTax'] ?>"/>
-                <?php } else {?>
-                  <input onchange="onChangeHandler()"  name="labelTax" id="labelTax" style="margin-bottom: 20px" placeholder="label" value=""/>
-                  <?php }?>
-                    </div> 
                       <label for="type" style="width: 100%;">Type</label> 
                       <?php if($determinant){?>
                         <?php if ($InvoiceValues[0]['typeTaxInvoice'] == "On Total")  {?>

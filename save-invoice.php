@@ -1,8 +1,13 @@
 
 
 <?php 
+//rymmy2sz9p65xc6f
 //
-
+session_start();
+if(!isset($_SESSION['first_name'])){
+    header("Location: ./index");
+    exit();
+  }
 function startPointSave($assocArray){
     // print_r($assocArray);
   include_once "setdb.php";
@@ -17,24 +22,24 @@ AND table_name = 'invoicedetails'";
     if($counter == 0){
       $sqlinvoicedetails = "CREATE TABLE invoicedetails (
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            user_identification INT(8),
             invoiceIdentifier VARCHAR(50),
             pickedColor VARCHAR(50),
             invoiceTitle VARCHAR(30),
             fromNameInvoice VARCHAR(30),
             fromEmailInvoice VARCHAR(50),
             address1FromInvoice VARCHAR(50),
-            address2FromInvoice VARCHAR(50),
-            zipcodeFromInvoice VARCHAR(50),
+            
             phoneFromInvoice VARCHAR(50),
-            businessNumberFromInvoice VARCHAR(50),
+    
             refNumberFromInvoice VARCHAR(50),
             dateFromInvoice VARCHAR(50),
-            termsFromInvoice VARCHAR(50),
+          
             clientNameFromInvoice VARCHAR(50),
             clientEmailFromInvoice VARCHAR(50),
             clientAddressFromInvoice VARCHAR(50),
             paymentInstructionsAddNotes VARCHAR(50),
-            labelTax VARCHAR(50),
+   
             typeTaxInvoice VARCHAR(50),
             discountInvoice VARCHAR(50),
             myPercent INT(6),
@@ -44,10 +49,7 @@ AND table_name = 'invoicedetails'";
             taxValue INT(6),
             discount INT(6),
             subTotal INT(6),
-            balance INT(6)
-
-
-             )";
+            balance INT(6)  )";
               if ($conn->query($sqlinvoicedetails) === TRUE) {
                    echo "Table invoice details created successfully";
                 } else {
@@ -68,14 +70,13 @@ AND table_name = 'invoicedetails'";
             if($mycounter == 0){
              $producteach = "CREATE TABLE producteach (
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            user_identification INT(8),
             description VARCHAR(50),
             invoiceIdentifier VARCHAR(50),
             descriptionRowInvoiceId VARCHAR(50),
             priceInvoice INT(6),
             qtyInvoice INT(6),
-            amountPerItem INT(6),
-            taxCheckBox VARCHAR(50)
-          )";
+            amountPerItem INT(6))";
              if ($conn->query($producteach) === TRUE) {
                    echo "Table product each details created successfully";
                 } else {
@@ -89,24 +90,25 @@ AND table_name = 'invoicedetails'";
            // initialize variables to be added to table
           $invoiceIdentifier = $assocArray['invoiceIdentifier'];
           $pickedColor = $assocArray['pickedColor'];
+          $user_identification = (float)$assocArray['user_identification'];
           $invoiceTitle = $assocArray['invoiceTitle'];
           $fromNameInvoice = $assocArray['fromNameInvoice'];
           $fromEmailInvoice = $assocArray['fromEmailInvoice'];
           $address1FromInvoice = $assocArray['address1FromInvoice'];
-          $address2FromInvoice = $assocArray['address2FromInvoice'];
-          $zipcodeFromInvoice = $assocArray['zipcodeFromInvoice'];
+          // $address2FromInvoice = $assocArray['address2FromInvoice'];
+          // $zipcodeFromInvoice = $assocArray['zipcodeFromInvoice'];
           $phoneFromInvoice = $assocArray['phoneFromInvoice'];
-          $businessNumberFromInvoice = $assocArray['businessNumberFromInvoice'];
+          // $businessNumberFromInvoice = $assocArray['businessNumberFromInvoice'];
           $refNumberFromInvoice = $assocArray['refNumberFromInvoice'];
           $dateFromInvoice = $assocArray['dateFromInvoice'];
-          $termsFromInvoice = $assocArray['termsFromInvoice'];
+          // $termsFromInvoice = $assocArray['termsFromInvoice'];
           $clientNameFromInvoice = $assocArray['clientNameFromInvoice'];
           $clientAddressFromInvoice = $assocArray['clientAddressFromInvoice'];
           $clientEmailFromInvoice = $assocArray['clientEmailFromInvoice'];
           $paymentInstructionsAddNotes = $assocArray['paymentInstructionsAddNotes'];
-          $labelTax = $assocArray['labelTax'];
+          // $labelTax = $assocArray['labelTax'];
           $typeTaxInvoice = $assocArray['typeTaxInvoice'];
-                    $discountInvoice = $assocArray['discountInvoice'];
+          $discountInvoice = $assocArray['discountInvoice'];
 
           $myPercent = $assocArray['myPercent'];
           $amountDiscount = $assocArray['amountDiscount'];
@@ -120,7 +122,7 @@ AND table_name = 'invoicedetails'";
 
 
           // check if invoice already exists
-          $sqlGetInvoiceIdentifier = "SELECT * FROM invoicedetails WHERE invoiceIdentifier = '$invoiceIdentifier'";
+          $sqlGetInvoiceIdentifier = "SELECT * FROM invoicedetails WHERE invoiceIdentifier = '$invoiceIdentifier' AND user_identification=$user_identification";
             //queryresult
             $queryGetInvoiceIdentifier = mysqli_query($conn, $sqlGetInvoiceIdentifier);
             //get result
@@ -129,7 +131,7 @@ AND table_name = 'invoicedetails'";
             if(count($GetInvoiceIdentifier) == 0){
               echo "   count  " . count($GetInvoiceIdentifier);
               print_r($GetInvoiceIdentifier);
-              $sqlInsertIntoInvoiceDetails = "INSERT INTO invoicedetails (invoiceTitle, invoiceIdentifier, pickedColor, fromNameInvoice, fromEmailInvoice, address1FromInvoice, address2FromInvoice, zipcodeFromInvoice, phoneFromInvoice, businessNumberFromInvoice, refNumberFromInvoice, dateFromInvoice, termsFromInvoice, clientNameFromInvoice, clientAddressFromInvoice, clientEmailFromInvoice, paymentInstructionsAddNotes, labelTax, typeTaxInvoice, discountInvoice, myPercent, amountDiscount, myPercentDiscount, currencyContInvoice, subTotal, taxValue, discount, balance) VALUES ('$invoiceTitle', '$invoiceIdentifier', '$pickedColor', '$fromNameInvoice', '$fromEmailInvoice', '$address1FromInvoice', '$address2FromInvoice', '$zipcodeFromInvoice', '$phoneFromInvoice', '$businessNumberFromInvoice', '$refNumberFromInvoice', '$dateFromInvoice', '$termsFromInvoice', '$clientNameFromInvoice', '$clientAddressFromInvoice', '$clientEmailFromInvoice', '$paymentInstructionsAddNotes', '$labelTax', '$typeTaxInvoice', '$discountInvoice', '$myPercent', '$amountDiscount', '$myPercentDiscount', '$currencyContInvoice', $subTotal, $taxValue, $discount, $balance)" ;
+              $sqlInsertIntoInvoiceDetails = "INSERT INTO invoicedetails (invoiceTitle, user_identification, invoiceIdentifier, pickedColor, fromNameInvoice, fromEmailInvoice, address1FromInvoice, phoneFromInvoice, refNumberFromInvoice, dateFromInvoice, clientNameFromInvoice, clientAddressFromInvoice, clientEmailFromInvoice, paymentInstructionsAddNotes, typeTaxInvoice, discountInvoice, myPercent, amountDiscount, myPercentDiscount, currencyContInvoice, subTotal, taxValue, discount, balance) VALUES ('$invoiceTitle', $user_identification, '$invoiceIdentifier', '$pickedColor', '$fromNameInvoice', '$fromEmailInvoice', '$address1FromInvoice', '$phoneFromInvoice',  '$refNumberFromInvoice', '$dateFromInvoice', '$clientNameFromInvoice', '$clientAddressFromInvoice', '$clientEmailFromInvoice', '$paymentInstructionsAddNotes',  '$typeTaxInvoice', '$discountInvoice', '$myPercent', '$amountDiscount', '$myPercentDiscount', '$currencyContInvoice', $subTotal, $taxValue, $discount, $balance)" ;
 
           if (mysqli_query($conn, $sqlInsertIntoInvoiceDetails)) {
              echo "New record created successfully";
@@ -140,7 +142,7 @@ AND table_name = 'invoicedetails'";
               
             } else{
                // DELETE ALREADY EXISTING INVOICE
-          $sqlDeleteInvoiceIdentifier = "DELETE FROM invoicedetails WHERE invoiceIdentifier='$invoiceIdentifier'";
+          $sqlDeleteInvoiceIdentifier = "DELETE FROM invoicedetails WHERE invoiceIdentifier='$invoiceIdentifier' AND user_identification=$user_identification" ;
             //queryresult
             if(mysqli_query($conn, $sqlDeleteInvoiceIdentifier)){
 
@@ -151,7 +153,7 @@ AND table_name = 'invoicedetails'";
             }     
            
             // THEN INSERT NEW ONE
-             $sqlInsertIntoInvoiceDetails = "INSERT INTO invoicedetails (invoiceTitle, invoiceIdentifier, pickedColor, fromNameInvoice, fromEmailInvoice, address1FromInvoice, address2FromInvoice, zipcodeFromInvoice, phoneFromInvoice, businessNumberFromInvoice, refNumberFromInvoice, dateFromInvoice, termsFromInvoice, clientNameFromInvoice, clientAddressFromInvoice, clientEmailFromInvoice, paymentInstructionsAddNotes, labelTax, typeTaxInvoice, discountInvoice, myPercent, amountDiscount, myPercentDiscount, currencyContInvoice, subTotal, taxValue, discount, balance) VALUES ('$invoiceTitle', '$invoiceIdentifier', '$pickedColor', '$fromNameInvoice', '$fromEmailInvoice', '$address1FromInvoice', '$address2FromInvoice', '$zipcodeFromInvoice', '$phoneFromInvoice', '$businessNumberFromInvoice', '$refNumberFromInvoice', '$dateFromInvoice', '$termsFromInvoice', '$clientNameFromInvoice', '$clientAddressFromInvoice', '$clientEmailFromInvoice', '$paymentInstructionsAddNotes', '$labelTax', '$typeTaxInvoice', '$discountInvoice', '$myPercent', '$amountDiscount', '$myPercentDiscount', '$currencyContInvoice', $subTotal, $taxValue, $discount, $balance)" ;
+             $sqlInsertIntoInvoiceDetails = "INSERT INTO invoicedetails (invoiceTitle, user_identification, invoiceIdentifier, pickedColor, fromNameInvoice, fromEmailInvoice, address1FromInvoice, phoneFromInvoice, refNumberFromInvoice, dateFromInvoice, clientNameFromInvoice, clientAddressFromInvoice, clientEmailFromInvoice, paymentInstructionsAddNotes, typeTaxInvoice, discountInvoice, myPercent, amountDiscount, myPercentDiscount, currencyContInvoice, subTotal, taxValue, discount, balance) VALUES ('$invoiceTitle', $user_identification, '$invoiceIdentifier', '$pickedColor', '$fromNameInvoice', '$fromEmailInvoice', '$address1FromInvoice', '$phoneFromInvoice',  '$refNumberFromInvoice', '$dateFromInvoice', '$clientNameFromInvoice', '$clientAddressFromInvoice', '$clientEmailFromInvoice', '$paymentInstructionsAddNotes',  '$typeTaxInvoice', '$discountInvoice', '$myPercent', '$amountDiscount', '$myPercentDiscount', '$currencyContInvoice', $subTotal, $taxValue, $discount, $balance)" ;
 
           if (mysqli_query($conn, $sqlInsertIntoInvoiceDetails)) {
              echo "New record created successfully";
@@ -172,17 +174,17 @@ AND table_name = 'invoicedetails'";
 
         $priceInvoice = (float)$item['priceInvoice'];
         $qtyInvoice = (float)$item['qtyInvoice'];
-        $taxCheckBox = $item['taxCheckBox'];
+        // $taxCheckBox = $item['taxCheckBox'];
         $amountPerItem = (float)$item['amountPerItem'];
 
            // check if invoice already exists
-          $sqlGetProductEach = "SELECT * FROM producteach WHERE descriptionRowInvoiceId = '$descriptionRowInvoiceId'";
+          $sqlGetProductEach = "SELECT * FROM producteach WHERE descriptionRowInvoiceId = '$descriptionRowInvoiceId' AND user_identification=$user_identification";
             //queryresult
             $queryGetProductEach = mysqli_query($conn, $sqlGetProductEach);
             //get result
             $GetProductEach = mysqli_fetch_all($queryGetProductEach, MYSQLI_ASSOC);
             if(count($GetProductEach) == 0){
-               $sqlInsertIntoProductEach = "INSERT INTO producteach (description, invoiceIdentifier, descriptionRowInvoiceId, priceInvoice, qtyInvoice, amountPerItem, taxCheckBox) VALUES ('$description', '$invoiceIdentifier', '$descriptionRowInvoiceId', $priceInvoice, $qtyInvoice, $amountPerItem, '$taxCheckBox')";
+               $sqlInsertIntoProductEach = "INSERT INTO producteach (description, user_identification, invoiceIdentifier, descriptionRowInvoiceId, priceInvoice, qtyInvoice, amountPerItem) VALUES ('$description', $user_identification, '$invoiceIdentifier', '$descriptionRowInvoiceId', $priceInvoice, $qtyInvoice, $amountPerItem)";
                   if (mysqli_query($conn, $sqlInsertIntoProductEach)) {
                   echo "New record created successfully";
 
@@ -201,7 +203,7 @@ AND table_name = 'invoicedetails'";
                   exit;
                    }     
 
-                  $sqlInsertIntoProductEach = "INSERT INTO producteach (description, invoiceIdentifier, descriptionRowInvoiceId, priceInvoice, qtyInvoice, amountPerItem, taxCheckBox) VALUES ('$description', '$invoiceIdentifier', '$descriptionRowInvoiceId', $priceInvoice, $qtyInvoice, $amountPerItem, '$taxCheckBox')";
+                  $sqlInsertIntoProductEach = "INSERT INTO producteach (description, user_identification, invoiceIdentifier, descriptionRowInvoiceId, priceInvoice, qtyInvoice, amountPerItem) VALUES ('$description', $user_identification, '$invoiceIdentifier', '$descriptionRowInvoiceId', $priceInvoice, $qtyInvoice, $amountPerItem)";
                       if (mysqli_query($conn, $sqlInsertIntoProductEach)) {
                        echo "New record created successfully";
 
@@ -235,4 +237,22 @@ if (isset($_POST['save'])) {
   	
  
   		exit;
+  }
+
+  if (isset($_GET['rowid'])) {
+          $rowid = $_GET['rowid'];
+      include_once "setdb.php";
+      $user_identification = (float)$_SESSION['user_identification'];
+      $sqlDelete = "DELETE FROM producteach WHERE descriptionRowInvoiceId='$rowid' AND user_identification=$user_identification";
+                   //queryresult
+                  if(mysqli_query($conn, $sqlDelete)){
+
+                echo "Record deleted successfully";
+                 } else {
+                echo "Error: " . $sqlInsertIntoInvoiceDetails . "<br>" . mysqli_error($conn);
+                  exit;
+                   }     
+
+
+
   }

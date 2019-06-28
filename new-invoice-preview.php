@@ -1,15 +1,17 @@
 <?php 
+      session_start();
   	if(isset($_GET['key'])){
       global $determinant;
       $key = htmlspecialchars($_GET['key']);
       // echo $key;
       include_once "setdb.php";
-      $sqlGetInvoiceToEdit = "SELECT invoicedetails.invoiceTitle, invoicedetails.fromNameInvoice, invoicedetails.fromEmailInvoice, invoicedetails.address1FromInvoice, invoicedetails.address2FromInvoice, invoicedetails.zipcodeFromInvoice, invoicedetails.phoneFromInvoice, invoicedetails.businessNumberFromInvoice, invoicedetails.refNumberFromInvoice, invoicedetails.dateFromInvoice, invoicedetails.termsFromInvoice, invoicedetails.clientNameFromInvoice, invoicedetails.clientEmailFromInvoice, invoicedetails.clientAddressFromInvoice, invoicedetails.paymentInstructionsAddNotes, invoicedetails.labelTax, invoicedetails.typeTaxInvoice, invoicedetails.myPercent, invoicedetails.amountDiscount, invoicedetails.myPercentDiscount, invoicedetails.currencyContInvoice, invoicedetails.subTotal, invoicedetails.taxValue, invoicedetails.discount, invoicedetails.discountInvoice, invoicedetails.pickedColor, invoicedetails.balance FROM invoicedetails WHERE invoicedetails.invoiceIdentifier='$key' ";
+      $sqlGetInvoiceToEdit = "SELECT invoicedetails.invoiceTitle, invoicedetails.fromNameInvoice, invoicedetails.fromEmailInvoice, invoicedetails.address1FromInvoice,   invoicedetails.phoneFromInvoice,  invoicedetails.refNumberFromInvoice, invoicedetails.dateFromInvoice,  invoicedetails.clientNameFromInvoice, invoicedetails.clientEmailFromInvoice, invoicedetails.clientAddressFromInvoice, invoicedetails.paymentInstructionsAddNotes,  invoicedetails.typeTaxInvoice, invoicedetails.myPercent, invoicedetails.amountDiscount, invoicedetails.myPercentDiscount, invoicedetails.currencyContInvoice, invoicedetails.subTotal, invoicedetails.taxValue, invoicedetails.discount, invoicedetails.discountInvoice, invoicedetails.pickedColor, invoicedetails.balance FROM invoicedetails WHERE invoicedetails.invoiceIdentifier='$key' ";
       
       $resultGetInvoiceToEdit = mysqli_query($conn, $sqlGetInvoiceToEdit);
       $GetInvoiceToEdit = mysqli_fetch_all($resultGetInvoiceToEdit, MYSQLI_ASSOC);
       // print_r($GetInvoiceToEdit);
       $InvoiceValues = $GetInvoiceToEdit;
+      // print_r($InvoiceValues);
       if(count($InvoiceValues) === 0){
         // header("Location: ./new-invoice");
 
@@ -30,7 +32,7 @@
       // print_r($InvoiceValues);
      
       // exit;
-      $sqlGetInvoiceToEdit = "SELECT producteach.description, producteach.priceInvoice, producteach.qtyInvoice, producteach.amountPerItem, producteach.taxCheckBox, producteach.descriptionRowInvoiceId  FROM invoicedetails  INNER JOIN producteach ON invoicedetails.invoiceIdentifier = producteach.invoiceIdentifier WHERE invoicedetails.invoiceIdentifier='$key' ";
+      $sqlGetInvoiceToEdit = "SELECT producteach.description, producteach.priceInvoice, producteach.qtyInvoice, producteach.amountPerItem, producteach.descriptionRowInvoiceId  FROM invoicedetails  INNER JOIN producteach ON invoicedetails.invoiceIdentifier = producteach.invoiceIdentifier WHERE invoicedetails.invoiceIdentifier='$key' ";
 
       $resultGetInvoiceToEdit = mysqli_query($conn, $sqlGetInvoiceToEdit);
       $GetInvoiceToEdit = mysqli_fetch_all($resultGetInvoiceToEdit, MYSQLI_ASSOC);
@@ -42,8 +44,18 @@
         }
         // exit;
         $ProductValues = $GetInvoiceToEdit;
-        // print_r($ProductValues);
 
+        // print_r($ProductValues);
+        $user_email = $_SESSION['user_email'];
+        $sqlLogoUrl = "SELECT logo_url FROM user_profiles WHERE user_email='$user_email' ";
+    
+        $resultLogoUrl = mysqli_query($conn, $sqlLogoUrl);
+        $logoUrl = mysqli_fetch_all($resultLogoUrl, MYSQLI_ASSOC);
+        $showLogo = false;
+      if((count($logoUrl)) ==0){
+        $showLogo = true;
+      }
+    
 
     } else{
       header("Location: invoice-generator.php");
@@ -63,6 +75,12 @@ $html = '
       background: rgb(250,250,250);
       border-top: 1px solid #bbb;
       border-bottom: 1px solid #bbb !important;
+    }
+    img{
+      width: 100%;
+
+      max-width: 400px;
+      min-width: 200px;
     }
         .invoice-box {
   max-width: 800px;
@@ -175,7 +193,7 @@ $html = '
 
 
 
-    <div class="invoice-box" id="invoice-box" style="border-top: 20px solid ' . $InvoiceValues[0]['pickedColor'] . '">
+    <div class="invoice-box" id="invoice-box" style="border-top: 20px solid ' . $InvoiceValues[0]['pickedColor'] . '; margin-top: 40px">
     <table cellpadding="14px" cellspacing="0">
     <tr>
     <td style="font-size: 50px; color: ' . $InvoiceValues[0]['pickedColor'] . ' ">' . $InvoiceValues[0]["invoiceTitle"] . '</td>
@@ -189,8 +207,8 @@ $html = '
             <tr>
               <td class="title">
                 <img
-                  src="./includes/behance.png"
-                  style="width:200px; max-width:300px;"
+                  src="./uploads/'.$logoUrl[0]['logo_url'] . '"
+                
                 />
               </td>
               <td></td>
@@ -232,17 +250,7 @@ $html = '
           </td>
         </tr>
 
-        <tr class="heading" >
-                <td >
-                   Terms of Payment
-                </td>
-                <td ></td>
-                <td ></td>
-                <td >
-                
-Due in ' . $InvoiceValues[0]['termsFromInvoice'] . '  
-             </td>
-            </tr>
+        
 
       
         <tr class="heading" style="background: ' . $InvoiceValues[0]['pickedColor'] . '; padding-right: 40px;">
@@ -273,32 +281,29 @@ $endHTML = '
         <tr class="total">
           <td></td>
           <td></td>
-          <td></td>
-          <td>
-            Sub Total: ' . $InvoiceValues[0]['currencyContInvoice'] .  
-$InvoiceValues[0]['subTotal'] . ' <br />
-            Discount: ' . $InvoiceValues[0]['currencyContInvoice'] .
- $InvoiceValues[0]['discount'] . ' <br />
-            Tax: ' .  $InvoiceValues[0]['currencyContInvoice'] . 
-$InvoiceValues[0]['taxValue'] . ' <br />
-            <strong style="font-size: 18px;">Grand Total: ' . $InvoiceValues[0]['currencyContInvoice'] . $InvoiceValues[0]['balance']. '</strong>
+          <td colspan="2">
+            Sub Total:    ' .$InvoiceValues[0]['currencyContInvoice'] .  
+            number_format($InvoiceValues[0]['subTotal'], 2) . ' <br />
+            Discount:   ' . $InvoiceValues[0]['currencyContInvoice'] .
+            number_format($InvoiceValues[0]['discount'], 2) . ' <br />
+            Tax:    ' .  $InvoiceValues[0]['currencyContInvoice'] . 
+            number_format($InvoiceValues[0]['taxValue'] ,2). ' <br />
+            <strong style="font-size: 18px;">Grand Total: ' . $InvoiceValues[0]['currencyContInvoice'] . number_format($InvoiceValues[0]['balance']). '</strong>
           </td>
         </tr>
       </table>
     </div>';
 $saveHTML = '<div  style="text-align: center; margin-top: 50px; margin-bottom: 50px;"><a href="#" onclick="downloadHandler()"  style="border: 1px solid blue; padding: 10px; box-shadow: 0px 1px 4px #bbb;" >Download as PDF</a></div>
 <div  style="text-align: center; margin-top: 50px; margin-bottom: 50px;"><a href="new-invoice?key=' . $key . ' "  style="border: 1px solid blue; padding: 10px; box-shadow: 0px 1px 4px #bbb;" >Back to Edit</a></div>
-<script src="jspdf.js"></script>
-<script src="pdfFromHTML.js"></script>
+
 <script src="jquery-2.1.3.js"></script>
-<script src="html2canvas.js"></script>
-<script src="autotable.js"></script>
+
 <script src="printThis.js"></script>
 <!-- <script src="autotable.js"></script> -->
 
 <script>
   const downloadHandler = ()=> {
-   window.location.href= "downloadpdf.php?key='. $key . ' "
+   window.location.href= "downloadpdf.php?key='. $key . '&url=' . $logoUrl[0]['logo_url'] .' "
   }
   const print = ()=> {
 

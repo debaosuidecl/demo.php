@@ -1,3 +1,8 @@
+<?php 
+session_start();
+
+ ?>
+ 
  <html>
     <head>
       <!--Import Google Icon Font-->
@@ -5,6 +10,11 @@
       <!--Import materialize.css-->
       <!-- <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/> -->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link href="./fontawesome-free-5.9.0-web/css/fontawesome.css" rel="stylesheet">
+      <link href="./fontawesome-free-5.9.0-web/css/brands.css" rel="stylesheet">
+  <link href="./fontawesome-free-5.9.0-web/css/solid.css" rel="stylesheet">
+  <link href="./fontawesome-free-5.9.0-web/css/all.css" rel="stylesheet">
+
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -28,9 +38,18 @@
   
       <li style="position: relative;"><a class="active" data-ref="fixit" href="./index">Home<div class="activeslider"></div></a></li>
       <li style="position: relative;"><a id="aboutnav" data-ref="about" href="#">About<div class="activeslider"></div></a></li>
-      <li style="position: relative;"><a id="whatwedonav" data-ref="whatwedo" href="#whatwedo">Partners<div class="activeslider"></div></a></li>
+      <!-- <li style="position: relative;"><a id="whatwedonav" data-ref="whatwedo" href="#whatwedo">Partners<div class="activeslider"></div></a></li>
       <li style="position: relative;"><a id="partnernav" data-ref="partners" href="#partners">Clients<div class="activeslider"></div></a></li>
+   -->
       <li style="position: relative;"><a  id="contactnav"data-ref="contact" href="#contact">Settings<div class="activeslider"></div></a></li>
+      <?php if(isset($_SESSION['first_name'])){?>
+ <li>  <a href="index"> <i class="fas fa-user" style="margin-right: 10px;"></i><?php echo $_SESSION['first_name']?> </a></li>
+ <li>  <a href="#" onclick="logout()">Logout </a></li>
+
+      <?php }  else {?>
+        <li style="position: relative;"><a id="aboutnav" data-ref="about" href="./auth/signup">Signup<div class="activeslider"></div></a></li>
+        <li style="position: relative;"><a id="aboutnav" data-ref="about" href="./auth/signin-auth/signin">Signin<div class="activeslider"></div></a></li>
+      <?php }?>
     </ul>
     
     
@@ -48,6 +67,10 @@
     </ul>
 
     <div class="mycontainer" style="margin-top: 1px;"> 
+    <?php
+if(isset($_SESSION['first_name'])){?>
+  <h2 style="width: 70%; margin: 20px auto; font-weight:lighter; color: #477fae; " class="userWelcomeText">Welcome  <?php echo $_SESSION['first_name']?>,</h2>
+<?php } ?>
         <div class="whatwedoicons"> 
         
         <div class="card" style="width: 18rem;">
@@ -111,6 +134,24 @@ that we ask</p>
 
 </div>
     </div>
-      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
+      <script data-cfasync="false"  src="jquery-3.2.1.min.js"></script>
+
+      <script>
+
+      const logout = ()=> {
+    $.ajax({
+              url: 'backend/logout.backend.php',
+              datatype: 'json',
+              type: 'post',
+              data:{submit: true},
+              // timeout: 5000,
+              success: function(data){
+                        window.location.href = "index.php?logout=success"
+                }
+              });
+  }
+      </script>
+
     </body>
   </html>

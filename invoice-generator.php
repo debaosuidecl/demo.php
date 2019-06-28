@@ -1,4 +1,12 @@
 <?php 
+session_start();
+// if(!isset($_SESSION['first_name'])){
+//   header("Location: ./auth/signin-auth/signin?redirect=invgen");
+// }
+
+if(!isset($_SESSION['first_name'])){
+     header("Location: ./auth/signin-auth/signin?redirect=invgen");
+  }
 include_once 'setdb.php';
 // $invoiceNumber = "";
 // $clientNumber = "";
@@ -7,22 +15,18 @@ AND table_name = 'invoicedetails'";
   $tableExistQueryResult = mysqli_query($conn, $tableExists);
     $table = mysqli_fetch_all($tableExistQueryResult, MYSQLI_ASSOC);
     $counter = $table[0]['COUNT(*)'];
-    // print_r($table);
-    // echo " " . $counter;
-
+    echo $counter;
     if($counter == 0){
       $sqlinvoicedetails = "CREATE TABLE invoicedetails (
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             invoiceIdentifier VARCHAR(50),
+            user_identification INT(8),
             pickedColor VARCHAR(50),
             invoiceTitle VARCHAR(30),
             fromNameInvoice VARCHAR(30),
             fromEmailInvoice VARCHAR(50),
             address1FromInvoice VARCHAR(50),
-            address2FromInvoice VARCHAR(50),
-            zipcodeFromInvoice VARCHAR(50),
             phoneFromInvoice VARCHAR(50),
-            businessNumberFromInvoice VARCHAR(50),
             refNumberFromInvoice VARCHAR(50),
             dateFromInvoice VARCHAR(50),
             termsFromInvoice VARCHAR(50),
@@ -30,7 +34,6 @@ AND table_name = 'invoicedetails'";
             clientEmailFromInvoice VARCHAR(50),
             clientAddressFromInvoice VARCHAR(50),
             paymentInstructionsAddNotes VARCHAR(50),
-            labelTax VARCHAR(50),
             typeTaxInvoice VARCHAR(50),
             discountInvoice VARCHAR(50),
             myPercent INT(6),
@@ -40,10 +43,7 @@ AND table_name = 'invoicedetails'";
             taxValue INT(6),
             discount INT(6),
             subTotal INT(6),
-            balance INT(6)
-
-
-             )";
+            balance INT(6))";
               if ($conn->query($sqlinvoicedetails) === TRUE) {
                   //  echo "Table invoice details created successfully";
                 } else {
@@ -62,28 +62,45 @@ AND table_name = 'invoicedetails'";
               //  echo '  producteach';
 
             if($mycounter == 0){
-             $producteach = "CREATE TABLE producteach (
+            $producteach = "CREATE TABLE producteach (
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            user_identification INT(8),
             description VARCHAR(50),
             invoiceIdentifier VARCHAR(50),
             descriptionRowInvoiceId VARCHAR(50),
             priceInvoice INT(6),
             qtyInvoice INT(6),
-            amountPerItem INT(6),
-            taxCheckBox VARCHAR(50)
+            amountPerItem INT(6)
           )";
              if ($conn->query($producteach) === TRUE) {
                    echo "Table product each details created successfully";
                 } else {
-                echo "Error creating table: " . $conn->error;
+                echo "Error creating product each table: " . $conn->error;
                 exit;
               }
        }
-$sqlGetInvoiceDetails = "SELECT * FROM invoicedetails";
+       $user_identification = (float)$_SESSION['user_identification'];
+$sqlGetInvoiceDetails = "SELECT * FROM invoicedetails WHERE user_identification=$user_identification";
 $queryGetInvoiceDetails = mysqli_query($conn, $sqlGetInvoiceDetails);
 //get result
 $GetInvoiceDetails = mysqli_fetch_all($queryGetInvoiceDetails, MYSQLI_ASSOC);
 // print_r($GetInvoiceDetails);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ?>
@@ -96,6 +113,10 @@ $GetInvoiceDetails = mysqli_fetch_all($queryGetInvoiceDetails, MYSQLI_ASSOC);
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <link href="./fontawesome-free-5.9.0-web/css/fontawesome.css" rel="stylesheet">
+      <link href="./fontawesome-free-5.9.0-web/css/brands.css" rel="stylesheet">
+  <link href="./fontawesome-free-5.9.0-web/css/solid.css" rel="stylesheet">
+  <link href="./fontawesome-free-5.9.0-web/css/all.css" rel="stylesheet">
       <link rel="stylesheet" href="indexstyle.css">
   <title>Invoice Generator</title>
 </head>
@@ -115,9 +136,16 @@ $GetInvoiceDetails = mysqli_fetch_all($queryGetInvoiceDetails, MYSQLI_ASSOC);
   
       <li style="position: relative;"><a class="active" data-ref="fixit" href="./index">Home<div class="activeslider"></div></a></li>
       <li style="position: relative;"><a id="aboutnav" data-ref="about" href="./invoice-generator">Invoices<div class="activeslider"></div></a></li>
-      <li style="position: relative;"><a id="whatwedonav" data-ref="whatwedo" href="./index">Quotations<div class="activeslider"></div></a></li>
-      <li style="position: relative;"><a id="partnernav" data-ref="partners" href="./index">Clients<div class="activeslider"></div></a></li>
-      <li style="position: relative;"><a  id="contactnav"data-ref="contact" href="./index">Settings<div class="activeslider"></div></a></li>
+      <li style="position: relative;"><a  id="contactnav"data-ref="quotations" href="./quotation-generator">Quotations<div class="activeslider"></div></a></li>
+      <li style="position: relative;"><a  id="contactnav"data-ref="quotations" href="./settings">Settings<div class="activeslider"></div></a></li>
+      <?php if(isset($_SESSION['first_name'])){?>
+ <li>  <a href="index"> <i class="fas fa-user" style="margin-right: 10px;"></i><?php echo $_SESSION['first_name']?> </a></li>
+ <li>  <a href="#" onclick="logout()">Logout </a></li>
+
+      <?php }  else {?>
+        <li style="position: relative;"><a id="aboutnav" data-ref="about" href="./auth/signup">Signup<div class="activeslider"></div></a></li>
+        <li style="position: relative;"><a id="aboutnav" data-ref="about" href="./auth/signin-auth/signin">Signin<div class="activeslider"></div></a></li>
+      <?php }?>
     </ul>
     
     
@@ -134,6 +162,7 @@ $GetInvoiceDetails = mysqli_fetch_all($queryGetInvoiceDetails, MYSQLI_ASSOC);
 
     </ul>
 
+  
 
 
     <div class="mycontainer">
@@ -158,6 +187,7 @@ $GetInvoiceDetails = mysqli_fetch_all($queryGetInvoiceDetails, MYSQLI_ASSOC);
         <td><?php echo $details['clientNameFromInvoice']?></td>
         <td><?php echo $details['dateFromInvoice']?></td>
         <td><?php echo $details['balance']?></td>
+       
         </tr>
     <?php }?>
 
@@ -203,8 +233,8 @@ $GetInvoiceDetails = mysqli_fetch_all($queryGetInvoiceDetails, MYSQLI_ASSOC);
                   //  asynonchange: false,
                    success: function(data){
                      console.log(data);
-                    //  window.history.pushState('obj', 'PageTitle', 'http://localhost/fiverrziad/new-invoice');
-                     window.location.href = "http://demophp32.herokuapp.com/new-invoice";
+                     window.history.pushState('obj', 'PageTitle', 'http://localhost/fiverrziad/new-invoice');
+                    //  window.location.href = "http://demophp32.herokuapp.com/new-invoice";
                     // resultmsg = data;
                    }                    
                  });
@@ -216,13 +246,26 @@ $GetInvoiceDetails = mysqli_fetch_all($queryGetInvoiceDetails, MYSQLI_ASSOC);
                    url: 'processtest.php',
                   //  asynonchange: false,
                    success: function(data){
-                     console.log(data);
-                    //  window.history.pushState('obj', 'PageTitle', 'http://localhost/fiverrziad/new-invoice');
+                    //  console.log(data);
+                    //  window.location.href = `http://localhost/fiverrziad/new-invoice?key=${invId}`
                      window.location.href = `http://demophp32.herokuapp.com/new-invoice?key=${invId}`;
                     // resultmsg = data;
                    }                    
                  });
       }
+
+      const logout = ()=> {
+    $.ajax({
+              url: 'backend/logout.backend.php',
+              datatype: 'json',
+              type: 'post',
+              data:{submit: true},
+              // timeout: 5000,
+              success: function(data){
+                        window.location.href = "index.php?logout=success"
+                }
+              });
+  }
  </script>
 </body>
 </html>

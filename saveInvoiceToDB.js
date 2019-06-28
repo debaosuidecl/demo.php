@@ -4,20 +4,19 @@ const submitHandler = () => {
   const fromNameInvoice = $$("#fromNameInvoice").value;
   const fromEmailInvoice = $$("#fromEmailInvoice").value;
   const address1FromInvoice = $$("#address1FromInvoice").value;
-  const address2FromInvoice = $$("#address2FromInvoice").value;
-  const zipcodeFromInvoice = $$("#zipcodeFromInvoice").value;
+
   const phoneFromInvoice = $$("#phoneFromInvoice").value;
-  const businessNumberFromInvoice = $$("#businessNumberFromInvoice").value;
+
   const refNumberFromInvoice = $$("#refNumberFromInvoice").value;
   const dateFromInvoice = $$("#dateFromInvoice").value;
-  const termsFromInvoice = $$("#termsFromInvoice").value;
+  // const termsFromInvoice = $$("#termsFromInvoice").value;
   const clientNameFromInvoice = $$("#clientNameFromInvoice").value;
   const clientEmailFromInvoice = $$("#clientEmailFromInvoice").value;
   const clientAddressFromInvoice = $$("#clientAddressFromInvoice").value;
   const paymentInstructionsAddNotes = $$(
     ".paymentInstructionsAddNotes textarea"
   ).value;
-  const labelTax = $$("#labelTax").value || "";
+
   const typeTaxInvoice = $$("#typeTaxInvoice").value || "";
   const discountInvoice = $$("#discountInvoice").value || "";
 
@@ -33,13 +32,13 @@ const submitHandler = () => {
     : "";
   // Product Details
   let totalItemArray = [];
-
+  let user_identification = $$(".ycontainer").getAttribute("data-src");
   document.querySelectorAll(".descriptionRowInvoice").forEach((d, i) => {
     let description = d.querySelector(".descriptionInvoiceInput textarea")
       .value;
     let priceInvoice = d.querySelector(".priceInvoice").value;
     let qtyInvoice = d.querySelector(".qtyInvoice").value;
-    let taxCheckBox = d.querySelector(".taxCheckBox").checked;
+
     let descriptionRowInvoiceId = d.id;
     let amountPerItem = totalPerItemArray[i];
     totalItemArray.push({
@@ -47,29 +46,26 @@ const submitHandler = () => {
       priceInvoice,
       qtyInvoice,
       amountPerItem,
-      taxCheckBox,
+
       descriptionRowInvoiceId
     });
   });
-  // console.log(pickedColor, "HELLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+
   const invoiceDetails = {
     invoiceIdentifier,
     invoiceTitle,
     fromNameInvoice,
     fromEmailInvoice,
     address1FromInvoice,
-    address2FromInvoice,
-    zipcodeFromInvoice,
+    user_identification,
     phoneFromInvoice,
-    businessNumberFromInvoice,
     refNumberFromInvoice,
     dateFromInvoice,
-    termsFromInvoice,
+    // termsFromInvoice,
     clientNameFromInvoice,
     clientEmailFromInvoice,
     clientAddressFromInvoice,
     paymentInstructionsAddNotes,
-    labelTax,
     typeTaxInvoice,
     discountInvoice,
     pickedColor,
@@ -85,17 +81,31 @@ const submitHandler = () => {
   };
 
   console.log(invoiceDetails);
-
-  $.ajax({
-    url: "save-invoice.php",
-    datatype: "json",
-    type: "post",
-    data: { save: JSON.stringify(invoiceDetails) },
-    success: function(data) {
-      console.log(data);
-    },
-    error: function(xhr, textStatus, errorThrown) {
-      alert(`${errorThrown}`);
-    }
-  });
+  if ($$(".ycontainer").getAttribute("data-page") == "invoice") {
+    $.ajax({
+      url: "save-invoice.php",
+      datatype: "json",
+      type: "post",
+      data: { save: JSON.stringify(invoiceDetails) },
+      success: function(data) {
+        console.log(data);
+      },
+      error: function(xhr, textStatus, errorThrown) {
+        alert(`${errorThrown}`);
+      }
+    });
+  } else {
+    $.ajax({
+      url: "save-quotation.php",
+      datatype: "json",
+      type: "post",
+      data: { save: JSON.stringify(invoiceDetails) },
+      success: function(data) {
+        console.log(data);
+      },
+      error: function(xhr, textStatus, errorThrown) {
+        alert(`${errorThrown}`);
+      }
+    });
+  }
 };

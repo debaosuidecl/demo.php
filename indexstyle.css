@@ -108,6 +108,11 @@ ul.forDropDown.slideDown {
   min-height: 700px;
   padding-top: 100px;
 }
+.ycontainer {
+  width: 100%;
+  min-height: 700px;
+  padding-top: 100px;
+}
 a:hover,
 a.active {
 }
@@ -213,13 +218,13 @@ a.active {
   display: flex;
   flex-flow: column;
   margin: 20px auto;
-  width: 80%;
+  width: 95%;
   /* background: green; */
 }
 .invoiceFormBody {
   flex: 1;
   background: white;
-  box-shadow: 0px 5px 15px #bbb;
+  box-shadow: 0px 5px 35px #ccc;
   min-height: 700px;
   display: flex;
   flex-flow: column;
@@ -233,18 +238,22 @@ a.active {
 
 .headingLogoInvoice {
   display: flex;
-  flex-flow: row;
+  flex-flow: column-reverse;
   /* background: green; */
   margin: 50px 50px;
-  align-items: flex-start;
+  align-items: center;
 
   /* flex-flow: column; */
-  justify-content: space-around;
+  justify-content: center;
   /* align-items: center; */
+}
+.headingLogoInvoice label {
+  padding: 39px 60px;
+  border: 1px dotted #bbb;
 }
 
 .invoiceTitle {
-  flex: 3;
+  flex: 1;
   /* padding: 0px 50px; */
 }
 .invoiceTitle input {
@@ -261,6 +270,9 @@ a.active {
   transition: 1.5s;
   border-bottom: 1px solid #477fae;
 }
+#logoInvoice {
+  opacity: 0;
+}
 
 input[name="invoiceTitle"] {
   font-size: 20px;
@@ -272,43 +284,60 @@ input[name="invoiceTitle"] {
   /* background: yellow; */
   /* margin-right: 5px; */
   width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 .fromInvoiceCont input {
   width: 100%;
+  /* text-align: center; */
   /* min-width: 100px; */
 }
+
+/* .fromInvoiceCont select {
+  text-align: center;
+} */
 .personalDets {
   /* flex: 3; */
   /* background: green; */
   display: flex;
+  flex-flow: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 100%;
   /* background: green; */
 }
 .personalDets label {
   /* margin-right: 10px; */
-  display: none;
+  /* display: none; */
   flex: 1;
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 .personalDets input {
   font-size: 13px;
   font-weight: lighter;
   /* letter-spacing: 5px; */
   padding: 10px;
-  margin: 5px auto;
+  /* margin: 2px auto; */
   /* font-size: 20px; */
   /* width: 100%; */
   border: none;
-  border: 1px solid #bbb;
-  border-radius: 3px;
+  transition: 0.8s;
+
   outline: none;
 }
+.personalDets input:focus {
+  outline: none;
+  background: #eee;
+  transition: 0.8s;
+}
+
 .personalDets select {
   font-size: 13px;
-  margin: 5px auto;
+  margin: 2px auto;
   width: 100%;
+  text-align: center !important;
   font-weight: lighter;
   /* letter-spacing: 5px; */
   padding: 10px;
@@ -323,11 +352,18 @@ input[name="invoiceTitle"] {
   flex: 1;
 }
 .invoiceLogo img {
-  width: 100px;
-  height: 100px;
+  /* width: 100%; */
+
+  width: 100%;
+
+  max-width: 400px;
+  min-width: 200px;
   /* background: gold; */
   flex: 1;
   border: 1px dotted #477fae;
+}
+.invoiceLogo label {
+  /* border-width: 2px; */
 }
 .fromToInvoiceCont {
   display: flex;
@@ -356,6 +392,9 @@ input[name="invoiceTitle"] {
   color: #477fae;
   font-weight: lighter;
 }
+#toInvoice {
+  margin-top: 30px;
+}
 .descriptionContainerInvoice {
   display: flex;
   flex-flow: column;
@@ -364,12 +403,13 @@ input[name="invoiceTitle"] {
   /* justify-content: column; */
 }
 .descriptionContainerInvoice #descriptionHeaderInvoice {
-  display: flex;
-  flex-flow: row;
+  display: none;
+  flex-flow: column;
   justify-content: space-around;
   min-height: 43px;
-  align-items: center;
+  align-items: flex-start;
   background: #477fae;
+
   width: 90%;
   margin: 30px auto 0px;
 }
@@ -377,12 +417,13 @@ input[name="invoiceTitle"] {
   color: white;
   list-style: none;
   padding: 4px;
+  font-size: 14px;
   flex: 1;
 }
 
 #descriptionInvoiceForm {
   flex: 3 !important;
-  margin-left: 50px;
+  margin-left: 10px;
 }
 #qtyInvoiceForm,
 #taxInvoiceForm {
@@ -405,17 +446,30 @@ input[name="invoiceTitle"] {
   align-items: center;
   /* background: #477fae; */
   width: 90%;
-  margin: auto;
+  margin: 3px auto;
+  flex-wrap: wrap;
 }
 .descriptionInvoiceInput {
-  flex: 3;
+  /* flex: 3; */
+  width: 100%;
+  border-bottom: 1px solid #eee;
+  margin: 10px 0px;
   /* margin-left: 80px; */
   /* background: green; */
 }
+.deleteTrashInvoice {
+  cursor: pointer;
+}
 .qtyInvoiceInput {
   flex: 1;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  border: none;
+  justify-content: space-between;
   /* align-self: flex-end; */
 }
+
 .priceInvoiceInput {
   flex: 2 !important;
 }
@@ -436,11 +490,11 @@ input[name="invoiceTitle"] {
 }
 .qtyInvoiceInput input {
   padding: 7px;
-  /* margin: 10px; */
+  margin-left: 10px;
   width: 95%;
   /* margin-right: 20px; */
   border: none;
-  border: 1px solid #bbb;
+  /* border: 1px solid #bbb; */
   border-radius: 5px;
 }
 .priceInvoiceInput input {
@@ -448,22 +502,41 @@ input[name="invoiceTitle"] {
   /* margin: 10px; */
   width: 90%;
   border: none;
-  border: 1px solid #bbb;
-  border-radius: 5px;
+  transition: 0.5s;
+
+  /* border: 1px solid #bbb; */
+  /* border-radius: 5px; */
 }
+.priceInvoiceInput input:focus {
+  background: #eee;
+  outline: none;
+  transition: 0.5s;
+}
+
 .descriptionInvoiceInput textarea {
   width: 96%;
   resize: none;
   padding: 14px 10px;
-  border-radius: 10px;
+
+  /* border-radius: 10px; */
+  border: none;
 }
 .descriptionInvoiceInput textarea:focus {
   outline: none;
-  box-shadow: 0px 1px 5px #bbb;
-}
+  background: #eee;
+  transition: 0.5s;
+  border: none;
 
+  /* box-shadow: 0px 1px 5px #bbb; */
+}
+.cancelItemInvoice {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
 .cancelItemInvoice .fas.fa-window-close {
   font-size: 30px;
+  justify-content: flex-end;
   color: #477fae;
   margin-right: 10px;
   cursor: pointer;
@@ -476,19 +549,19 @@ input[name="invoiceTitle"] {
 #AddNewProductInvoice {
   width: 90%;
   margin: 30px auto;
+  text-align: center;
   padding: 10px;
-  border-top: 1px solid #477fae;
-  border-bottom: 1px solid #477fae;
 }
 #AddNewProductInvoice i {
   font-size: 30px;
   color: #477fae;
   cursor: pointer;
+
   margin-left: -10px;
 }
 #productSummaryInvoice {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   flex-flow: row;
   width: 90%;
   margin: 20px auto;
@@ -500,7 +573,7 @@ input[name="invoiceTitle"] {
   justify-content: space-between;
   min-width: 200px;
   /* font-size: 10px; */
-  margin-bottom: -6px;
+  margin-bottom: 0px;
   color: #555;
 }
 #productSummaryInvoice li {
@@ -525,13 +598,16 @@ input[name="invoiceTitle"] {
   padding: 10px;
   font-size: 15px;
 }
-
+input::placeholder {
+  font-size: 14px;
+  font-weight: 100;
+}
 .paymentInstructionsAddNotes textarea::placeholder {
   font-size: 14px;
 }
 
 .invoiceFormController {
-  border: 1px dotted #477fae;
+  /* border: 1px dotted #477fae; */
   flex: 1;
   padding-top: 40px;
   /* display: flex; */
@@ -641,6 +717,8 @@ input[name="invoiceTitle"] {
   margin: auto;
   /* flex: 2; */
   width: 100%;
+  border: none;
+  border-bottom: 1px solid #eee;
   /* text-align: center; */
   padding: 10px;
 }
@@ -667,57 +745,150 @@ select option {
 }
 
 .SavePreviewCont {
-  width: 90%;
+  width: 80%;
   margin: 20px auto;
   /* background: green; */
-  display: flex;
+  /* display: flex; */
   flex-flow: row;
+  text-align: center;
 
   justify-content: center;
 }
 .SavePreviewCont a {
   text-decoration: none;
-  color: white !important;
+  /* color: white !important; */
   padding: 10px;
   cursor: pointer;
-  margin: 10px auto;
+  margin-right: 20px;
   text-align: center;
-  box-shadow: 0px 1px 5px #bbb;
+  /* box-shadow: 0px 1px 5px #bbb; */
   /* border: 1px solid #477fae; */
-  background: #477fae;
+  border: 1px solid #477fae;
+  color: #477fae !important;
 }
 .SavePreviewCont a:hover {
   background: #274c6b;
   transition: 0.5s;
+  color: white !important;
+}
+#invoiceDueDateTable {
+  /* margin: auto; */
+  border: 1px solid #eee;
+
+  /* margin: auto; */
+}
+#invoiceDueDateTableCont {
+  width: 90%;
+  margin: 30px auto;
+}
+#invoiceDueDateTable tr th {
+  /* background: #eee; */
+  font-size: 52px;
+  color: #222;
+}
+#invoiceDueDateTable input:focus {
+  outline: none;
+}
+#invoiceDueDateTableCont td {
+  border: 1px solid #eee;
+}
+
+#invoiceDueDateTable input {
+  border: none;
+  width: 100%;
+}
+input[type="text"] {
+  font-weight: 100;
+}
+.personalDets label {
+  color: #bbb;
+}
+.descriptionHeaderForMobile {
+  display: block;
+  margin: auto;
+  text-align: center;
+  font-size: 19px;
+}
+.descriptionHeaderForMobile h2 {
+  font-weight: 100;
+}
+.sendToEmailCont {
+  display: flex;
+  width: 100%;
+  /* background: #000; */
+  align-items: center;
+  justify-content: center;
+}
+.sendToEmailCont button {
+  border: none;
+  background: #477fae;
   color: white;
+  padding: 10px;
+  width: 70%;
+  max-width: 300px;
 }
 @media (min-width: 850px) {
+  .SavePreviewCont {
+    text-align: left;
+  }
+  .descriptionHeaderForMobile {
+    display: none;
+  }
+  .descriptionInvoiceInput {
+    flex: 3;
+    width: 40%;
+  }
+  .descriptionContainerInvoice #descriptionHeaderInvoice {
+    display: flex;
+    align-items: center;
+
+    flex-flow: row;
+  }
+  .descriptionContainerInvoice #descriptionHeaderInvoice li {
+    font-size: 10px;
+  }
+
+  .cancelItemInvoice {
+    display: block;
+  }
+  #toInvoice {
+    margin-top: 0;
+  }
+  .personalDets {
+    flex-flow: row-reverse;
+    justify-content: flex-start;
+  }
   .fromInvoiceCont,
   .toInvoiceCont {
     flex: 3;
   }
   .personalDets input {
     flex: 2;
+    text-align: left;
   }
   .personalDets select {
     flex: 2;
+    text-align: left;
   }
   .personalDets label {
-    display: flex;
+    /* display: flex; */
+    margin-right: -20px;
   }
   .invoiceFormBody {
     flex: 8;
   }
   .invoiceGeneratorCont {
     flex-flow: row;
-    width: 90%;
+    width: 80%;
   }
   .invoiceFormController {
     flex: 4;
   }
   .headingLogoInvoice {
-    flex-flow: row;
-    justify-content: space-around;
+    text-align: center;
+    /* flex-flow: row; */
+    justify-content: center;
+    align-items: center;
   }
   .fromToInvoiceCont {
     flex-flow: row;
@@ -896,7 +1067,8 @@ select option {
 #invoiceTable {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  border: 1px solid #477fae;
+  /* border: 1px solid #477fae; */
+  box-shadow: 0px 4px 10px #eee;
   width: 100%;
 }
 .invoicesContainer {
@@ -911,7 +1083,7 @@ select option {
 }
 
 #invoiceTable tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: white;
 }
 
 #invoiceTable tr:hover {
