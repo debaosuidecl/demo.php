@@ -237,8 +237,8 @@ $html = '
        
               </td>
               <td></td>
-              <td></td>
-              <td style="font-size: 18px;">
+            
+              <td colspan="2" style="font-size: 18px;">
               <span style="color: #888; font-size: 14px">Client Details</span> <br/><br/>
 
                 <strong>
