@@ -33,6 +33,6 @@
   "homepage": "https://harvesthq.github.io/chosen/",
   "require": {
     "mpdf/mpdf": "^8.0",
-    "sendgrid/sendgrid": "~7"
+    "sendgrid/sendgrid": "^7.3"
   }
 }
