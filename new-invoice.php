@@ -202,7 +202,7 @@ $user_email = $_SESSION['user_email'];
                   
                     <input style="position: absolute" type="file" name="image" id="logoInvoice">
                   </form>
-                        <img  src="<?php echo "./uploads/" . $logoUrl[0]['logo_url']?>" alt="">
+                        <img  src="<?php echo "./uploadFile/" . $logoUrl[0]['logo_url']?>" alt="">
                 <?php }?>
                 </label>
                <!-- <img src="./includes/behance.png" alt="">  -->

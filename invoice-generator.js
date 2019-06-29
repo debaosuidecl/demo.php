@@ -625,7 +625,7 @@ const fileHandler = e => {
       const newMsg = JSON.parse(msg);
       console.log(newMsg);
       if (newMsg.success !== undefined) {
-        $$(".invoiceLogo label").innerHTML = `<img  src="./uploads/${
+        $$(".invoiceLogo label").innerHTML = `<img  src="./uploadFile/${
           newMsg.success
         }" alt=""/>
         <form id="formInvoice" enctype="multipart/form-data" name="submit" style="position: absolute"  >
