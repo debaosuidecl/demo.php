@@ -218,7 +218,7 @@ $user_email = $_SESSION['user_email'];
               </div>
               <div class="invoiceLogo">
                 <label for="logoInvoice" style="position: relative" >
-                <?php if($showLogo == true){?>
+                <?php if((count($logoUrl)) ==0){?>
                     <p style="padding: 20px; border: none; position: abosolute; top: 50%; left: 50%;  border: 1px solid #999; cursor: pointer;  outline: none; ">Upload Your Logo</p>
                     <form id="formInvoice" enctype="multipart/form-data" name="submit" style="position: absolute"  >
                   
