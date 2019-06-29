@@ -660,7 +660,7 @@ const logout = () => {
 
 const emailHandler = () => {
   $.ajax({
-    url: "sendquotationtoclient",
+    url: "sendquotationtoclient.php",
     type: "get",
     success: function(data) {
       console.log(data);
