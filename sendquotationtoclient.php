@@ -9,21 +9,21 @@ $API_KEY = "SG.3wnEYOptQZmuH1SUUkVAuQ.m5Sy-sEBY9kpK65JROwko_9BUigVDG3RIicXGUuya0
 $email = new \SendGrid\Mail\Mail(); 
 $email->setFrom("deba@mrfixit.ng", "Fixit");
 $email->setSubject("A message from Me");
-$email->addTo("degrapheng@gmail.com", "DegrapheTech");
+$email->addTo("clembright123@gmail.com", "DegrapheTech");
 $email->addContent("text/plain", "Hey there world");
 // $email->addContent(
 //     "text/html", "<strong>and easy to do anywhere, even with PHP</strong>"
 // );
 $sendgrid = new \SendGrid($API_KEY);
-if($sendgrid->send($email)){
-    echo "Email sent successfully";
-}
-// try {
-//     $response = $sendgrid->send($email);
-//     print $response->statusCode() . "\n";
-//     print_r($response->headers());
-//     print $response->body() . "\n";
-// } catch (Exception $e) {
-//     echo 'Caught exception: '. $e->getMessage() ."\n";
+// if($sendgrid->send($email)){
+//     echo "Email sent successfully";
 // }
+try {
+    $response = $sendgrid->send($email);
+    print $response->statusCode() . "\n";
+    print_r($response->headers());
+    print $response->body() . "\n";
+} catch (Exception $e) {
+    echo 'Caught exception: '. $e->getMessage() ."\n";
+}
 ?>
