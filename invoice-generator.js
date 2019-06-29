@@ -612,7 +612,7 @@ const fileHandler = e => {
   formData.append("image", file);
   $.ajax({
     type: "POST",
-    url: "uploads/uploads.php",
+    url: "uploadFile/uploads.php",
     data: formData,
     contentType: false,
     // cache: false,
