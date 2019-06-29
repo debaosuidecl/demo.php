@@ -193,7 +193,7 @@ $user_email = $_SESSION['user_email'];
                 <label for="logoInvoice" style="position: relative" >
                 <?php if($showLogo == false){?>
                     <p style="padding: 20px; border: none; position: abosolute; top: 50%; left: 50%;  border: 1px solid #999; cursor: pointer;  outline: none; ">Upload Your Logo</p>
-                    <form id="formInvoice" enctype="multipart/form-data" name="submit" style="position: absolute"  >
+                    <form id="formInvoice" enctype="multipart/form-data" name="submit" style="position: absolute">
                   
                     <input style="position: absolute" type="file" name="image" id="logoInvoice">
                   </form>
