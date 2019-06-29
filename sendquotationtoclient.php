@@ -7,7 +7,7 @@
 	// include_once('credentials.php');
 	
 	$email = new \SendGrid\Mail\Mail(); 
-$email->setFrom("debaosuidecl@gmail.com", "Example User");
+$email->setFrom("oosuide@yahoo.com", "Example User");
 $email->setSubject("Sending with Twilio SendGrid is Fun");
 $email->addTo("debaosuidecl@gmail.com", "Example User");
 $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
