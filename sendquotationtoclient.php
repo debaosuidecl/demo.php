@@ -1,6 +1,6 @@
 <?php
 
-require("./sendgrid-php/sendgrid-php.php");// Comment out the above line if not using Composer
+require("sendgrid-php/sendgrid-php.php");// Comment out the above line if not using Composer
 // require("<PATH TO>/sendgrid-php.php");
 // If not using Composer, uncomment the above line and
 // download sendgrid-php.zip from the latest release here,
