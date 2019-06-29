@@ -605,14 +605,14 @@ document.querySelectorAll(".personalDets").forEach(i => {
 const fileHandler = e => {
   console.log(e);
   var file = e.target.files[0];
-  // uploadFile(file);
+  // uploads(file);
   console.log(file);
   let formData = new FormData();
 
   formData.append("image", file);
   $.ajax({
     type: "POST",
-    url: "uploadFile/uploads.php",
+    url: "uploads/uploads.php",
     data: formData,
     contentType: false,
     // cache: false,
@@ -625,7 +625,7 @@ const fileHandler = e => {
       const newMsg = JSON.parse(msg);
       console.log(newMsg);
       if (newMsg.success !== undefined) {
-        $$(".invoiceLogo label").innerHTML = `<img  src="./uploadFile/${
+        $$(".invoiceLogo label").innerHTML = `<img  src="./uploads/${
           newMsg.success
         }" alt=""/>
         <form id="formInvoice" enctype="multipart/form-data" name="submit" style="position: absolute"  >
