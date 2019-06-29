@@ -8,7 +8,7 @@ require("./sendgrid-php/sendgrid-php.php");// Comment out the above line if not 
 // which is included in the download:
 // https://github.com/sendgrid/sendgrid-php/releases
 
-$from = new SendGrid\Email(null, "test@example.com");
+$from = new SendGrid\Email(null, "oosuide@yahoo.com");
 $subject = "Hello World from the SendGrid PHP Library!";
 $to = new SendGrid\Email(null, "debaosuidecl@gmail.com");
 $content = new SendGrid\Content("text/plain", "Hello, Email!");
