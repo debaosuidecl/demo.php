@@ -192,7 +192,7 @@ $user_email = $_SESSION['user_email'];
     <!-- END OF SAVE TO DATABASE -->
     <div class="SavePreviewCont">
       <a class="prev" href="#" onclick="previewQuotation(this.id)">Preview</a>
-      <a>Email Client</a>
+      <a href="sendquotationtoclient">Email Client</a>
     </div>
        <div class="invoiceGeneratorCont">
          
@@ -722,9 +722,9 @@ $user_email = $_SESSION['user_email'];
 <script>
 
 //SUBMIT ALGORITHM
-const previewQuotation = id => {
-  window.location.href = `quotation-preview?key=${id}`;
-};
+// const previewQuotation = id => {
+//   window.location.href = `quotation-preview?key=${id}`;
+// };
  
 </script>
 </body>
