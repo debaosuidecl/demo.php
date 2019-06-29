@@ -1,29 +1,46 @@
 <?php
-	// You need to install the sendgrid client library so run: composer require sendgrid/sendgrid
-	require 'vendor/autoload.php';
-	// contains a variable called: $API_KEY that is the API Key.
-    // You need this API_KEY created on the Sendgrid website.
-    // require 'lib/SendGrid/Email.php';
-	// include_once('credentials.php');
-$API_KEY = "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"; 	
-$email = new \SendGrid\Mail\Mail(); 
-$email->setFrom("deba@mrfixit.ng", "Fixit");
-$email->setSubject("A message from Me");
-$email->addTo("clembright123@gmail.com", "DegrapheTech");
-$email->addContent("text/plain", "Hey there world");
-// $email->addContent(
-//     "text/html", "<strong>and easy to do anywhere, even with PHP</strong>"
-// );
-$sendgrid = new \SendGrid($API_KEY);
-// if($sendgrid->send($email)){
-//     echo "Email sent successfully";
-// }
+// Import PHPMailer classes into the global namespace
+// These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+// Load Composer's autoloader
+require 'vendor/autoload.php';
+
+// Instantiation and passing `true` enables exceptions
+$mail = new PHPMailer(true);
+
 try {
-    $response = $sendgrid->send($email);
-    print $response->statusCode() . "\n";
-    print_r($response->headers());
-    print $response->body() . "\n";
+    //Server settings
+    $mail->SMTPDebug = 2;                                       // Enable verbose debug output
+    $mail->isSMTP();                                            // Set mailer to use SMTP
+    $mail->Host       = 'wgh21.whogohost.com';  // Specify main and backup SMTP servers
+    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+    $mail->Username   = 'deba@mrfixit.ng';                     // SMTP username
+    $mail->Password   = ']lAbh.S;j&L@';                               // SMTP password
+    $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
+    $mail->Port       = 587;                                    // TCP port to connect to
+
+    //Recipients
+    $mail->setFrom('deba@mrfixit.ng', 'Mailer');
+    $mail->addAddress('debaosuidecl@gmail.com', 'clem User');     // Add a recipient
+    // $mail->addAddress('ellen@example.com');               // Name is optional
+    // $mail->addReplyTo('info@example.com', 'Information');
+    // $mail->addCC('cc@example.com');
+    // $mail->addBCC('bcc@example.com');
+
+    // Attachments
+    // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+
+    // Content
+    $mail->isHTML(true);                                  // Set email format to HTML
+    $mail->Subject = 'Here is the subject';
+    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+    $mail->send();
+    echo 'Message has been sent';
 } catch (Exception $e) {
-    echo 'Caught exception: '. $e->getMessage() ."\n";
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
-?>
