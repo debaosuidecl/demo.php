@@ -7,10 +7,10 @@
 	// include_once('credentials.php');
 $API_KEY = "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"; 	
 $email = new \SendGrid\Mail\Mail(); 
-$email->setFrom("debaosuidecl@gmail.com", "Example User");
-$email->setSubject("Sending with Twilio SendGrid is Fun");
-$email->addTo("degrapheng@gmail.com", "Example User");
-$email->addContent("text/plain", "and easy to do anywhere, even with PHP");
+$email->setFrom("deba@mrfixit.ng", "Fixit");
+$email->setSubject("A message from Me");
+$email->addTo("degrapheng@gmail.com", "DegrapheTech");
+$email->addContent("text/plain", "Hey there world");
 // $email->addContent(
 //     "text/html", "<strong>and easy to do anywhere, even with PHP</strong>"
 // );
