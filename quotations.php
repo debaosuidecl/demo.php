@@ -192,7 +192,7 @@ $user_email = $_SESSION['user_email'];
     <!-- END OF SAVE TO DATABASE -->
     <div class="SavePreviewCont">
       <a class="prev" href="#" onclick="previewQuotation(this.id)">Preview</a>
-      <a href="sendquotationtoclient">Email Client</a>
+      <a onclick="emailHandler()">Email Client</a>
     </div>
        <div class="invoiceGeneratorCont">
          

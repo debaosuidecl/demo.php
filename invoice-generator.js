@@ -657,3 +657,13 @@ const logout = () => {
     }
   });
 };
+
+const emailHandler = () => {
+  $.ajax({
+    url: "sendquotationtoclient",
+    type: "get",
+    success: function(data) {
+      console.log(data);
+    }
+  });
+};
