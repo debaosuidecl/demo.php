@@ -663,7 +663,8 @@ const logout = () => {
   });
 };
 
-const emailHandler = () => {
+const emailHandler = id => {
+  let logoURL = $$("#download").getAttribute("data-logo");
   $.ajax({
     url: `sendquotationtoclient.php?key=${id}&url=${logoURL}`,
     type: "get",
