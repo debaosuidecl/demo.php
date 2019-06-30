@@ -221,6 +221,7 @@ if ($$(".logo").getAttribute("data-src") === "") {
 }
 $$(".prev").id = invoiceIdentifier;
 $$("#download").className = invoiceIdentifier;
+$$("#email").className = invoiceIdentifier;
 
 console.log(invoiceIdentifier);
 let currencySymbol = ".";

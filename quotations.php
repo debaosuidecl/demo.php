@@ -192,7 +192,7 @@ $user_email = $_SESSION['user_email'];
     <!-- END OF SAVE TO DATABASE -->
     <div class="SavePreviewCont">
       <button disabled class="prev" href="#" onclick="previewQuotation(this.id)">Preview</button>
-      <button disabled onclick="emailHandler()">Email Client</button>
+      <button disabled id="email" onclick="emailHandler(this.className)">Email Client</button>
       <button disabled data-logo="<?php echo $logoUrl[0]['logo_url'] ?>" id="download" onclick="downloadPDFHandler(this.className)">Download as PDF</button>
     </div>
        <div class="invoiceGeneratorCont">
