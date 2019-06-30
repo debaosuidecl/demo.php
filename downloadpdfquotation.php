@@ -74,7 +74,7 @@
         img{
           width: 100%;
     
-          max-width: 400px;
+          max-width: 200px;
           min-width: 200px;
         }
             .invoice-box {
@@ -195,6 +195,7 @@
                 <tr>
                   <td class="title">
                     <img
+                    
                       src="./uploads/'. $url . '"
                     
                     />
@@ -280,13 +281,13 @@
               <td></td>
               <td></td>
               <td colspan="2">
-                Sub Total: ' . $InvoiceValues[0]['currencyContInvoice'] .  
-    $InvoiceValues[0]['subTotal'] . ' <br />
+                Sub Total: ' . ['currencyContInvoice'] .  
+                number_format($InvoiceValues[0]['subTotal']) . ' <br />
                 Discount: ' . $InvoiceValues[0]['currencyContInvoice'] .
-     $InvoiceValues[0]['discount'] . ' <br />
+     number_format($InvoiceValues[0]['discount'], 2) . ' <br />
                 Tax: ' .  $InvoiceValues[0]['currencyContInvoice'] . 
-    $InvoiceValues[0]['taxValue'] . ' <br />
-                <strong style="font-size: 18px;">Grand Total: ' . $InvoiceValues[0]['currencyContInvoice'] . $InvoiceValues[0]['balance']. '</strong>
+    number_format($InvoiceValues[0]['taxValue'], 2) . ' <br />
+                <strong style="font-size: 18px;">Grand Total: ' . $InvoiceValues[0]['currencyContInvoice'] . number_format($InvoiceValues[0]['balance'], 2). '</strong>
               </td>
             </tr>
           </table>

@@ -194,7 +194,7 @@ $GetInvoiceDetails = mysqli_fetch_all($queryGetInvoiceDetails, MYSQLI_ASSOC);
         <td><?php echo $details['refNumberFromInvoice']?></td>
         <td><?php echo $details['clientNameFromInvoice']?></td>
         <td><?php echo $details['dateFromInvoice']?></td>
-        <td><?php echo $details['balance']?></td>
+        <td><?php echo $details['currencyContInvoice'] . " " . number_format($details['balance'], 2)?></td>
        
         </tr>
     <?php }?>

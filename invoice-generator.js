@@ -220,6 +220,7 @@ if ($$(".logo").getAttribute("data-src") === "") {
   invoiceIdentifier = uuidv4();
 }
 $$(".prev").id = invoiceIdentifier;
+$$("#download").className = invoiceIdentifier;
 
 console.log(invoiceIdentifier);
 let currencySymbol = ".";
@@ -382,6 +383,9 @@ let taxValue = 0.0;
 let discountValue = 0.0;
 
 const onChangeHandler = id => {
+  document.querySelectorAll(".savePreviewCont button").forEach(e => {
+    e.disabled = false;
+  });
   balance = 0.0;
   clearTimeout(timeout);
   timeout = setTimeout(() => {
@@ -660,10 +664,15 @@ const logout = () => {
 
 const emailHandler = () => {
   $.ajax({
-    url: "sendquotationtoclient.php",
+    url: `sendquotationtoclient.php?key=${id}&url=${logoURL}`,
     type: "get",
     success: function(data) {
       console.log(data);
     }
   });
+};
+
+const downloadPDFHandler = id => {
+  let logoURL = $$("#download").getAttribute("data-logo");
+  window.location.href = `downloadpdfquotation.php?key=${id}&url=${logoURL}`;
 };

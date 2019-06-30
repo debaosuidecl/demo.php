@@ -364,7 +364,7 @@ input[name="invoiceTitle"] {
 
   width: 100%;
 
-  max-width: 400px;
+  max-width: 200px;
   min-width: 200px;
   /* background: gold; */
   flex: 1;
@@ -756,16 +756,24 @@ select option {
   width: 80%;
   margin: 20px auto;
   /* background: green; */
-  /* display: flex; */
+  display: flex;
   flex-flow: row;
   text-align: center;
+  font-size: 1em;
 
   justify-content: center;
 }
-.SavePreviewCont a {
+.SavePreviewCont button:disabled {
+  background: #eee;
+  cursor: not-allowed;
+  border: #bbb;
+  color: white !important;
+}
+.SavePreviewCont button {
   text-decoration: none;
+  background: none;
   /* color: white !important; */
-  padding: 10px;
+  padding: 5px;
   cursor: pointer;
   margin-right: 20px;
   text-align: center;

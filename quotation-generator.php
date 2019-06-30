@@ -184,7 +184,7 @@ $tableExists = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schem
         <td><?php echo $details['refNumberFromInvoice']?></td>
         <td><?php echo $details['clientNameFromInvoice']?></td>
         <td><?php echo $details['dateFromInvoice']?></td>
-        <td><?php echo $details['balance']?></td>
+        <td><?php echo $details['currencyContInvoice'] . " " . number_format($details['balance'], 2)?></td>
        
         </tr>
     <?php }?>
@@ -194,7 +194,7 @@ $tableExists = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schem
     <td>No Quotation created presently</td>
     <td></td>
     <td></td>
-    <td><a href="new-invoice">Add New Invoice</a></td>
+    <td><a href="quotations">Add New Quotation</a></td>
     <tr>
 
   <?php }?>
