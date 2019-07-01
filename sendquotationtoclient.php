@@ -10,8 +10,8 @@ require 'vendor/autoload.php';
 
 // Instantiation and passing `true` enables exceptions
 $mail = new PHPMailer(true);
-$id= $_GET['id'] ;
-$logo= $_GET['logoUrl'] ;
+$id= $_GET['key'] ;
+$logo= $_GET['url'] ;
 try {
     //Server settings
     $mail->SMTPDebug = 2;                                       // Enable verbose debug output
@@ -220,7 +220,7 @@ try {
                                             style="font-family: sans-serif;  yfont-size: 14px; vertical-align: top; background-color: #3498db; border-radius: 5px; text-align: center;"
                                           >
                                             <a
-                                              href="http://demophp32.herokuapp.com/downloadpdfquotation.php?key='. $id . '&url=' . $logoUrl .' "
+                                              href="https://demophp32.herokuapp.com/downloadpdfquotation.php?key='. $id . '&url=' . $logo .' "
                                               target="_blank"
                                               style="display: inline-block; color: #ffffff; background-color: #3498db; border: solid 1px #3498db; border-radius: 5px; box-sizing: border-box; cursor: pointer; text-decoration: none; font-size: 14px; font-weight: bold; margin: 0; padding: 12px 25px; text-transform: capitalize; border-color: #3498db;"
                                               >Download Your Quotation</a
