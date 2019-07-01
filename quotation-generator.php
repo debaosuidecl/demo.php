@@ -8,7 +8,7 @@ $tableExists = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schem
   $tableExistQueryResult = mysqli_query($conn, $tableExists);
     $table = mysqli_fetch_all($tableExistQueryResult, MYSQLI_ASSOC);
     $counter = $table[0]['COUNT(*)'];
-    echo $counter;
+    // echo $counter;
     if($counter == 0){
       $sqlinvoicedetails = "CREATE TABLE quotationdetails (
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,

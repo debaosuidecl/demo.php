@@ -71,7 +71,7 @@ $user_email = $_SESSION['user_email'];
     //     echo "Error: " . $sqlLogoUrl . "<br>" . mysqli_error($conn);
     //     // exit;
     //   }
-    print_r($logoUrl);
+    // print_r($logoUrl);
     $showLogo = false;
   if((count($logoUrl)) ==0){
     $showLogo = true;
@@ -180,7 +180,7 @@ $user_email = $_SESSION['user_email'];
 
     <div class="upperCont">
 
-<div style="width: 100%; display:none; height: 100%; position: fixed; background: rgba(255,255,255,0.6); top: 0;" class="loadCont" >
+<div style="width: 100%;  height: 100%; position: fixed; background: rgba(255,255,255,0.6); top: 0;" class="loadCont" >
   <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.6" src="player.gif" alt="">
 </div>
 </div>
