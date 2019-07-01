@@ -666,11 +666,30 @@ const logout = () => {
 const emailHandler = id => {
   let clientEmail = $$("#email").getAttribute("data-client");
   let logoURL = $$("#download").getAttribute("data-logo");
+  if (!clientEmail && !logoURL) {
+    return alert(
+      "Please insert  client details and Logo URL before sending to client"
+    );
+  }
   $.ajax({
     url: `sendquotationtoclient.php?key=${id}&url=${logoURL}&client=${clientEmail}`,
     type: "get",
+    beforeSend: function() {
+      $$(
+        ".upperCont"
+      ).innerHTML = `<div style="width: 100%; height: 100%; position: fixed; background: rgba(255,255,255,0.6); top: 0;" class="loadCont" >
+      <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.6" src="player.gif" alt="">
+  </div>`;
+    },
     success: function(data) {
       console.log(data);
+      $$(
+        ".upperCont"
+      ).innerHTML = `<div style="width: 100%; height: 100%; position: fixed; display: none; background: rgba(255,255,255,0.6); top: 0;" class="loadCont" >
+      <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.6" src="player.gif" alt="">
+  </div>`;
+
+      alert("email sent to client :)");
     }
   });
 };
