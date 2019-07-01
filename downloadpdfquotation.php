@@ -239,18 +239,6 @@
               </td>
             </tr>
     
-            <tr class="heading" >
-                    <td >
-                       Terms of Payment
-                    </td>
-                    <td ></td>
-                    <td ></td>
-                    <td >
-                    
-    
-                 </td>
-                </tr>
-    
           
             <tr class="heading" style="background: ' . $InvoiceValues[0]['pickedColor'] . '; padding-right: 40px;">
               
@@ -277,11 +265,12 @@
 
        
             $endHTML = '
-            <tr class="total">
+            <tr class="total" style="padding-top: 50px">
               <td></td>
               <td></td>
-              <td colspan="2">
-                Sub Total: ' . ['currencyContInvoice'] .  
+              <td></td>
+              <td>
+                Sub Total: ' . $InvoiceValues[0]['currencyContInvoice'] .  
                 number_format($InvoiceValues[0]['subTotal'], 2) . ' <br />
                 Discount: ' . $InvoiceValues[0]['currencyContInvoice'] .
      number_format($InvoiceValues[0]['discount'], 2) . ' <br />
