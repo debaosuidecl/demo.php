@@ -384,9 +384,9 @@ let taxValue = 0.0;
 let discountValue = 0.0;
 
 const onChangeHandler = id => {
-  document.querySelectorAll(".savePreviewCont button").forEach(e => {
-    e.disabled = false;
-  });
+  // document.querySelectorAll(".savePreviewCont button").forEach(e => {
+  //   e.disabled = false;
+  // });
   balance = 0.0;
   clearTimeout(timeout);
   timeout = setTimeout(() => {
