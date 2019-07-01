@@ -193,6 +193,8 @@ $user_email = $_SESSION['user_email'];
               
     <!-- END OF SAVE TO DATABASE -->
     <div class="SavePreviewCont">
+    <?php if($determinant){?>
+
     <?php if ($QuotationValues[0]['clientEmailFromInvoice'] == "" && $QuotationValues[0]['clientNameFromInvoice'] == "" && $QuotationValues[0]['clientAddressFromInvoice'] == "") {?>
       <button disabled class="prev" href="#" onclick="previewQuotation(this.id)">Preview</button>
       <button disabled id="email"  onclick="emailHandler(this.className)">Email Client</button>
@@ -204,6 +206,11 @@ $user_email = $_SESSION['user_email'];
       <button  data-logo="<?php echo $logoUrl[0]['logo_url'] ?>" id="download" onclick="downloadPDFHandler(this.className)">Download as PDF</button>
 
     <?php }?>
+<?php } else {?>
+  <button disabled class="prev" href="#" onclick="previewQuotation(this.id)">Preview</button>
+      <button disabled id="email"  onclick="emailHandler(this.className)">Email Client</button>
+      <button disabled data-logo="<?php echo $logoUrl[0]['logo_url'] ?>" id="download" onclick="downloadPDFHandler(this.className)">Download as PDF</button>
+ <?php }?>
     </div>
        <div class="invoiceGeneratorCont">
          
