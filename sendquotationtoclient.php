@@ -25,7 +25,7 @@ try {
 
     //Recipients
     $mail->setFrom('deba@mrfixit.ng', 'Mailer');
-    $mail->addAddress('debaosuidecl@gmail.com', 'clem User');     // Add a recipient
+    $mail->addAddress('degrapheng@gmail.com', 'clem User');     // Add a recipient
     // $mail->addAddress('ellen@example.com');               // Name is optional
     // $mail->addReplyTo('info@example.com', 'Information');
     // $mail->addCC('cc@example.com');
