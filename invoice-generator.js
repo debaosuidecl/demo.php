@@ -666,7 +666,7 @@ const logout = () => {
 const emailHandler = id => {
   let clientEmail = $$("#email").getAttribute("data-client");
   let logoURL = $$("#download").getAttribute("data-logo");
-  if (clientEmail == "" && !logoURL) {
+  if (clientEmail == "") {
     alert(
       "Please insert  client details and Logo URL before sending to client"
     );

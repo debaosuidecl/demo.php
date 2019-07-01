@@ -183,7 +183,7 @@ $GetInvoiceDetails = mysqli_fetch_all($queryGetInvoiceDetails, MYSQLI_ASSOC);
       <tr>
     <th>Invoice</th>
     <th>Client</th>
-    <th>Date</th>
+    <th class="desktopOnly">Date</th>
     <th>Balance Due</th>
   </tr>
   
@@ -193,7 +193,7 @@ $GetInvoiceDetails = mysqli_fetch_all($queryGetInvoiceDetails, MYSQLI_ASSOC);
         <tr onclick="editInvoiceHandler('<?php echo $details['invoiceIdentifier'] ?>')" style=" cursor: pointer;">
         <td><?php echo $details['refNumberFromInvoice']?></td>
         <td><?php echo $details['clientNameFromInvoice']?></td>
-        <td><?php echo $details['dateFromInvoice']?></td>
+        <td class="desktopOnly" ><?php echo $details['dateFromInvoice']?></td>
         <td><?php echo $details['currencyContInvoice'] . " " . number_format($details['balance'], 2)?></td>
        
         </tr>

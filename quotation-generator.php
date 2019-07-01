@@ -173,7 +173,7 @@ $tableExists = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schem
       <tr>
     <th>Quotation</th>
     <th>Client</th>
-    <th>Date</th>
+    <th class="desktopOnly">Date</th>
     <th>Quoted Amount</th>
   </tr>
   
@@ -183,7 +183,7 @@ $tableExists = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schem
         <tr onclick="editInvoiceHandler('<?php echo $details['invoiceIdentifier'] ?>')" style=" cursor: pointer;">
         <td><?php echo $details['refNumberFromInvoice']?></td>
         <td><?php echo $details['clientNameFromInvoice']?></td>
-        <td><?php echo $details['dateFromInvoice']?></td>
+        <td class="desktopOnly"><?php echo $details['dateFromInvoice']?></td>
         <td><?php echo $details['currencyContInvoice'] . " " . number_format($details['balance'], 2)?></td>
        
         </tr>

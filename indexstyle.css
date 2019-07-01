@@ -1113,10 +1113,16 @@ input[type="text"] {
   background-color: #477fae;
   color: white;
 }
+#invoiceTable .desktopOnly {
+  display: none;
+}
 /* end w3schools */
 @media (min-width: 650px) {
   ul.forDropDown {
     display: none;
+  }
+  #invoiceTable .desktopOnly {
+    display: block;
   }
 
   ul.forDesktop {
