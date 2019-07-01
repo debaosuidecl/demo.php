@@ -666,10 +666,11 @@ const logout = () => {
 const emailHandler = id => {
   let clientEmail = $$("#email").getAttribute("data-client");
   let logoURL = $$("#download").getAttribute("data-logo");
-  if (!clientEmail && !logoURL) {
-    return alert(
+  if (clientEmail == "" && !logoURL) {
+    alert(
       "Please insert  client details and Logo URL before sending to client"
     );
+    return;
   }
   $.ajax({
     url: `sendquotationtoclient.php?key=${id}&url=${logoURL}&client=${clientEmail}`,
