@@ -112,6 +112,16 @@ const submitHandler = () => {
       data: { save: JSON.stringify(invoiceDetails) },
       success: function(data) {
         console.log(data);
+        if (
+          clientEmailFromInvoice.length > 0 &&
+          clientNameFromInvoice.length > 0 &&
+          clientAddressFromInvoice.length > 0
+        ) {
+          document.querySelectorAll(".savePreviewCont button").forEach(e => {
+            e.disabled = false;
+          });
+        }
+        $$("#email").setAttribute("data-client", clientEmailFromInvoice);
       },
       error: function(xhr, textStatus, errorThrown) {
         alert(`${errorThrown}`);
