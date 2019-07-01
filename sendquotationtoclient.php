@@ -24,7 +24,7 @@ try {
     $mail->Port       = 587;                                    // TCP port to connect to
 
     //Recipients
-    $mail->setFrom('deba@mrfixit.ng', 'Mailer');
+    $mail->setFrom('deba@mrfixit.ng', 'Invoice Generator');
     $mail->addAddress('degrapheng@gmail.com', 'clem User');     // Add a recipient
     // $mail->addAddress('ellen@example.com');               // Name is optional
     // $mail->addReplyTo('info@example.com', 'Information');

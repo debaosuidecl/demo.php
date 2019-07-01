@@ -146,9 +146,6 @@ $user_email = $_SESSION['user_email'];
       </div>
       <li style="position: relative;"><a class="active" data-ref="fixit" href="./index">Home<div class="activeslider"></div></a></li>
       <li style="position: relative;"><a id="aboutnav" data-ref="about" href="./invoice-generator">Invoices<div class="activeslider"></div></a></li>
-      <!-- <li style="position: relative;"><a id="whatwedonav" data-ref="whatwedo" href="#whatwedo">Partners<div class="activeslider"></div></a></li>
-      <li style="position: relative;"><a id="partnernav" data-ref="partners" href="#partners">Clients<div class="activeslider"></div></a></li>
-   -->
       <li style="position: relative;"><a  id="contactnav"data-ref="quotations" href="./quotation-generator">Quotations<div class="activeslider"></div></a></li>
       <li style="position: relative;"><a  id="contactnav"data-ref="quotations" href="./settings">Settings<div class="activeslider"></div></a></li>
       <?php if(isset($_SESSION['first_name'])){?>
@@ -191,9 +188,17 @@ $user_email = $_SESSION['user_email'];
               
     <!-- END OF SAVE TO DATABASE -->
     <div class="SavePreviewCont">
+    <?php if ($QuotationValues[0]['clientEmailFromInvoice'] == "") {?>
       <button disabled class="prev" href="#" onclick="previewQuotation(this.id)">Preview</button>
       <button disabled id="email" onclick="emailHandler(this.className)">Email Client</button>
       <button disabled data-logo="<?php echo $logoUrl[0]['logo_url'] ?>" id="download" onclick="downloadPDFHandler(this.className)">Download as PDF</button>
+
+    <?php } else{?>
+      <button  class="prev" href="#" onclick="previewQuotation(this.id)">Preview</button>
+      <button  id="email" onclick="emailHandler(this.className)">Email Client</button>
+      <button  data-logo="<?php echo $logoUrl[0]['logo_url'] ?>" id="download" onclick="downloadPDFHandler(this.className)">Download as PDF</button>
+
+    <?php }?>
     </div>
        <div class="invoiceGeneratorCont">
          

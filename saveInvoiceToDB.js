@@ -89,6 +89,7 @@ const submitHandler = () => {
       data: { save: JSON.stringify(invoiceDetails) },
       success: function(data) {
         console.log(data);
+        $$("#email").setAttribute("data-client", clientEmailFromInvoice);
       },
       error: function(xhr, textStatus, errorThrown) {
         alert(`${errorThrown}`);
