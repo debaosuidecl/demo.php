@@ -190,7 +190,7 @@ $user_email = $_SESSION['user_email'];
     <div class="SavePreviewCont">
     <?php if ($QuotationValues[0]['clientEmailFromInvoice'] == "" && $QuotationValues[0]['clientNameFromInvoice'] == "" && $QuotationValues[0]['clientAddressFromInvoice'] == "") {?>
       <button disabled class="prev" href="#" onclick="previewQuotation(this.id)">Preview</button>
-      <button disabled id="email" onclick="emailHandler(this.className)">Email Client</button>
+      <button disabled id="email" data-client="<?php echo $QuotationValues[0]['clientEmailFromInvoice'] ?>" onclick="emailHandler(this.className)">Email Client</button>
       <button disabled data-logo="<?php echo $logoUrl[0]['logo_url'] ?>" id="download" onclick="downloadPDFHandler(this.className)">Download as PDF</button>
 
     <?php } else{?>
