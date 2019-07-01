@@ -10,8 +10,9 @@ require 'vendor/autoload.php';
 
 // Instantiation and passing `true` enables exceptions
 $mail = new PHPMailer(true);
-$id= $_GET['key'] ;
-$logo= $_GET['url'] ;
+$id= htmlspecialchars($_GET['key']) ;
+$logo= htmlspecialchars($_GET['url']) ;
+$clientEmail= htmlspecialchars($_GET['client']) ;
 try {
     //Server settings
     $mail->SMTPDebug = 2;                                       // Enable verbose debug output
@@ -25,7 +26,7 @@ try {
 
     //Recipients
     $mail->setFrom('deba@mrfixit.ng', 'Invoice Generator');
-    $mail->addAddress('degrapheng@gmail.com', 'clem User');     // Add a recipient
+    $mail->addAddress($clientEmail, 'clem User');     // Add a recipient
     // $mail->addAddress('ellen@example.com');               // Name is optional
     // $mail->addReplyTo('info@example.com', 'Information');
     // $mail->addCC('cc@example.com');

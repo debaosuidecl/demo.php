@@ -664,9 +664,10 @@ const logout = () => {
 };
 
 const emailHandler = id => {
+  let clientEmail = $$("#email").getAttribute("data-client");
   let logoURL = $$("#download").getAttribute("data-logo");
   $.ajax({
-    url: `sendquotationtoclient.php?key=${id}&url=${logoURL}`,
+    url: `sendquotationtoclient.php?key=${id}&url=${logoURL}&client=${clientEmail}`,
     type: "get",
     success: function(data) {
       console.log(data);

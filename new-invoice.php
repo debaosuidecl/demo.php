@@ -165,8 +165,19 @@ $user_email = $_SESSION['user_email'];
               <!-- SAVE TO DATABASE -->
 
               <div class="heading" style="text-align: center; font-size: 50px; color: #477fae; font-family: 'Lobster' "><h1>Design an Invoice</h1></div>
-              <div class="SavePreviewCont">
-      <a class="prev" href="#" onclick="previewInvoice(this.id)">Preview</a>
+         <!-- END OF SAVE TO DATABASE -->
+    <div class="SavePreviewCont">
+    <?php if ($InvoiceValues[0]['clientEmailFromInvoice'] == "" && $InvoiceValues[0]['clientNameFromInvoice'] == "" && $InvoiceValues[0]['clientAddressFromInvoice'] == "") {?>
+      <button disabled class="prev" href="#" onclick="previewInvoice(this.id)">Preview</button>
+      <button disabled id="email" onclick="emailHandler(this.className)">Email Client</button>
+      <button disabled data-logo="<?php echo $logoUrl[0]['logo_url'] ?>" id="download" onclick="downloadPDFHandler(this.className)">Download as PDF</button>
+
+    <?php } else{?>
+      <button  class="prev" href="#" onclick="previewInvoice(this.id)">Preview</button>
+      <button  id="email" onclick="emailHandler(this.className)">Email Client</button>
+      <button  data-logo="<?php echo $logoUrl[0]['logo_url'] ?>" id="download" onclick="downloadPDFHandler(this.className)">Download as PDF</button>
+
+    <?php }?>
     </div>
     <!-- END OF SAVE TO DATABASE -->
        <div class="invoiceGeneratorCont">
