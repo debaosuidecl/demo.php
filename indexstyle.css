@@ -226,7 +226,7 @@ a.active {
   display: flex;
   flex-flow: column;
   margin: 20px auto;
-  width: 95%;
+  width: 100%;
   /* background: green; */
 }
 .invoiceFormBody {
@@ -799,7 +799,7 @@ select option {
 }
 #invoiceDueDateTable tr th {
   /* background: #eee; */
-  font-size: 52px;
+  font-size: 45px;
   color: #222;
 }
 #invoiceDueDateTable input:focus {
