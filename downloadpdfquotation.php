@@ -282,7 +282,7 @@
               <td></td>
               <td colspan="2">
                 Sub Total: ' . ['currencyContInvoice'] .  
-                number_format($InvoiceValues[0]['subTotal']) . ' <br />
+                number_format($InvoiceValues[0]['subTotal'], 2) . ' <br />
                 Discount: ' . $InvoiceValues[0]['currencyContInvoice'] .
      number_format($InvoiceValues[0]['discount'], 2) . ' <br />
                 Tax: ' .  $InvoiceValues[0]['currencyContInvoice'] . 

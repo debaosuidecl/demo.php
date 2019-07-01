@@ -217,7 +217,7 @@ try {
                                       <tbody>
                                         <tr>
                                           <td
-                                            style="font-family: sans-serif; font-size: 14px; vertical-align: top; background-color: #3498db; border-radius: 5px; text-align: center;"
+                                            style="font-family: sans-serif;  yfont-size: 14px; vertical-align: top; background-color: #3498db; border-radius: 5px; text-align: center;"
                                           >
                                             <a
                                               href="http://demophp32.herokuapp.com/downloadpdfquotation.php?key='. $id . '&url=' . $logoUrl .' "
