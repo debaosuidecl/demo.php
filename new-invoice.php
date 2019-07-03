@@ -182,7 +182,7 @@ $user_email = $_SESSION['user_email'];
     <?php if ($InvoiceValues[0]['clientEmailFromInvoice'] == "" && $InvoiceValues[0]['clientNameFromInvoice'] == "" && $InvoiceValues[0]['clientAddressFromInvoice'] == "") {?>
       <button  class="prev" href="#" onclick="previewInvoice(this.id)">Preview</button>
       <button  id="email" data-client="" onclick="emailHandler(this.className)">Email Client</button>
-      <button  data-logo="<?php echo $logoUrl[0]['logo_url'] ?>" id="download" onclick="downloadPDFHandler(this.className)">Download as PDF</button>
+      <button  data-logo="<?php echo $logoUrl[0]['logo_url'] ?>" id="download" onclick="downloadPDFHandler(this.className, 'invoice')">Download as PDF</button>
 
     <?php } else{?>
       <button  class="prev" href="#" onclick="previewInvoice(this.id)">Preview</button>

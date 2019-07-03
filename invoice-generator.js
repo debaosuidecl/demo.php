@@ -696,7 +696,11 @@ const emailHandler = id => {
   });
 };
 
-const downloadPDFHandler = id => {
+const downloadPDFHandler = (id, purpose) => {
   let logoURL = $$("#download").getAttribute("data-logo");
-  window.location.href = `downloadpdfquotation.php?key=${id}&url=${logoURL}`;
+  if (purpose == "invoice") {
+    window.location.href = `downloadpdfquotation.php?key=${id}&url=${logoURL}`;
+  } else {
+    window.location.href = `downloadpdf.php?key=${id}&url=${logoURL}`;
+  }
 };

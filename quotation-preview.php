@@ -13,7 +13,7 @@
       $InvoiceValues = $GetInvoiceToEdit;
       // print_r($InvoiceValues);
       if(count($InvoiceValues) === 0){
-        // header("Location: ./new-invoice");
+        header("Location: ./quotations");
 
         $determinant = false;
         echo "

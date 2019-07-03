@@ -154,7 +154,7 @@ $GetInvoiceDetails = mysqli_fetch_all($queryGetInvoiceDetails, MYSQLI_ASSOC);
       <div class="cancont">
         <i class="fas fa-window-close" id="cancel" onclick="toggleHandler()"></i>
       </div>
-      <
+      
       <li style="position: relative;"><a class="active" data-ref="fixit" href="./index">Home<div class="activeslider"></div></a></li>
       <li style="position: relative;"><a id="aboutnav" data-ref="about" href="./invoice-generator">Invoices<div class="activeslider"></div></a></li>
       <li style="position: relative;"><a  id="contactnav"data-ref="quotations" href="./quotation-generator">Quotations<div class="activeslider"></div></a></li>
