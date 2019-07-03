@@ -32,7 +32,10 @@
 	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
 
 	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-	
+	<link href="../fontawesome-free-5.9.0-web/css/fontawesome.css" rel="stylesheet">
+  <link href="../fontawesome-free-5.9.0-web/css/brands.css" rel="stylesheet">
+  <link href="../fontawesome-free-5.9.0-web/css/solid.css" rel="stylesheet">
+  <link href="../fontawesome-free-5.9.0-web/css/all.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
 
 	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
@@ -71,6 +74,13 @@
 		input::placeholder{
 			font-weight: lighter;
 		}
+		.forDropDown a{
+			color: white !important;
+		}
+		.forDropDown a:hover{
+			color: #477fae !important;
+		}
+		
 	</style>
 </head>
 <body>
