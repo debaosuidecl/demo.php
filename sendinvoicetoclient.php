@@ -162,7 +162,7 @@ try {
                 <span
                   class="preheader"
                   style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;"
-                  >An Invoie has been sent to you</span
+                  >An Invoice has been sent to you</span
                 >
                 <table
                   class="main"
@@ -222,10 +222,10 @@ try {
                                             style="font-family: sans-serif;  yfont-size: 14px; vertical-align: top; background-color: #3498db; border-radius: 5px; text-align: center;"
                                           >
                                             <a
-                                              href="https://demophp32.herokuapp.com/downloadpdfquotation.php?key='. $id . '&url=' . $logo .' "
+                                              href="https://demophp32.herokuapp.com/downloadpdf.php?key='. $id . '&url=' . $logo .' "
                                               target="_blank"
                                               style="display: inline-block; color: #ffffff; background-color: #3498db; border: solid 1px #3498db; border-radius: 5px; box-sizing: border-box; cursor: pointer; text-decoration: none; font-size: 14px; font-weight: bold; margin: 0; padding: 12px 25px; text-transform: capitalize; border-color: #3498db;"
-                                              >Download Your Quotation</a
+                                              >Download Your Invoice</a
                                             >
                                           </td>
                                         </tr>
