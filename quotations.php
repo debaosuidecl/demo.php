@@ -413,7 +413,7 @@ $user_email = $_SESSION['user_email'];
                                 <?php if($determinant){?>
                               <input type="text" id="refNumberFromInvoice" onchange="onChangeHandler()" value="<?php echo $QuotationValues[0]['refNumberFromInvoice']?>" placeholder="Reference Number" name="refnumber">
                               <?php } else {?>
-                                <input type="text" id="refNumberFromInvoice" onchange="onChangeHandler()" value="QU-<?php echo $count + 1?>" placeholder="Reference Number" name="refnumber">
+                                <input type="text" id="refNumberFromInvoice" onchange="onChangeHandler()" value="#QU-<?php echo $count + 1?>" placeholder="Reference Number" name="refnumber">
                                 <?php }?>
               
                                 </div></td>
