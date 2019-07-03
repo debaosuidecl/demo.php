@@ -193,7 +193,7 @@ $tableExists = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schem
     <tr>  
     <td>No Quotation created presently</td>
     <td></td>
-    <td></td>
+    <td class="desktopOnly"></td>
     <td><a href="quotations">Add New Quotation</a></td>
     <tr>
 

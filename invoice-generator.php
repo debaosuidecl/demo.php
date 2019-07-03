@@ -203,7 +203,7 @@ $GetInvoiceDetails = mysqli_fetch_all($queryGetInvoiceDetails, MYSQLI_ASSOC);
     <tr>  
     <td>No Invoice created presently</td>
     <td></td>
-    <td></td>
+    <td class="desktopOnly" ></td>
     <td><a href="new-invoice">Add New Invoice</a></td>
     <tr>
 
