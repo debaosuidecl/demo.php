@@ -702,7 +702,7 @@ const emailHandler = (id, purpose) => {
 const downloadPDFHandler = (id, purpose) => {
   let logoURL = $$("#download").getAttribute("data-logo");
 
-  if (purpose == "invoice") {
+  if (purpose == "quotation") {
     window.location.href = `downloadpdfquotation.php?key=${id}&url=${logoURL}`;
   } else {
     window.location.href = `downloadpdf.php?key=${id}&url=${logoURL}`;
