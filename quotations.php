@@ -55,7 +55,7 @@ $user_email = $_SESSION['user_email'];
         
         // print_r($ProductValues);
 
-
+       
        
 
 
@@ -77,6 +77,12 @@ $user_email = $_SESSION['user_email'];
     $showLogo = true;
   }
 
+
+  $sqlGetQuotationCount = "SELECT  quotationdetails.refNumberFromInvoice FROM quotationdetails WHERE quotationdetails.user_identification=$user_identification";
+      
+  $resultGetQuotationCount = mysqli_query($conn, $sqlGetQuotationCount);
+  $GetQuotationCount = mysqli_fetch_all($resultGetQuotationCount, MYSQLI_ASSOC);
+  $count =  count($GetQuotationCount);
 
 ?>
 <!DOCTYPE html>
@@ -407,7 +413,7 @@ $user_email = $_SESSION['user_email'];
                                 <?php if($determinant){?>
                               <input type="text" id="refNumberFromInvoice" onchange="onChangeHandler()" value="<?php echo $QuotationValues[0]['refNumberFromInvoice']?>" placeholder="Reference Number" name="refnumber">
                               <?php } else {?>
-                                <input type="text" id="refNumberFromInvoice" onchange="onChangeHandler()" value="#INV0001" placeholder="Reference Number" name="refnumber">
+                                <input type="text" id="refNumberFromInvoice" onchange="onChangeHandler()" value="QU-<?php echo $count + 1?>" placeholder="Reference Number" name="refnumber">
                                 <?php }?>
               
                                 </div></td>
