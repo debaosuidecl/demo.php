@@ -374,6 +374,7 @@ $HTMLKINGU = $html . $htmlMid . $endHTML;
   $mpdf->watermarkTextAlpha = 0.1;
   $mpdf->SetDisplayMode('fullpage');
   $mpdf->SetTitle('Quotation');
+  
   $mpdf->WriteHTML($HTMLKINGU);
-  $mpdf->Output();
+  $mpdf->Output('quotation.pdf', 'D');
 // }

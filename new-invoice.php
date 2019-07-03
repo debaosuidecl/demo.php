@@ -161,6 +161,13 @@ $user_email = $_SESSION['user_email'];
 
 
 
+    <div class="upperCont">
+
+<div style="width: 100%; display:none; height: 100%; position: fixed; background: rgba(255,255,255,0.6); top: 0;" class="loadCont" >
+  <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.6" src="player.gif" alt="">
+</div>
+</div>
+
 
 
 
@@ -186,14 +193,14 @@ $user_email = $_SESSION['user_email'];
 
     <?php } else{?>
       <button  class="prev" href="#" onclick="previewInvoice(this.id)">Preview</button>
-      <button  id="email" data-client="<?php echo $InvoiceValues[0]['clientEmailFromInvoice'] ?>" onclick="emailHandler(this.className)">Email Client</button>
-      <button  data-logo="<?php echo $logoUrl[0]['logo_url'] ?>" id="download" onclick="downloadPDFHandler(this.className)">Download as PDF</button>
+      <button  id="email" data-client="<?php echo $InvoiceValues[0]['clientEmailFromInvoice'] ?>" onclick="emailHandler(this.className, 'invoice')">Email Client</button>
+      <button  data-logo="<?php echo $logoUrl[0]['logo_url'] ?>" id="download" onclick="downloadPDFHandler(this.className, 'invoice')">Download as PDF</button>
 
         <?php }?>
         <?php } else {?>
       <button class="prev" href="#" onclick="previewInvoice(this.id)">Preview</button>
-      <button data-client="" id="email"  onclick="emailHandler(this.className)">Email Client</button>
-      <button data-logo="<?php echo $logoUrl[0]['logo_url'] ?>" id="download" onclick="downloadPDFHandler(this.className)">Download as PDF</button>
+      <button data-client="" id="email"  onclick="emailHandler(this.className, 'invoice')">Email Client</button>
+      <button data-logo="<?php echo $logoUrl[0]['logo_url'] ?>" id="download" onclick="downloadPDFHandler(this.className,'invoice')">Download as PDF</button>
  <?php }?>
     </div>
 
@@ -237,7 +244,7 @@ $user_email = $_SESSION['user_email'];
               <div class="invoiceLogo">
                 <label for="logoInvoice" style="position: relative" >
                 <?php if((count($logoUrl)) == 0){?>
-                    <p style="padding: 20px; border: none; position: abosolute; top: 50%; left: 50%;  border: 1px solid #999; cursor: pointer;  outline: none; ">Upload Your Logo</p>
+                    <p style="padding: 20px; border: none; min-width: 150px;position: abosolute; top: 50%; left: 50%;  border: 1px solid #999; cursor: pointer;  outline: none; ">Upload Your Logo</p>
                     <form id="formInvoice" enctype="multipart/form-data" name="submit" style="position: absolute">
                   
                     <input style="position: absolute" type="file" name="image" id="logoInvoice">

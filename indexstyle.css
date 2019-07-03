@@ -231,12 +231,13 @@ a.active {
 }
 .invoiceFormBody {
   flex: 1;
-  width: 100%;
+  width: 100% !important;
   background: white;
   box-shadow: 0px 5px 35px #ccc;
-  min-height: 700px;
+  /* min-height: 700px; */
   display: flex;
   flex-flow: column;
+  margin: 0px;
   justify-content: flex-start;
 }
 .invoiceFormBody #topDesignInvoice {
@@ -358,7 +359,7 @@ input[name="invoiceTitle"] {
   outline: none;
 }
 .invoiceLogo {
-  flex: 1;
+  /* flex: 1; */
 }
 .invoiceLogo img {
   /* width: 100%; */
@@ -366,9 +367,9 @@ input[name="invoiceTitle"] {
   width: 100%;
 
   max-width: 200px;
-  min-width: 200px;
+  min-width: 150px;
   /* background: gold; */
-  flex: 1;
+  /* flex: 1; */
   border: 1px dotted #477fae;
 }
 .invoiceLogo label {

@@ -379,5 +379,5 @@ $HTMLKINGU = $html . $htmlMid . $endHTML;
   $mpdf->SetDisplayMode('fullpage');
   $mpdf->SetTitle('Invoice');
   $mpdf->WriteHTML($HTMLKINGU);
-  $mpdf->Output();
+  $mpdf->Output('invoice.pdf', 'D');
 // }
