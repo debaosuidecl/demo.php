@@ -201,7 +201,7 @@ $user_email = $_SESSION['user_email'];
 
     <?php if ($QuotationValues[0]['clientEmailFromInvoice'] == "" && $QuotationValues[0]['clientNameFromInvoice'] == "" && $QuotationValues[0]['clientAddressFromInvoice'] == "") {?>
       <button  class="prev" href="#" onclick="previewQuotation(this.id)">Preview</button>
-      <button  id="email" data-client="" onclick="emailHandler(this.className)">Email Client</button>
+      <button  id="email" data-client="" onclick="emailHandler(this.className, 'quotation')">Email Client</button>
       <button  data-logo="<?php echo $logoUrl[0]['logo_url'] ?>" id="download" onclick="downloadPDFHandler(this.className)">Download as PDF</button>
 
     <?php } else{?>

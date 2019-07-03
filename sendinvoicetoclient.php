@@ -162,7 +162,7 @@ try {
                 <span
                   class="preheader"
                   style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;"
-                  >A Quotation has been sent to you</span
+                  >An Invoie has been sent to you</span
                 >
                 <table
                   class="main"
@@ -192,9 +192,10 @@ try {
                             <p
                               style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;"
                             >
-                              A Quotation has been sent to you from "Website
+                              An Invoice has been sent to you from "Website
                               Name". please Click on the button below to access
-                              it. If you did not expect any quotation please ignore this message.
+                              it.
+                              If you did not expect any invoice please ignore this message.
                             </p>
                             <table
                               border="0"

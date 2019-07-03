@@ -664,7 +664,7 @@ const logout = () => {
   });
 };
 
-const emailHandler = id => {
+const emailHandler = (id, purpose) => {
   let clientEmail = $$("#email").getAttribute("data-client");
   let logoURL = $$("#download").getAttribute("data-logo");
   if (clientEmail == "") {
@@ -674,7 +674,10 @@ const emailHandler = id => {
     return;
   }
   $.ajax({
-    url: `sendquotationtoclient.php?key=${id}&url=${logoURL}&client=${clientEmail}`,
+    url:
+      purpose == "quotation"
+        ? `sendquotationtoclient.php?key=${id}&url=${logoURL}&client=${clientEmail}`
+        : `sendinvoicetoclient.php?key=${id}&url=${logoURL}&client=${clientEmail}`,
     type: "get",
     beforeSend: function() {
       $$(
@@ -698,6 +701,7 @@ const emailHandler = id => {
 
 const downloadPDFHandler = (id, purpose) => {
   let logoURL = $$("#download").getAttribute("data-logo");
+
   if (purpose == "invoice") {
     window.location.href = `downloadpdfquotation.php?key=${id}&url=${logoURL}`;
   } else {
