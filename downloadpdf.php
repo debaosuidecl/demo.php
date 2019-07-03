@@ -12,7 +12,7 @@
       // echo $key;
       include_once "setdb.php";
       $sqlGetInvoiceToEdit = "SELECT invoicedetails.invoiceTitle, invoicedetails.fromNameInvoice, invoicedetails.fromEmailInvoice, invoicedetails.address1FromInvoice,   invoicedetails.phoneFromInvoice,  invoicedetails.refNumberFromInvoice, invoicedetails.dateFromInvoice,  invoicedetails.clientNameFromInvoice, invoicedetails.clientEmailFromInvoice, invoicedetails.clientAddressFromInvoice, invoicedetails.paymentInstructionsAddNotes,  invoicedetails.typeTaxInvoice, invoicedetails.myPercent, invoicedetails.amountDiscount, invoicedetails.myPercentDiscount, invoicedetails.currencyContInvoice, invoicedetails.subTotal, invoicedetails.taxValue, invoicedetails.discount, invoicedetails.discountInvoice, invoicedetails.pickedColor, invoicedetails.balance FROM invoicedetails WHERE invoicedetails.invoiceIdentifier='$key' ";
-      
+
       
       $resultGetInvoiceToEdit = mysqli_query($conn, $sqlGetInvoiceToEdit);
       $GetInvoiceToEdit = mysqli_fetch_all($resultGetInvoiceToEdit, MYSQLI_ASSOC);
@@ -72,10 +72,10 @@
           border-top: 1px solid #bbb;
           border-bottom: 1px solid #bbb !important;
         }
-        img{
+         img{
           width: 100%;
     
-          max-width: 400px;
+          max-width: 200px;
           min-width: 200px;
         }
             .invoice-box {
@@ -194,25 +194,26 @@
         <td></td>
         
         </tr>
-            <tr class="top">
-              <td colspan="2">
-                <tr>
-                  <td class="title">
-                    <img
-                      src="./uploads/'. $url . '"
-                    
-                    />
-                  </td>
-                  <td></td>
-                  <td></td>
-                  <td style="font-size: 20px;">
-                    Invoice: ' . $InvoiceValues[0]['refNumberFromInvoice'] . '<br />
-                    ' . $InvoiceValues[0]['dateFromInvoice'] . '<br />
-                  
-                  </td>
-                </tr>
-              </td>
-            </tr>
+        <tr class="top">
+        <td colspan="2">
+          <tr>
+            <td class="title">
+              <img
+              
+                src="./uploads/'. $url . '"
+              
+              />
+            </td>
+            <td></td>
+            <td></td>
+            <td style="font-size: 20px;">
+              Invoice: ' . $InvoiceValues[0]['refNumberFromInvoice'] . '<br />
+              ' . $InvoiceValues[0]['dateFromInvoice'] . '<br />
+            
+            </td>
+          </tr>
+        </td>
+      </tr>
             
             <tr class="information">
               <td>
@@ -242,18 +243,7 @@
               </td>
             </tr>
     
-            <tr class="heading" >
-                    <td >
-                       Terms of Payment
-                    </td>
-                    <td ></td>
-                    <td ></td>
-                    <td >
-                    
-    
-                 </td>
-                </tr>
-    
+           
           
             <tr class="heading" style="background: ' . $InvoiceValues[0]['pickedColor'] . '; padding-right: 40px;">
               
@@ -280,17 +270,18 @@
 
        
             $endHTML = '
-            <tr class="total">
+            <tr class="total" style="padding-top: 50px">
               <td></td>
               <td></td>
-              <td colspan="2">
+              <td></td>
+              <td>
                 Sub Total: ' . $InvoiceValues[0]['currencyContInvoice'] .  
-    $InvoiceValues[0]['subTotal'] . ' <br />
+                number_format($InvoiceValues[0]['subTotal'], 2) . ' <br />
                 Discount: ' . $InvoiceValues[0]['currencyContInvoice'] .
-     $InvoiceValues[0]['discount'] . ' <br />
+     number_format($InvoiceValues[0]['discount'], 2) . ' <br />
                 Tax: ' .  $InvoiceValues[0]['currencyContInvoice'] . 
-    $InvoiceValues[0]['taxValue'] . ' <br />
-                <strong style="font-size: 18px;">Grand Total: ' . $InvoiceValues[0]['currencyContInvoice'] . $InvoiceValues[0]['balance']. '</strong>
+    number_format($InvoiceValues[0]['taxValue'], 2) . ' <br />
+                <strong style="font-size: 18px;">Grand Total: ' . $InvoiceValues[0]['currencyContInvoice'] . number_format($InvoiceValues[0]['balance'], 2). '</strong>
               </td>
             </tr>
           </table>
@@ -338,7 +329,6 @@
         </html>';
    
 
-
         $htmlMid;
         foreach($ProductValues as $p){
           global $htmlMid;
@@ -349,15 +339,15 @@
           </td>
           <td>
           ' . $InvoiceValues[0]['currencyContInvoice'] 
-        . $p['priceInvoice'] . '
+        . number_format($p['priceInvoice'], 2) . '
           </td>
           <td>
           ' .  $p['qtyInvoice'] . '
         
           </td>
           <td>
-          ' . $InvoiceValues[0]['currencyContInvoice'] . 
-        $p['amountPerItem'] . '
+          ' . $InvoiceValues[0]['currencyContInvoice'] .  
+        number_format($p['amountPerItem'],2) . '
           </td>
         </tr>
         ' ;
@@ -387,6 +377,7 @@ $HTMLKINGU = $html . $htmlMid . $endHTML;
   $mpdf->watermark_font = 'DejaVuSansCondensed';
   $mpdf->watermarkTextAlpha = 0.1;
   $mpdf->SetDisplayMode('fullpage');
+  $mpdf->SetTitle('Invoice');
   $mpdf->WriteHTML($HTMLKINGU);
   $mpdf->Output();
 // }

@@ -335,15 +335,15 @@
           </td>
           <td>
           ' . $InvoiceValues[0]['currencyContInvoice'] 
-        . $p['priceInvoice'] . '
+        . number_format($p['priceInvoice'], 2) . '
           </td>
           <td>
           ' .  $p['qtyInvoice'] . '
         
           </td>
           <td>
-          ' . $InvoiceValues[0]['currencyContInvoice'] . 
-        $p['amountPerItem'] . '
+          ' . $InvoiceValues[0]['currencyContInvoice'] .  
+        number_format($p['amountPerItem'],2) . '
           </td>
         </tr>
         ' ;
@@ -373,6 +373,7 @@ $HTMLKINGU = $html . $htmlMid . $endHTML;
   $mpdf->watermark_font = 'DejaVuSansCondensed';
   $mpdf->watermarkTextAlpha = 0.1;
   $mpdf->SetDisplayMode('fullpage');
+  $mpdf->SetTitle('Quotation');
   $mpdf->WriteHTML($HTMLKINGU);
   $mpdf->Output();
 // }
