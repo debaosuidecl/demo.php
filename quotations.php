@@ -206,7 +206,7 @@ $user_email = $_SESSION['user_email'];
     <?php }?>
 <?php } else {?>
   <button class="prev" href="#" onclick="previewQuotation(this.id)">Preview</button>
-      <button id="email"  onclick="emailHandler(this.className)">Email Client</button>
+      <button data-client="" id="email"  onclick="emailHandler(this.className)">Email Client</button>
       <button data-logo="<?php echo $logoUrl[0]['logo_url'] ?>" id="download" onclick="downloadPDFHandler(this.className)">Download as PDF</button>
  <?php }?>
     </div>
