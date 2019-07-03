@@ -643,6 +643,7 @@ const fileHandler = e => {
       $$("#download").setAttribute("data-logo", newMsg.success);
       // $$(".invoiceLogo label").innerHTML = "Image Uploaded";
       $$("#logoInvoice").addEventListener("change", fileHandler);
+      onChangeHandler();
     }
   });
 };

@@ -215,34 +215,33 @@
         </td>
       </tr>
             
-            <tr class="information">
-              <td>
-             
-    
-                <tr>
-                  <td style="font-size: 18px;">
-                  <span style="color: #888; font-size: 14px">Your Details</span> <br/><br/>
-                    <strong>' . $InvoiceValues[0]['fromNameInvoice'] . ' </strong><br />
-                    <br />
-                    ' . $InvoiceValues[0]['address1FromInvoice'] . ' <br />
-                   ' . $InvoiceValues[0]['fromEmailInvoice'] . '<br />
-                    ' . $InvoiceValues[0]['phoneFromInvoice'] . ' <br />
-           
-                  </td>
-                  <td></td>
-            
-                  <td colspan="2" style="font-size: 18px;">
-                  <span style="color: #888; font-size: 14px">Client Details</span> <br/><br/>
-    
-                    <strong>
-                   ' . $InvoiceValues[0]['clientNameFromInvoice'] . '                </strong>
-                    <br /><br />
-                    ' . $InvoiceValues[0]['clientEmailFromInvoice'] . ' <br />
-                    ' . $InvoiceValues[0]['clientAddressFromInvoice'] . '               </td>
-                </tr>
-              </td>
-            </tr>
-    
+      <tr class="information">
+      <td>
+     
+
+        <tr>
+          <td style="font-size: 18px;">
+          <span style="color: #888; font-size: 14px">Your Details</span> <br/><br/>
+            <strong>' . $InvoiceValues[0]['fromNameInvoice'] . ' </strong><br />
+            <br />
+            ' . $InvoiceValues[0]['address1FromInvoice'] . ' <br />
+           ' . $InvoiceValues[0]['fromEmailInvoice'] . '<br />
+            ' . $InvoiceValues[0]['phoneFromInvoice'] . ' <br />
+   
+          </td>
+          <td></td>
+          <td></td>
+          <td style="font-size: 18px;">
+          <span style="color: #888; font-size: 14px">Client Details</span> <br/><br/>
+
+            <strong>
+           ' . $InvoiceValues[0]['clientNameFromInvoice'] . '                </strong>
+            <br /><br />
+            ' . $InvoiceValues[0]['clientEmailFromInvoice'] . ' <br />
+            ' . $InvoiceValues[0]['clientAddressFromInvoice'] . '               </td>
+        </tr>
+      </td>
+    </tr>
            
           
             <tr class="heading" style="background: ' . $InvoiceValues[0]['pickedColor'] . '; padding-right: 40px;">

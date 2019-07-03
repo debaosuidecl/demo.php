@@ -38,7 +38,7 @@ try {
 
     // Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'A Quotation has been sent to you';
+    $mail->Subject = 'An Invoice has been sent to you';
     $mail->Body    = '<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
